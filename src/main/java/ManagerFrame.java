@@ -5,13 +5,12 @@ import javax.swing.*;
  * Created by JFormDesigner on Mon Jun 27 10:59:42 CST 2022
  */
 
-//只是给设计界面用的而已，真正的界面代码在ManagerFrame
 
 /**
  * @author unknown
  */
-public class ManagerFrameDesigner extends JFrame {
-    public ManagerFrameDesigner() {
+public class ManagerFrame extends JFrame {
+    public ManagerFrame() {
         initComponents();
     }
 
@@ -51,8 +50,18 @@ public class ManagerFrameDesigner extends JFrame {
         OrderManage = new JButton();
         CostomerManage = new JButton();
         ProductManage = new JButton();
+        ManagePanel = new JPanel(){
+            @Override
+            /**
+             * 重写该方法以设置背景图片
+             */
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+            }
+        };
 
         //======== this ========
+        setContentPane(ManagePanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         Container contentPane = getContentPane();
@@ -170,7 +179,8 @@ public class ManagerFrameDesigner extends JFrame {
         contentPane.add(ProductManage);
         ProductManage.setBounds(470, 190, 240, 45);
 
-        {
+        setSize(1000, 620);
+        /*{
             // compute preferred size
             Dimension preferredSize = new Dimension();
             for(int i = 0; i < contentPane.getComponentCount(); i++) {
@@ -184,7 +194,7 @@ public class ManagerFrameDesigner extends JFrame {
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }
-        pack();
+        pack();*/
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -206,5 +216,10 @@ public class ManagerFrameDesigner extends JFrame {
     private JButton OrderManage;
     private JButton CostomerManage;
     private JButton ProductManage;
+    private JPanel ManagePanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    public static void main(String[] args) {
+        new ManagerFrame().setVisible(true);
+    }
 }

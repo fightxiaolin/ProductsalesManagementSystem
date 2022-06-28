@@ -8,14 +8,8 @@ new FormModel {
 			"title": "用户订单管理系统"
 			"defaultCloseOperation": 3
 			"$locationPolicy": 1
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-				name: "panel"
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 0
-				"y": 0
-			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label11"
+				name: "label1"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 60
 				"y": 30
@@ -23,8 +17,9 @@ new FormModel {
 				"height": 80
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label12"
+				name: "label2"
 				"text": "用户号："
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 15
 				"y": 135
@@ -32,8 +27,9 @@ new FormModel {
 				"height": 25
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label13"
+				name: "label3"
 				"text": "用户名："
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 15
 				"y": 175
@@ -41,8 +37,9 @@ new FormModel {
 				"height": 25
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label14"
+				name: "label4"
 				"text": "电话："
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 55
 				"height": 25
@@ -50,8 +47,9 @@ new FormModel {
 				"y": 215
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label15"
+				name: "label5"
 				"text": "地址："
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 55
 				"height": 25
@@ -59,8 +57,9 @@ new FormModel {
 				"y": 255
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label16"
+				name: "label6"
 				"text": "信贷情况："
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 70
 				"height": 25
@@ -70,6 +69,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "UserNum"
 				"text": "123456"
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 70
 				"y": 135
@@ -79,6 +79,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "UserName"
 				"text": "小林"
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 135
 				"height": 25
@@ -88,6 +89,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "PhoneNumber"
 				"text": "189xxxxxxxx"
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 135
 				"height": 25
@@ -97,6 +99,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "Address"
 				"text": "广西大学"
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 135
 				"height": 25
@@ -106,6 +109,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "Credit"
 				"text": "优"
+				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 135
 				"height": 25
@@ -115,6 +119,8 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "modify"
 				"text": "修改资料"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "modifyMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 15
 				"y": 345
@@ -123,9 +129,10 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "comboBox1"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 220
-				"y": 115
+				"y": 110
 				"width": 240
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -136,12 +143,14 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 220
 				"y": 145
-				"width": 530
-				"height": 425
+				"width": 765
+				"height": 435
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Add"
 				"text": "添加订单"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AddMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 230
 				"y": 20
@@ -151,6 +160,8 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Delete"
 				"text": "删除订单"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "DeleteMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 400
 				"y": 20
@@ -160,6 +171,8 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Alter"
 				"text": "修改订单"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AlterMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 135
 				"height": 35
@@ -168,26 +181,30 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "comboBox2"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 220
 				"y": 75
+				"width": 130
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField1"
+				name: "InputText"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 310
+				"x": 360
 				"y": 75
-				"width": 345
+				"width": 455
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
-				"text": "text"
+				name: "Search"
+				"text": "查询"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "SearchMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 665
+				"x": 845
 				"y": 75
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 750, 600 )
+			"size": new java.awt.Dimension( 1000, 620 )
 			"location": new java.awt.Point( 0, 0 )
 		} )
 	}

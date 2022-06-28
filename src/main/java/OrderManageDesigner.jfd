@@ -1,0 +1,254 @@
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"font": new java.awt.Font( "Dialog", 0, 48 )
+			"defaultCloseOperation": 3
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "订单管理系统"
+				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 48 )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 70
+				"y": 35
+				"width": 435
+				"height": 55
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "Ordertable"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 5
+				"y": 140
+				"width": 610
+				"height": 445
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "Check"
+				"text": "查看订单"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "CheckMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 665
+				"y": 40
+				"width": 140
+				"height": 45
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "Handle"
+				"text": "处理订单"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "HandleMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 45
+				"x": 830
+				"y": 40
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "Withdraw"
+				"text": "撤回订单"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "WithdrawMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 45
+				"x": 665
+				"y": 110
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "选择查询类型："
+				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 665
+				"y": 195
+				"width": 130
+				"height": 25
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "OrderNum"
+				"text": "订单号"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 670
+				"y": 240
+				"width": 140
+				"height": 20
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "Address"
+				"text": "收货地"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 670
+				"y": 270
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "DeliveryDate"
+				"text": "交货日期"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 670
+				"y": 300
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "SupplyNum"
+				"text": "供应商号"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 830
+				"y": 240
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "OrderDate"
+				"text": "订货日期"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				"actionCommand": "订货日期"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 830
+				"y": 270
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "Payment"
+				"text": "付款金额"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 830
+				"y": 300
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 675
+				"y": 340
+				"width": 175
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "Research"
+				"text": "查询"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "ResearchMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 865
+				"y": 340
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "选择范围类型："
+				"font": #SwingDerivedFont0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 130
+				"height": 25
+				"x": 665
+				"y": 395
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "RangeOrderDate"
+				"text": "订货日期"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 670
+				"y": 440
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "RangePayment"
+				"text": "付款金额"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 670
+				"y": 470
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "RangeDeliveryDate"
+				"text": "交货日期"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 830
+				"y": 440
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "Rangecount"
+				"text": "订货项数"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 20
+				"x": 830
+				"y": 470
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "Rangelower"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 660
+				"y": 515
+				"width": 105
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "~"
+				"horizontalAlignment": 0
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 765
+				"y": 520
+				"width": 30
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "Rangeupper"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 105
+				"height": 30
+				"x": 795
+				"y": 515
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "RangeResearch"
+				"text": "查询"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "RangeResearchMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 910
+				"y": 515
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "Refresh"
+				"text": "刷新订单"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "RefreshMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 140
+				"height": 45
+				"x": 830
+				"y": 110
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 1000, 620 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+	}
+}

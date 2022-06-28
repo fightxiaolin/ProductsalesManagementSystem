@@ -39,10 +39,12 @@ public class LoginFrame extends JFrame implements Res {
         LoginPanel.setLayout(null);
 
         //======== this ========
-        Container contentPane = getContentPane();
-        LoginPanel.setSize(500, 400);
+
+        /*Container contentPane = getContentPane();
         contentPane.add(LoginPanel);
-        contentPane.setLayout(null);
+        contentPane.setLayout(null);*/
+        setContentPane(LoginPanel);
+//        LoginPanel.setSize(500, 400);
         setResizable(false);
         setTitle("登录");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -91,8 +93,8 @@ public class LoginFrame extends JFrame implements Res {
         Title.setBounds(new Rectangle(new Point((500-(int)Title.getPreferredSize().getWidth())/2, 40), Title.getPreferredSize()));
 
 
-
-        {
+        setSize(500, 400);
+        /*{
             // compute preferred size
             Dimension preferredSize = new Dimension();
             for(int i = 0; i < contentPane.getComponentCount(); i++) {
@@ -106,7 +108,8 @@ public class LoginFrame extends JFrame implements Res {
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }
-        pack();
+
+        pack();*/
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
