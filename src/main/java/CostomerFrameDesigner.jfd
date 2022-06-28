@@ -111,7 +111,7 @@ new FormModel {
 				"text": "优"
 				"font": new java.awt.Font( "Dialog", 0, 13 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 135
+				"width": 120
 				"height": 25
 				"x": 85
 				"y": 295

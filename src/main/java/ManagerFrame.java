@@ -1,3 +1,5 @@
+import util.Res;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -9,7 +11,7 @@ import javax.swing.*;
 /**
  * @author unknown
  */
-public class ManagerFrame extends JFrame {
+public class ManagerFrame extends JFrame implements Res {
     public ManagerFrame() {
         initComponents();
     }
@@ -21,6 +23,7 @@ public class ManagerFrame extends JFrame {
 
     private void modifyMouseClicked(MouseEvent e) {
         // TODO add your code here
+        ModifyImformation();
     }
 
     private void OrderManageMouseClicked(MouseEvent e) {
@@ -29,6 +32,16 @@ public class ManagerFrame extends JFrame {
 
     private void CostomerManageMouseClicked(MouseEvent e) {
         // TODO add your code here
+    }
+
+    private void ConfirmMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        ConfirmModify();
+    }
+
+    private void CancelMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        CancelModify();
     }
 
 
@@ -57,6 +70,7 @@ public class ManagerFrame extends JFrame {
              */
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
+                g.drawImage(ManageBackground, 0, 0, ManageBackground.getWidth(), ManageBackground.getHeight(), null);
             }
         };
 
@@ -216,8 +230,105 @@ public class ManagerFrame extends JFrame {
     private JButton OrderManage;
     private JButton CostomerManage;
     private JButton ProductManage;
+    private JButton Confirm;
+    private JButton Cancel;
     private JPanel ManagePanel;
+    private JTextField UserNumText;
+    private JTextField UserNameText;
+    private JTextField PhoneNumberText;
+    private JTextField AddressText;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    private void ModifyImformation(){
+
+        UserNumText = new JTextField();
+        UserNameText = new JTextField();
+        PhoneNumberText = new JTextField();
+        AddressText = new JTextField();
+        Confirm = new JButton();
+        Cancel = new JButton();
+
+
+        Container contentPane = getContentPane();
+        //---- UserNum ----
+        UserNumText.setText(UserNum.getText());
+        UserNumText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(UserNumText);
+        UserNumText.setBounds(75, 180, 180, 25);
+
+        //---- UserName ----
+        UserNameText.setText(UserName.getText());
+        UserNameText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(UserNameText);
+        UserNameText.setBounds(75, 220, 180, 25);
+
+        //---- PhoneNumber ----
+        PhoneNumberText.setText(PhoneNumber.getText());
+        PhoneNumberText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(PhoneNumberText);
+        PhoneNumberText.setBounds(75, 260, 180, 25);
+
+        //---- Address ----
+        AddressText.setText(Address.getText());
+        AddressText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(AddressText);
+        AddressText.setBounds(75, 300, 180, 25);
+
+
+        contentPane.remove(modify);
+        contentPane.repaint();
+
+        //---- Confirm ----
+        Confirm.setText("确认");
+        Confirm.setFont(Confirm.getFont().deriveFont(Confirm.getFont().getSize() + 4f));
+        Confirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(Confirm);
+        Confirm.setBounds(15, 345, 70, 30);
+        //---- Cancel ----
+        Cancel.setText("取消");
+        Cancel.setFont(Cancel.getFont().deriveFont(Cancel.getFont().getSize() + 4f));
+        Cancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                CancelMouseClicked(e);
+            }
+        });
+        contentPane.add(Cancel);
+        Cancel.setBounds(100, 345, 70, 30);
+    }
+
+    private void ConfirmModify(){
+        Container contentPane = getContentPane();
+        contentPane.remove(UserNumText);
+        contentPane.remove(UserNameText);
+        contentPane.remove(AddressText);
+        contentPane.remove(PhoneNumberText);
+        contentPane.remove(Confirm);
+        contentPane.remove(Cancel);
+        contentPane.add(modify);
+        contentPane.repaint();
+        UserNum.setText(UserNumText.getText());
+        UserName.setText(UserNameText.getText());
+        PhoneNumber.setText(PhoneNumberText.getText());
+        Address.setText(AddressText.getText());
+    }
+
+    private void CancelModify(){
+        Container contentPane = getContentPane();
+        contentPane.remove(UserNumText);
+        contentPane.remove(UserNameText);
+        contentPane.remove(AddressText);
+        contentPane.remove(PhoneNumberText);
+        contentPane.remove(Confirm);
+        contentPane.remove(Cancel);
+        contentPane.add(modify);
+        contentPane.repaint();
+    }
 
     public static void main(String[] args) {
         new ManagerFrame().setVisible(true);

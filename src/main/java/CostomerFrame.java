@@ -17,6 +17,7 @@ public class CostomerFrame extends JFrame {
 
     private void modifyMouseClicked(MouseEvent e) {
         // TODO add your code here
+        ModifyImformation();
     }
 
     private void AddMouseClicked(MouseEvent e) {
@@ -33,6 +34,16 @@ public class CostomerFrame extends JFrame {
 
     private void SearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+    }
+
+    private void ConfirmMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        ConfirmModify();
+    }
+
+    private void CancelMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        CancelModify();
     }
 
     private void initComponents() {
@@ -257,11 +268,118 @@ public class CostomerFrame extends JFrame {
     private JButton Add;
     private JButton Delete;
     private JButton Alter;
+    private JButton Confirm;
+    private JButton Cancel;
     private JComboBox comboBox2;
     private JTextField InputText;
     private JButton Search;
     private JPanel CostomerPanel;
+    private JTextField UserNumText;
+    private JTextField UserNameText;
+    private JTextField PhoneNumberText;
+    private JTextField AddressText;
+    private JTextField CreditText;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    private void ModifyImformation(){
+
+        UserNumText = new JTextField();
+        UserNameText = new JTextField();
+        PhoneNumberText = new JTextField();
+        AddressText = new JTextField();
+        CreditText = new JTextField();
+        Confirm = new JButton();
+        Cancel = new JButton();
+
+
+        Container contentPane = getContentPane();
+        //---- UserNum ----
+        UserNumText.setText(UserNum.getText());
+        UserNumText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(UserNumText);
+        UserNumText.setBounds(70, 135, 135, 25);
+
+        //---- UserName ----
+        UserNameText.setText(UserName.getText());
+        UserNameText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(UserNameText);
+        UserNameText.setBounds(70, 175, 135, 25);
+
+        //---- PhoneNumber ----
+        PhoneNumberText.setText(PhoneNumber.getText());
+        PhoneNumberText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(PhoneNumberText);
+        PhoneNumberText.setBounds(70, 215, 135, 25);
+
+        //---- Address ----
+        AddressText.setText(Address.getText());
+        AddressText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(AddressText);
+        AddressText.setBounds(70, 255, 135, 25);
+
+        //---- Credit ----
+        CreditText.setText(Credit.getText());
+        CreditText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(CreditText);
+        CreditText.setBounds(85, 295, 120, 25);
+
+        contentPane.remove(modify);
+        contentPane.repaint();
+
+        //---- Confirm ----
+        Confirm.setText("确认");
+        Confirm.setFont(Confirm.getFont().deriveFont(Confirm.getFont().getSize() + 4f));
+        Confirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(Confirm);
+        Confirm.setBounds(15, 345, 70, 30);
+        //---- Cancel ----
+        Cancel.setText("取消");
+        Cancel.setFont(Cancel.getFont().deriveFont(Cancel.getFont().getSize() + 4f));
+        Cancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                CancelMouseClicked(e);
+            }
+        });
+        contentPane.add(Cancel);
+        Cancel.setBounds(100, 345, 70, 30);
+    }
+
+    private void ConfirmModify(){
+        Container contentPane = getContentPane();
+        contentPane.remove(UserNumText);
+        contentPane.remove(UserNameText);
+        contentPane.remove(AddressText);
+        contentPane.remove(CreditText);
+        contentPane.remove(PhoneNumberText);
+        contentPane.remove(Confirm);
+        contentPane.remove(Cancel);
+        contentPane.add(modify);
+        contentPane.repaint();
+        UserNum.setText(UserNumText.getText());
+        UserName.setText(UserNameText.getText());
+        PhoneNumber.setText(PhoneNumberText.getText());
+        Address.setText(AddressText.getText());
+        Credit.setText(CreditText.getText());
+    }
+
+    private void CancelModify(){
+        Container contentPane = getContentPane();
+        contentPane.remove(UserNumText);
+        contentPane.remove(UserNameText);
+        contentPane.remove(AddressText);
+        contentPane.remove(CreditText);
+        contentPane.remove(PhoneNumberText);
+        contentPane.remove(Confirm);
+        contentPane.remove(Cancel);
+        contentPane.add(modify);
+        contentPane.repaint();
+    }
 
     public static void main(String[] args) {
         new CostomerFrame().setVisible(true);

@@ -127,7 +127,7 @@ public class CostomerFrameDesigner extends JFrame {
         Credit.setText("\u4f18");
         Credit.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(Credit);
-        Credit.setBounds(85, 295, 135, 25);
+        Credit.setBounds(85, 295, 120, 25);
 
         //---- modify ----
         modify.setText("\u4fee\u6539\u8d44\u6599");
