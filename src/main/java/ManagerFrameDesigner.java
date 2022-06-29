@@ -35,7 +35,6 @@ public class ManagerFrameDesigner extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
         modify = new JButton();
         label5 = new JLabel();
         Address = new JLabel();
@@ -51,10 +50,12 @@ public class ManagerFrameDesigner extends JFrame {
         OrderManage = new JButton();
         CostomerManage = new JButton();
         ProductManage = new JButton();
+        label7 = new JLabel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wallhaven-pkdr23_1920x1080.png").getImage());
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -72,49 +73,49 @@ public class ManagerFrameDesigner extends JFrame {
 
         //---- label5 ----
         label5.setText("\u516c\u53f8\uff1a");
-        label5.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        label5.setFont(new Font("Dialog", Font.PLAIN, 13));
         contentPane.add(label5);
         label5.setBounds(20, 300, 55, 25);
 
         //---- Address ----
         Address.setText("\u505a\u4e0d\u51fa\u6570\u636e\u5e93\u7684\u79d1\u6280\u6709\u9650\u516c\u53f8");
-        Address.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        Address.setFont(new Font("Dialog", Font.PLAIN, 13));
         contentPane.add(Address);
         Address.setBounds(75, 300, 175, 25);
 
         //---- PhoneNumber ----
         PhoneNumber.setText("18988888888");
-        PhoneNumber.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        PhoneNumber.setFont(new Font("Dialog", Font.PLAIN, 13));
         contentPane.add(PhoneNumber);
         PhoneNumber.setBounds(75, 260, 135, 25);
 
         //---- label4 ----
         label4.setText("\u7535\u8bdd\uff1a");
-        label4.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        label4.setFont(new Font("Dialog", Font.PLAIN, 13));
         contentPane.add(label4);
         label4.setBounds(20, 260, 55, 25);
 
         //---- label3 ----
         label3.setText("\u7ba1\u7406\u5458\uff1a");
-        label3.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        label3.setFont(new Font("Dialog", Font.PLAIN, 13));
         contentPane.add(label3);
         label3.setBounds(20, 220, 55, 25);
 
         //---- UserName ----
         UserName.setText("\u6797\u603b");
-        UserName.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        UserName.setFont(new Font("Dialog", Font.PLAIN, 13));
         contentPane.add(UserName);
         UserName.setBounds(75, 220, 135, 25);
 
         //---- UserNum ----
         UserNum.setText("666666");
-        UserNum.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        UserNum.setFont(new Font("Dialog", Font.PLAIN, 13));
         contentPane.add(UserNum);
         UserNum.setBounds(75, 180, 135, 25);
 
         //---- label2 ----
         label2.setText("\u804c\u5de5\u53f7\uff1a");
-        label2.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        label2.setFont(new Font("Dialog", Font.PLAIN, 13));
         contentPane.add(label2);
         label2.setBounds(20, 180, 55, 25);
         contentPane.add(label1);
@@ -155,7 +156,7 @@ public class ManagerFrameDesigner extends JFrame {
             }
         });
         contentPane.add(CostomerManage);
-        CostomerManage.setBounds(475, 355, 240, 45);
+        CostomerManage.setBounds(475, 350, 240, 45);
 
         //---- ProductManage ----
         ProductManage.setText("\u4ea7\u54c1\u7ba1\u7406");
@@ -169,6 +170,12 @@ public class ManagerFrameDesigner extends JFrame {
         });
         contentPane.add(ProductManage);
         ProductManage.setBounds(470, 190, 240, 45);
+
+        //---- label7 ----
+        label7.setText("text");
+        label7.setIcon(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wallhaven-pkdr23_1920x1080.png"));
+        contentPane.add(label7);
+        label7.setBounds(new Rectangle(new Point(-60, -30), label7.getPreferredSize()));
 
         {
             // compute preferred size
@@ -190,7 +197,6 @@ public class ManagerFrameDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
     private JButton modify;
     private JLabel label5;
     private JLabel Address;
@@ -206,5 +212,6 @@ public class ManagerFrameDesigner extends JFrame {
     private JButton OrderManage;
     private JButton CostomerManage;
     private JButton ProductManage;
+    private JLabel label7;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
