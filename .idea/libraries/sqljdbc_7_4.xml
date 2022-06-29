@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="sqljdbc_7.4">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/adaptive" />
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/alwaysencrypted" />
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/azureactivedirectoryauthentication" />
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/connections" />
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/constrained" />
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/dataclassification" />
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/datatypes" />
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/resultsets" />
+      <root url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1/chs/samples/sparse" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../IDE-Tools/sqljdbc_7.4.1" recursive="false" />
+  </library>
+</component>

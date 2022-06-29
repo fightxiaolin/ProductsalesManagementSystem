@@ -16,6 +16,18 @@ public class OrderManage extends JFrame {
     public OrderManage() {
         initComponents();
     }
+    public OrderManage(String UserNum){
+        initComponents();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                OrderwindowClosing(UserNum);
+                dispose();
+            }
+        });
+    }
+
+
 
     private void CheckMouseClicked(MouseEvent e) {
         // TODO add your code here
@@ -39,6 +51,11 @@ public class OrderManage extends JFrame {
 
     private void RangeResearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+    }
+
+    private void OrderwindowClosing(String UserNum) {
+
+        new ManagerFrame().setVisible(true);
     }
 
     private void initComponents() {
@@ -83,7 +100,7 @@ public class OrderManage extends JFrame {
 
         //======== this ========
         setContentPane(OrderPanel);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
@@ -295,6 +312,8 @@ public class OrderManage extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
+
+
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown

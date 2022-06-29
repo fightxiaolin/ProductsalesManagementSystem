@@ -15,6 +15,23 @@ public class ProductManage extends JFrame {
         initComponents();
     }
 
+    public ProductManage(String UserNum){
+        initComponents();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                ProductwindowClosing(UserNum);
+            }
+        });
+    }
+
+    private void ProductwindowClosing(String UserNum) {
+        // TODO add your code here
+        new ManagerFrame().setVisible(true);
+        dispose();
+
+    }
+
     private void AddMouseClicked(MouseEvent e) {
         // TODO add your code here
     }
@@ -79,7 +96,7 @@ public class ProductManage extends JFrame {
 
         //======== this ========
         setContentPane(ProductPanel);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);

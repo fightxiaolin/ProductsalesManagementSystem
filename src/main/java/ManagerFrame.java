@@ -18,7 +18,8 @@ public class ManagerFrame extends JFrame implements Res {
 
     private void ProductManageMouseClicked(MouseEvent e) {
         // TODO add your code here
-
+        new ProductManage(UserNum.getText()).setVisible(true);
+        dispose();
     }
 
     private void modifyMouseClicked(MouseEvent e) {
@@ -28,6 +29,8 @@ public class ManagerFrame extends JFrame implements Res {
 
     private void OrderManageMouseClicked(MouseEvent e) {
         // TODO add your code here
+        new OrderManage(UserNum.getText()).setVisible(true);
+        dispose();
     }
 
     private void CostomerManageMouseClicked(MouseEvent e) {
@@ -187,28 +190,12 @@ public class ManagerFrame extends JFrame implements Res {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ProductManageMouseClicked(e);
-                ProductManageMouseClicked(e);
             }
         });
         contentPane.add(ProductManage);
         ProductManage.setBounds(470, 190, 240, 45);
 
         setSize(1000, 620);
-        /*{
-            // compute preferred size
-            Dimension preferredSize = new Dimension();
-            for(int i = 0; i < contentPane.getComponentCount(); i++) {
-                Rectangle bounds = contentPane.getComponent(i).getBounds();
-                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-            }
-            Insets insets = contentPane.getInsets();
-            preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
-            contentPane.setMinimumSize(preferredSize);
-            contentPane.setPreferredSize(preferredSize);
-        }
-        pack();*/
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

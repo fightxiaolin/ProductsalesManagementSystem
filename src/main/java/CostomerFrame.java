@@ -1,6 +1,9 @@
+import util.Res;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 /*
  * Created by JFormDesigner on Mon Jun 27 14:19:59 CST 2022
  */
@@ -10,7 +13,7 @@ import javax.swing.*;
 /**
  * @author unknown
  */
-public class CostomerFrame extends JFrame {
+public class CostomerFrame extends JFrame implements Res {
     public CostomerFrame() {
         initComponents();
     }
@@ -77,6 +80,7 @@ public class CostomerFrame extends JFrame {
              */
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
+                g.drawImage(CostomerBackground,0, 0, CostomerBackground.getWidth(), CostomerBackground.getHeight(), null);
             }
         };
 
@@ -160,6 +164,7 @@ public class CostomerFrame extends JFrame {
         });
         contentPane.add(modify);
         modify.setBounds(15, 345, 145, 30);
+        modify.setContentAreaFilled(false);
 
         //---- comboBox1 ----
         comboBox1.setFont(comboBox1.getFont().deriveFont(comboBox1.getFont().getSize() + 4f));
@@ -184,6 +189,7 @@ public class CostomerFrame extends JFrame {
         });
         contentPane.add(Add);
         Add.setBounds(230, 20, 135, 35);
+        Add.setContentAreaFilled(false);
 
         //---- Delete ----
         Delete.setText("\u5220\u9664\u8ba2\u5355");
@@ -196,6 +202,7 @@ public class CostomerFrame extends JFrame {
         });
         contentPane.add(Delete);
         Delete.setBounds(400, 20, 135, 35);
+        Delete.setContentAreaFilled(false);
 
         //---- Alter ----
         Alter.setText("\u4fee\u6539\u8ba2\u5355");
@@ -208,13 +215,31 @@ public class CostomerFrame extends JFrame {
         });
         contentPane.add(Alter);
         Alter.setBounds(570, 20, 135, 35);
+        Alter.setContentAreaFilled(false);
 
         //---- comboBox2 ----
         comboBox2.setFont(comboBox2.getFont().deriveFont(comboBox2.getFont().getSize() + 4f));
         contentPane.add(comboBox2);
         comboBox2.setBounds(220, 75, 130, comboBox2.getPreferredSize().height);
         contentPane.add(InputText);
+        comboBox2.setOpaque(false);
+        /*comboBox2.setUI(new BasicComboBoxUI(){
+            @Override
+            public void installUI(JComponent c) {
+                super.installUI(c);
+                listBox.setForeground(Color.white);
+                listBox.setSelectionBackground(new Color(0,0,0,0));
+                listBox.setSelectionForeground(Color.BLACK);
+            }
+            protected JButton createArrowButton() {
+                return super.createArrowButton();
+            }
+
+        });*/
+
+        //---- InputText ----
         InputText.setBounds(360, 75, 455, comboBox2.getPreferredSize().height);
+        InputText.setOpaque(false);
 
         //---- Search ----
         Search.setText("\u67e5\u8be2");
@@ -227,6 +252,7 @@ public class CostomerFrame extends JFrame {
         });
         contentPane.add(Search);
         Search.setBounds(new Rectangle(new Point(845, 75), Search.getPreferredSize()));
+        Search.setContentAreaFilled(false);
 
         setSize(1000, 620);
         /*{
