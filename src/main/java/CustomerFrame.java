@@ -1,3 +1,5 @@
+import util.Res;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -5,19 +7,19 @@ import javax.swing.*;
  * Created by JFormDesigner on Mon Jun 27 14:19:59 CST 2022
  */
 
-//只是给设计界面用的而已，真正的界面代码在CostomerFrame
 
 
 /**
  * @author unknown
  */
-public class CostomerFrameDesigner extends JFrame {
-    public CostomerFrameDesigner() {
+public class CustomerFrame extends JFrame implements Res {
+    public CustomerFrame() {
         initComponents();
     }
 
     private void modifyMouseClicked(MouseEvent e) {
         // TODO add your code here
+        ModifyImformation();
     }
 
     private void AddMouseClicked(MouseEvent e) {
@@ -34,6 +36,16 @@ public class CostomerFrameDesigner extends JFrame {
 
     private void SearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+    }
+
+    private void ConfirmMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        ConfirmModify();
+    }
+
+    private void CancelMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        CancelModify();
     }
 
     private void initComponents() {
@@ -60,8 +72,19 @@ public class CostomerFrameDesigner extends JFrame {
         comboBox2 = new JComboBox();
         InputText = new JTextField();
         Search = new JButton();
+        CostomerPanel = new JPanel(){
+            @Override
+            /**
+             * 重写该方法以设置背景图片
+             */
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(CostomerBackground,0, 0, CostomerBackground.getWidth(), CostomerBackground.getHeight(), null);
+            }
+        };
 
         //======== this ========
+        setContentPane(CostomerPanel);
         setTitle("\u7528\u6237\u8ba2\u5355\u7ba1\u7406\u7cfb\u7edf");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container contentPane = getContentPane();
@@ -127,7 +150,7 @@ public class CostomerFrameDesigner extends JFrame {
         Credit.setText("\u4f18");
         Credit.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(Credit);
-        Credit.setBounds(85, 295, 120, 25);
+        Credit.setBounds(85, 295, 135, 25);
 
         //---- modify ----
         modify.setText("\u4fee\u6539\u8d44\u6599");
@@ -140,6 +163,7 @@ public class CostomerFrameDesigner extends JFrame {
         });
         contentPane.add(modify);
         modify.setBounds(15, 345, 145, 30);
+        modify.setContentAreaFilled(false);
 
         //---- comboBox1 ----
         comboBox1.setFont(comboBox1.getFont().deriveFont(comboBox1.getFont().getSize() + 4f));
@@ -164,6 +188,7 @@ public class CostomerFrameDesigner extends JFrame {
         });
         contentPane.add(Add);
         Add.setBounds(230, 20, 135, 35);
+        Add.setContentAreaFilled(false);
 
         //---- Delete ----
         Delete.setText("\u5220\u9664\u8ba2\u5355");
@@ -176,6 +201,7 @@ public class CostomerFrameDesigner extends JFrame {
         });
         contentPane.add(Delete);
         Delete.setBounds(400, 20, 135, 35);
+        Delete.setContentAreaFilled(false);
 
         //---- Alter ----
         Alter.setText("\u4fee\u6539\u8ba2\u5355");
@@ -188,13 +214,31 @@ public class CostomerFrameDesigner extends JFrame {
         });
         contentPane.add(Alter);
         Alter.setBounds(570, 20, 135, 35);
+        Alter.setContentAreaFilled(false);
 
         //---- comboBox2 ----
         comboBox2.setFont(comboBox2.getFont().deriveFont(comboBox2.getFont().getSize() + 4f));
         contentPane.add(comboBox2);
         comboBox2.setBounds(220, 75, 130, comboBox2.getPreferredSize().height);
         contentPane.add(InputText);
-        InputText.setBounds(360, 75, 455, InputText.getPreferredSize().height);
+        comboBox2.setOpaque(false);
+        /*comboBox2.setUI(new BasicComboBoxUI(){
+            @Override
+            public void installUI(JComponent c) {
+                super.installUI(c);
+                listBox.setForeground(Color.white);
+                listBox.setSelectionBackground(new Color(0,0,0,0));
+                listBox.setSelectionForeground(Color.BLACK);
+            }
+            protected JButton createArrowButton() {
+                return super.createArrowButton();
+            }
+
+        });*/
+
+        //---- InputText ----
+        InputText.setBounds(360, 75, 455, comboBox2.getPreferredSize().height);
+        InputText.setOpaque(false);
 
         //---- Search ----
         Search.setText("\u67e5\u8be2");
@@ -207,8 +251,10 @@ public class CostomerFrameDesigner extends JFrame {
         });
         contentPane.add(Search);
         Search.setBounds(new Rectangle(new Point(845, 75), Search.getPreferredSize()));
+        Search.setContentAreaFilled(false);
 
-        {
+        setSize(1000, 620);
+        /*{
             // compute preferred size
             Dimension preferredSize = new Dimension();
             for(int i = 0; i < contentPane.getComponentCount(); i++) {
@@ -222,7 +268,7 @@ public class CostomerFrameDesigner extends JFrame {
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }
-        pack();
+        pack();*/
         setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -247,8 +293,120 @@ public class CostomerFrameDesigner extends JFrame {
     private JButton Add;
     private JButton Delete;
     private JButton Alter;
+    private JButton Confirm;
+    private JButton Cancel;
     private JComboBox comboBox2;
     private JTextField InputText;
     private JButton Search;
+    private JPanel CostomerPanel;
+    private JTextField UserNumText;
+    private JTextField UserNameText;
+    private JTextField PhoneNumberText;
+    private JTextField AddressText;
+    private JTextField CreditText;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    private void ModifyImformation(){
+
+        UserNumText = new JTextField();
+        UserNameText = new JTextField();
+        PhoneNumberText = new JTextField();
+        AddressText = new JTextField();
+        CreditText = new JTextField();
+        Confirm = new JButton();
+        Cancel = new JButton();
+
+
+        Container contentPane = getContentPane();
+        //---- UserNum ----
+        UserNumText.setText(UserNum.getText());
+        UserNumText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(UserNumText);
+        UserNumText.setBounds(70, 135, 135, 25);
+
+        //---- UserName ----
+        UserNameText.setText(UserName.getText());
+        UserNameText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(UserNameText);
+        UserNameText.setBounds(70, 175, 135, 25);
+
+        //---- PhoneNumber ----
+        PhoneNumberText.setText(PhoneNumber.getText());
+        PhoneNumberText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(PhoneNumberText);
+        PhoneNumberText.setBounds(70, 215, 135, 25);
+
+        //---- Address ----
+        AddressText.setText(Address.getText());
+        AddressText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(AddressText);
+        AddressText.setBounds(70, 255, 135, 25);
+
+        //---- Credit ----
+        CreditText.setText(Credit.getText());
+        CreditText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        contentPane.add(CreditText);
+        CreditText.setBounds(85, 295, 120, 25);
+
+        contentPane.remove(modify);
+        contentPane.repaint();
+
+        //---- Confirm ----
+        Confirm.setText("确认");
+        Confirm.setFont(Confirm.getFont().deriveFont(Confirm.getFont().getSize() + 4f));
+        Confirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(Confirm);
+        Confirm.setBounds(15, 345, 70, 30);
+        //---- Cancel ----
+        Cancel.setText("取消");
+        Cancel.setFont(Cancel.getFont().deriveFont(Cancel.getFont().getSize() + 4f));
+        Cancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                CancelMouseClicked(e);
+            }
+        });
+        contentPane.add(Cancel);
+        Cancel.setBounds(100, 345, 70, 30);
+    }
+
+    private void ConfirmModify(){
+        Container contentPane = getContentPane();
+        contentPane.remove(UserNumText);
+        contentPane.remove(UserNameText);
+        contentPane.remove(AddressText);
+        contentPane.remove(CreditText);
+        contentPane.remove(PhoneNumberText);
+        contentPane.remove(Confirm);
+        contentPane.remove(Cancel);
+        contentPane.add(modify);
+        contentPane.repaint();
+        UserNum.setText(UserNumText.getText());
+        UserName.setText(UserNameText.getText());
+        PhoneNumber.setText(PhoneNumberText.getText());
+        Address.setText(AddressText.getText());
+        Credit.setText(CreditText.getText());
+    }
+
+    private void CancelModify(){
+        Container contentPane = getContentPane();
+        contentPane.remove(UserNumText);
+        contentPane.remove(UserNameText);
+        contentPane.remove(AddressText);
+        contentPane.remove(CreditText);
+        contentPane.remove(PhoneNumberText);
+        contentPane.remove(Confirm);
+        contentPane.remove(Cancel);
+        contentPane.add(modify);
+        contentPane.repaint();
+    }
+
+    public static void main(String[] args) {
+        new CustomerFrame().setVisible(true);
+    }
 }

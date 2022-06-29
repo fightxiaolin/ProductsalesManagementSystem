@@ -12,6 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="MigLayout" level="project" />
-    <orderEntry type="library" name="sqljdbc_7.4" level="project" />
+    <orderEntry type="library" exported="" name="mssql-jdbc-7.4.1.jre8" level="project" />
   </component>
 </module>

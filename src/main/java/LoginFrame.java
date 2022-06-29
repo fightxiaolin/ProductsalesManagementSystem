@@ -1,6 +1,3 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import javafx.beans.property.ReadOnlySetProperty;
-import sun.security.util.Password;
 import util.Res;
 
 import java.awt.*;
@@ -171,7 +168,7 @@ public class LoginFrame extends JFrame implements Res {
         }
         else if(Type.equals("Costomer") && Judge){
             dispose();
-            new CostomerFrame().setVisible(true);
+            new CustomerFrame().setVisible(true);
         }
     }
 
