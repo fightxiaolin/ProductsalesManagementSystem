@@ -25,9 +25,9 @@ public class ManagerFrame extends JFrame implements Res {
         dispose();
     }
 
-    private void modifyMouseClicked(MouseEvent e) {
+    private void modifyMouseClicked(String Number) {
         // TODO add your code here
-        ModifyImformation();
+        ModifyImformation(Number);
     }
 
     private void OrderManageMouseClicked(MouseEvent e) {
@@ -40,9 +40,9 @@ public class ManagerFrame extends JFrame implements Res {
         // TODO add your code here
     }
 
-    private void ConfirmMouseClicked(MouseEvent e) {
+    private void ConfirmMouseClicked(String Number) {
         // TODO add your code here
-        ConfirmModify();
+        ConfirmModify(Number);
     }
 
     private void CancelMouseClicked(MouseEvent e) {
@@ -110,7 +110,7 @@ public class ManagerFrame extends JFrame implements Res {
         modify.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                modifyMouseClicked(e);
+                modifyMouseClicked(Number);
             }
         });
         contentPane.add(modify);
@@ -246,7 +246,7 @@ public class ManagerFrame extends JFrame implements Res {
     private JTextField AddressText;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    private void ModifyImformation(){
+    private void ModifyImformation(String Number){
 
         UserNumText = new JTextField();
         UserNameText = new JTextField();
@@ -257,11 +257,11 @@ public class ManagerFrame extends JFrame implements Res {
 
 
         Container contentPane = getContentPane();
-        //---- UserNum ----
+        /*//---- UserNum ----
         UserNumText.setText(UserNum.getText());
         UserNumText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(UserNumText);
-        UserNumText.setBounds(75, 180, 180, 25);
+        UserNumText.setBounds(75, 180, 180, 25);*/
 
         //---- UserName ----
         UserNameText.setText(UserName.getText());
@@ -291,7 +291,7 @@ public class ManagerFrame extends JFrame implements Res {
         Confirm.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ConfirmMouseClicked(e);
+                ConfirmMouseClicked(Number);
             }
         });
         contentPane.add(Confirm);
@@ -309,9 +309,9 @@ public class ManagerFrame extends JFrame implements Res {
         Cancel.setBounds(100, 345, 70, 30);
     }
 
-    private void ConfirmModify(){
+    private void ConfirmModify(String Number){
         Container contentPane = getContentPane();
-        contentPane.remove(UserNumText);
+//        contentPane.remove(UserNumText);
         contentPane.remove(UserNameText);
         contentPane.remove(AddressText);
         contentPane.remove(PhoneNumberText);
@@ -319,10 +319,22 @@ public class ManagerFrame extends JFrame implements Res {
         contentPane.remove(Cancel);
         contentPane.add(modify);
         contentPane.repaint();
-        UserNum.setText(UserNumText.getText());
         UserName.setText(UserNameText.getText());
         PhoneNumber.setText(PhoneNumberText.getText());
         Address.setText(AddressText.getText());
+
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        String SQL = "update customer_info set cna='" + UserNameText.getText() + "'"
+                + ", cad='" + AddressText.getText() + "'" + ", cte='" + PhoneNumberText.getText() + "'"
+                + "where cno='" + Number + "'";
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+            System.out.println("资料修改成功了！！！");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void CancelModify(){
@@ -336,4 +348,6 @@ public class ManagerFrame extends JFrame implements Res {
         contentPane.add(modify);
         contentPane.repaint();
     }
+
+
 }

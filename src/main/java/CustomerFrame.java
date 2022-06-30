@@ -22,9 +22,9 @@ public class CustomerFrame extends JFrame implements Res {
         initComponents(UserNum);
     }
 
-    private void modifyMouseClicked(MouseEvent e) {
+    private void modifyMouseClicked(String Number) {
         // TODO add your code here
-        ModifyImformation();
+        ModifyImformation(Number);
     }
 
     private void AddMouseClicked(MouseEvent e) {
@@ -43,9 +43,9 @@ public class CustomerFrame extends JFrame implements Res {
         // TODO add your code here
     }
 
-    private void ConfirmMouseClicked(MouseEvent e) {
+    private void ConfirmMouseClicked(String Number) {
         // TODO add your code here
-        ConfirmModify();
+        ConfirmModify(Number);
     }
 
     private void CancelMouseClicked(MouseEvent e) {
@@ -96,12 +96,13 @@ public class CustomerFrame extends JFrame implements Res {
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
-            result.next();
-            cno = result.getString("cno");
-            cna = result.getString("cna");
-            cad = result.getString("cad");
-            cte = result.getString("cte");
-            cco = result.getString("cco");
+            if(result.next()){
+                cno = result.getString("cno");
+                cna = result.getString("cna");
+                cad = result.getString("cad");
+                cte = result.getString("cte");
+                cco = result.getString("cco");
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -181,7 +182,7 @@ public class CustomerFrame extends JFrame implements Res {
         modify.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                modifyMouseClicked(e);
+                modifyMouseClicked(Number);
             }
         });
         contentPane.add(modify);
@@ -301,7 +302,7 @@ public class CustomerFrame extends JFrame implements Res {
     private JTextField CreditText;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    private void ModifyImformation(){
+    private void ModifyImformation(String Number){
 
         UserNumText = new JTextField();
         UserNameText = new JTextField();
@@ -352,7 +353,7 @@ public class CustomerFrame extends JFrame implements Res {
         Confirm.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ConfirmMouseClicked(e);
+                ConfirmMouseClicked(Number);
             }
         });
         contentPane.add(Confirm);
@@ -372,7 +373,7 @@ public class CustomerFrame extends JFrame implements Res {
         Cancel.setContentAreaFilled(false);
     }
 
-    private void ConfirmModify(){
+    private void ConfirmModify(String Number){
         Container contentPane = getContentPane();
         contentPane.remove(UserNumText);
         contentPane.remove(UserNameText);
@@ -383,11 +384,22 @@ public class CustomerFrame extends JFrame implements Res {
         contentPane.remove(Cancel);
         contentPane.add(modify);
         contentPane.repaint();
-//        UserNum.setText(UserNumText.getText());
         UserName.setText(UserNameText.getText());
         PhoneNumber.setText(PhoneNumberText.getText());
         Address.setText(AddressText.getText());
-//        Credit.setText(CreditText.getText());
+
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        String SQL = "update customer_info set cna='" + UserNameText.getText() + "'"
+                + ", cad='" + AddressText.getText() + "'" + ", cte='" + PhoneNumberText.getText() + "'"
+                + "where cno='" + Number + "'";
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+            System.out.println("资料修改成功了！！！");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void CancelModify(){
