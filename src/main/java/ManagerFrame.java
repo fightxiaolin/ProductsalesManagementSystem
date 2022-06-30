@@ -1,7 +1,10 @@
 import util.Res;
-
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Mon Jun 27 10:59:42 CST 2022
@@ -12,8 +15,8 @@ import javax.swing.*;
  * @author unknown
  */
 public class ManagerFrame extends JFrame implements Res {
-    public ManagerFrame() {
-        initComponents();
+    public ManagerFrame(String Number) {
+        initComponents(Number);
     }
 
     private void ProductManageMouseClicked(MouseEvent e) {
@@ -48,7 +51,7 @@ public class ManagerFrame extends JFrame implements Res {
     }
 
 
-    private void initComponents() {
+    private void initComponents(String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         modify = new JButton();
@@ -77,6 +80,23 @@ public class ManagerFrame extends JFrame implements Res {
             }
         };
 
+        Connection con = DatabaseConnection.getConnection();
+        ResultSet result = null;
+        Statement stmt= null;
+        String SQL = "select * from customer_info where cno=" + "'" + Number + "'";
+        String cno = null, cna = null, cad = null, cte = null;
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            result.next();
+            cno = result.getString("cno").trim();
+            cna = result.getString("cna").trim();
+            cad = result.getString("cad").trim();
+            cte = result.getString("cte").trim();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         //======== this ========
         setContentPane(ManagePanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -103,13 +123,13 @@ public class ManagerFrame extends JFrame implements Res {
         label5.setBounds(20, 300, 55, 25);
 
         //---- Address ----
-        Address.setText("\u505a\u4e0d\u51fa\u6570\u636e\u5e93\u7684\u79d1\u6280\u6709\u9650\u516c\u53f8");
+        Address.setText(cad);
         Address.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(Address);
         Address.setBounds(75, 300, 175, 25);
 
         //---- PhoneNumber ----
-        PhoneNumber.setText("18988888888");
+        PhoneNumber.setText(cte);
         PhoneNumber.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(PhoneNumber);
         PhoneNumber.setBounds(75, 260, 135, 25);
@@ -127,13 +147,13 @@ public class ManagerFrame extends JFrame implements Res {
         label3.setBounds(20, 220, 55, 25);
 
         //---- UserName ----
-        UserName.setText("\u6797\u603b");
+        UserName.setText(cna);
         UserName.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(UserName);
         UserName.setBounds(75, 220, 135, 25);
 
         //---- UserNum ----
-        UserNum.setText("666666");
+        UserNum.setText(cno);
         UserNum.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(UserNum);
         UserNum.setBounds(75, 180, 135, 25);
@@ -315,9 +335,5 @@ public class ManagerFrame extends JFrame implements Res {
         contentPane.remove(Cancel);
         contentPane.add(modify);
         contentPane.repaint();
-    }
-
-    public static void main(String[] args) {
-        new ManagerFrame().setVisible(true);
     }
 }

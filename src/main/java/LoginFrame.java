@@ -152,7 +152,6 @@ public class LoginFrame extends JFrame implements Res {
         String Pass = new String(Password.getPassword());
         Connection con = DatabaseConnection.getConnection();
         String SQL = "select * from regist_info where no=" + "'" +  UserNum + "'";
-        System.out.println(SQL);
         ResultSet result = null;
         int sign = 0;
         String password = null;
@@ -162,13 +161,13 @@ public class LoginFrame extends JFrame implements Res {
             result = stmt.executeQuery(SQL);
             if(result.next()){
                 sign = result.getInt("sign");
-                password = result.getString("password");
+                password = result.getString("password").trim();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        System.out.println("密码：" + password + "\t" + "职务：" + sign);
+//        System.out.println("密码：" + password + password.length() + "职务：" + sign);
         Boolean Judge;
         if(Pass.equals(password)){
             Judge = true;
@@ -181,7 +180,7 @@ public class LoginFrame extends JFrame implements Res {
              * 结束当前窗口的进程，并开启管理员窗口进程
              */
             dispose();
-            new ManagerFrame().setVisible(true);
+            new ManagerFrame(UserNum).setVisible(true);
         }
         else if(sign == 2 && Judge){
             /**

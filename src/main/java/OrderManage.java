@@ -55,7 +55,7 @@ public class OrderManage extends JFrame {
 
     private void OrderwindowClosing(String UserNum) {
 
-        new ManagerFrame().setVisible(true);
+        new ManagerFrame(UserNum).setVisible(true);
     }
 
     private void initComponents() {

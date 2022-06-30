@@ -27,7 +27,7 @@ public class ProductManage extends JFrame {
 
     private void ProductwindowClosing(String UserNum) {
         // TODO add your code here
-        new ManagerFrame().setVisible(true);
+        new ManagerFrame(UserNum).setVisible(true);
         dispose();
 
     }
