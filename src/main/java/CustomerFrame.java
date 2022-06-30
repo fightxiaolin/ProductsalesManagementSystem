@@ -1,7 +1,12 @@
+import sun.net.ConnectionResetException;
 import util.Res;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Mon Jun 27 14:19:59 CST 2022
@@ -13,8 +18,8 @@ import javax.swing.*;
  * @author unknown
  */
 public class CustomerFrame extends JFrame implements Res {
-    public CustomerFrame() {
-        initComponents();
+    public CustomerFrame(String UserNum) {
+        initComponents(UserNum);
     }
 
     private void modifyMouseClicked(MouseEvent e) {
@@ -48,7 +53,7 @@ public class CustomerFrame extends JFrame implements Res {
         CancelModify();
     }
 
-    private void initComponents() {
+    private void initComponents(String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         label1 = new JLabel();
@@ -82,6 +87,24 @@ public class CustomerFrame extends JFrame implements Res {
                 g.drawImage(CostomerBackground,0, 0, CostomerBackground.getWidth(), CostomerBackground.getHeight(), null);
             }
         };
+
+        Connection con = DatabaseConnection.getConnection();
+        ResultSet result = null;
+        Statement stmt= null;
+        String SQL = "select * from customer_info where cno=" + "'" + Number + "'";
+        String cno = null, cna = null, cad = null, cte = null, cco = null;
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            result.next();
+            cno = result.getString("cno");
+            cna = result.getString("cna");
+            cad = result.getString("cad");
+            cte = result.getString("cte");
+            cco = result.getString("cco");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         //======== this ========
         setContentPane(CostomerPanel);
@@ -123,31 +146,31 @@ public class CustomerFrame extends JFrame implements Res {
         label6.setBounds(15, 295, 70, 25);
 
         //---- UserNum ----
-        UserNum.setText("123456");
+        UserNum.setText(cno);
         UserNum.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(UserNum);
         UserNum.setBounds(70, 135, 135, 25);
 
         //---- UserName ----
-        UserName.setText("\u5c0f\u6797");
+        UserName.setText(cna);
         UserName.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(UserName);
         UserName.setBounds(70, 175, 135, 25);
 
         //---- PhoneNumber ----
-        PhoneNumber.setText("189xxxxxxxx");
+        PhoneNumber.setText(cte);
         PhoneNumber.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(PhoneNumber);
         PhoneNumber.setBounds(70, 215, 135, 25);
 
         //---- Address ----
-        Address.setText("\u5e7f\u897f\u5927\u5b66");
+        Address.setText(cad);
         Address.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(Address);
         Address.setBounds(70, 255, 135, 25);
 
         //---- Credit ----
-        Credit.setText("\u4f18");
+        Credit.setText(cco);
         Credit.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(Credit);
         Credit.setBounds(85, 295, 135, 25);
@@ -222,19 +245,6 @@ public class CustomerFrame extends JFrame implements Res {
         comboBox2.setBounds(220, 75, 130, comboBox2.getPreferredSize().height);
         contentPane.add(InputText);
         comboBox2.setOpaque(false);
-        /*comboBox2.setUI(new BasicComboBoxUI(){
-            @Override
-            public void installUI(JComponent c) {
-                super.installUI(c);
-                listBox.setForeground(Color.white);
-                listBox.setSelectionBackground(new Color(0,0,0,0));
-                listBox.setSelectionForeground(Color.BLACK);
-            }
-            protected JButton createArrowButton() {
-                return super.createArrowButton();
-            }
-
-        });*/
 
         //---- InputText ----
         InputText.setBounds(360, 75, 455, comboBox2.getPreferredSize().height);
@@ -254,21 +264,6 @@ public class CustomerFrame extends JFrame implements Res {
         Search.setContentAreaFilled(false);
 
         setSize(1000, 620);
-        /*{
-            // compute preferred size
-            Dimension preferredSize = new Dimension();
-            for(int i = 0; i < contentPane.getComponentCount(); i++) {
-                Rectangle bounds = contentPane.getComponent(i).getBounds();
-                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-            }
-            Insets insets = contentPane.getInsets();
-            preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
-            contentPane.setMinimumSize(preferredSize);
-            contentPane.setPreferredSize(preferredSize);
-        }
-        pack();*/
         setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -318,11 +313,11 @@ public class CustomerFrame extends JFrame implements Res {
 
 
         Container contentPane = getContentPane();
-        //---- UserNum ----
+        /*//---- UserNum ----
         UserNumText.setText(UserNum.getText());
         UserNumText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(UserNumText);
-        UserNumText.setBounds(70, 135, 135, 25);
+        UserNumText.setBounds(70, 135, 135, 25);*/
 
         //---- UserName ----
         UserNameText.setText(UserName.getText());
@@ -342,11 +337,11 @@ public class CustomerFrame extends JFrame implements Res {
         contentPane.add(AddressText);
         AddressText.setBounds(70, 255, 135, 25);
 
-        //---- Credit ----
+        /*//---- Credit ----
         CreditText.setText(Credit.getText());
         CreditText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(CreditText);
-        CreditText.setBounds(85, 295, 120, 25);
+        CreditText.setBounds(85, 295, 120, 25);*/
 
         contentPane.remove(modify);
         contentPane.repaint();
@@ -362,6 +357,7 @@ public class CustomerFrame extends JFrame implements Res {
         });
         contentPane.add(Confirm);
         Confirm.setBounds(15, 345, 70, 30);
+        Confirm.setContentAreaFilled(false);
         //---- Cancel ----
         Cancel.setText("取消");
         Cancel.setFont(Cancel.getFont().deriveFont(Cancel.getFont().getSize() + 4f));
@@ -373,6 +369,7 @@ public class CustomerFrame extends JFrame implements Res {
         });
         contentPane.add(Cancel);
         Cancel.setBounds(100, 345, 70, 30);
+        Cancel.setContentAreaFilled(false);
     }
 
     private void ConfirmModify(){
@@ -386,11 +383,11 @@ public class CustomerFrame extends JFrame implements Res {
         contentPane.remove(Cancel);
         contentPane.add(modify);
         contentPane.repaint();
-        UserNum.setText(UserNumText.getText());
+//        UserNum.setText(UserNumText.getText());
         UserName.setText(UserNameText.getText());
         PhoneNumber.setText(PhoneNumberText.getText());
         Address.setText(AddressText.getText());
-        Credit.setText(CreditText.getText());
+//        Credit.setText(CreditText.getText());
     }
 
     private void CancelModify(){
@@ -404,9 +401,5 @@ public class CustomerFrame extends JFrame implements Res {
         contentPane.remove(Cancel);
         contentPane.add(modify);
         contentPane.repaint();
-    }
-
-    public static void main(String[] args) {
-        new CustomerFrame().setVisible(true);
     }
 }

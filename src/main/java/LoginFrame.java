@@ -3,6 +3,7 @@ import util.Res;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Mon Jun 27 09:44:52 CST 2022
@@ -147,28 +148,58 @@ public class LoginFrame extends JFrame implements Res {
      */
     private void loginmouseClicked(MouseEvent e) {
         String UserNum = Username.getText();
+        Statement stmt = null;
         String Pass = new String(Password.getPassword());
-        String Type;
-        if(UserNum.equals("123456")){
-            Type = "Costomer";
+        Connection con = DatabaseConnection.getConnection();
+        String SQL = "select * from regist_info where no=" + "'" +  UserNum + "'";
+        System.out.println(SQL);
+        ResultSet result = null;
+        int sign = 0;
+        String password = null;
+
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            if(result.next()){
+                sign = result.getInt("sign");
+                password = result.getString("password");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        else {
-            Type = "Manager";
-        }
+
+        System.out.println("密码：" + password + "\t" + "职务：" + sign);
         Boolean Judge;
-        if(Pass.equals("xiaolin")){
+        if(Pass.equals(password)){
             Judge = true;
         }
         else{
             Judge = false;
         }
-        if(Type.equals("Manager") && Judge){
+        if(sign == 1 && Judge){
+            /**
+             * 结束当前窗口的进程，并开启管理员窗口进程
+             */
             dispose();
             new ManagerFrame().setVisible(true);
         }
-        else if(Type.equals("Costomer") && Judge){
+        else if(sign == 2 && Judge){
+            /**
+             * 结束当前窗口进程，并开启顾客窗口进程
+             */
             dispose();
-            new CustomerFrame().setVisible(true);
+            new CustomerFrame(UserNum).setVisible(true);
+        }
+        else if(sign == 3 && Judge){
+            /**
+             * 结束当前窗口进程，并开启供应商窗口进程
+             */
+
+        }else{
+            /**
+             * 显示对话框“输入的账号或者密码错误”
+             */
+
         }
     }
 
