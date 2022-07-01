@@ -1,3 +1,4 @@
+import com.sun.org.apache.xpath.internal.operations.Or;
 import util.Res;
 import java.awt.*;
 import java.awt.event.*;
@@ -67,7 +68,7 @@ public class ManagerFrame extends JFrame implements Res {
         label6 = new JLabel();
         SelectText = new JLabel();
         OrderManage = new JButton();
-        CostomerManage = new JButton();
+        CustomerManage = new JButton();
         ProductManage = new JButton();
         ManagePanel = new JPanel(){
             @Override
@@ -115,9 +116,10 @@ public class ManagerFrame extends JFrame implements Res {
         });
         contentPane.add(modify);
         modify.setBounds(20, 335, 145, 30);
+        modify.setContentAreaFilled(false);
 
         //---- label5 ----
-        label5.setText("\u516c\u53f8\uff1a");
+        label5.setText("地址：");
         label5.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
         contentPane.add(label5);
         label5.setBounds(20, 300, 55, 25);
@@ -190,18 +192,20 @@ public class ManagerFrame extends JFrame implements Res {
         });
         contentPane.add(OrderManage);
         OrderManage.setBounds(470, 270, 240, 45);
+        OrderManage.setContentAreaFilled(false);
 
         //---- CostomerManage ----
-        CostomerManage.setText("\u987e\u5ba2\u7ba1\u7406");
-        CostomerManage.setFont(CostomerManage.getFont().deriveFont(CostomerManage.getFont().getSize() + 4f));
-        CostomerManage.addMouseListener(new MouseAdapter() {
+        CustomerManage.setText("\u987e\u5ba2\u7ba1\u7406");
+        CustomerManage.setFont(CustomerManage.getFont().deriveFont(CustomerManage.getFont().getSize() + 4f));
+        CustomerManage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 CostomerManageMouseClicked(e);
             }
         });
-        contentPane.add(CostomerManage);
-        CostomerManage.setBounds(475, 355, 240, 45);
+        contentPane.add(CustomerManage);
+        CustomerManage.setBounds(475, 355, 240, 45);
+        CustomerManage.setContentAreaFilled(false);
 
         //---- ProductManage ----
         ProductManage.setText("\u4ea7\u54c1\u7ba1\u7406");
@@ -214,6 +218,7 @@ public class ManagerFrame extends JFrame implements Res {
         });
         contentPane.add(ProductManage);
         ProductManage.setBounds(470, 190, 240, 45);
+        ProductManage.setContentAreaFilled(false);
 
         setSize(1000, 620);
         setLocationRelativeTo(getOwner());
@@ -235,7 +240,7 @@ public class ManagerFrame extends JFrame implements Res {
     private JLabel label6;
     private JLabel SelectText;
     private JButton OrderManage;
-    private JButton CostomerManage;
+    private JButton CustomerManage;
     private JButton ProductManage;
     private JButton Confirm;
     private JButton Cancel;
@@ -296,6 +301,7 @@ public class ManagerFrame extends JFrame implements Res {
         });
         contentPane.add(Confirm);
         Confirm.setBounds(15, 345, 70, 30);
+        Confirm.setContentAreaFilled(false);
         //---- Cancel ----
         Cancel.setText("取消");
         Cancel.setFont(Cancel.getFont().deriveFont(Cancel.getFont().getSize() + 4f));
@@ -307,6 +313,7 @@ public class ManagerFrame extends JFrame implements Res {
         });
         contentPane.add(Cancel);
         Cancel.setBounds(100, 345, 70, 30);
+        Cancel.setContentAreaFilled(false);
     }
 
     private void ConfirmModify(String Number){

@@ -43,7 +43,7 @@ public class LoginFrame extends JFrame implements Res {
         //======== this ========
         
         setContentPane(LoginPanel);
-        setResizable(false);
+//        setResizable(false);
         setTitle("登录");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

@@ -3,11 +3,10 @@ import util.Res;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Vector;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 /*
  * Created by JFormDesigner on Mon Jun 27 14:19:59 CST 2022
  */
@@ -70,7 +69,6 @@ public class CustomerFrame extends JFrame implements Res {
         modify = new JButton();
         comboBox1 = new JComboBox();
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
         Add = new JButton();
         Delete = new JButton();
         Alter = new JButton();
@@ -193,11 +191,25 @@ public class CustomerFrame extends JFrame implements Res {
         comboBox1.setFont(comboBox1.getFont().deriveFont(comboBox1.getFont().getSize() + 4f));
         contentPane.add(comboBox1);
         comboBox1.setBounds(220, 110, 240, comboBox1.getPreferredSize().height);
+        comboBox1.addItem("全部订单");
+        comboBox1.addItem("未完成订单");
+        comboBox1.addItem("已完成订单");
+
 
         //======== scrollPane1 ========
         {
+            SQL = "select * from order_info where cno='" + Number + "'";
+            try {
+                result = stmt.executeQuery(SQL);
+                table1 = new JTable(DatabaseConnection.buildTableModel(result));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             scrollPane1.setViewportView(table1);
+
         }
+
+
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(220, 145, 765, 435);
 
@@ -246,6 +258,11 @@ public class CustomerFrame extends JFrame implements Res {
         comboBox2.setBounds(220, 75, 130, comboBox2.getPreferredSize().height);
         contentPane.add(InputText);
         comboBox2.setOpaque(false);
+        comboBox2.addItem("订单号");
+        comboBox2.addItem("供应商号");
+        comboBox2.addItem("订货项数");
+        comboBox2.addItem("订货日期");
+        comboBox2.addItem("付款金额");
 
         //---- InputText ----
         InputText.setBounds(360, 75, 455, comboBox2.getPreferredSize().height);
@@ -414,4 +431,6 @@ public class CustomerFrame extends JFrame implements Res {
         contentPane.add(modify);
         contentPane.repaint();
     }
+
+
 }
