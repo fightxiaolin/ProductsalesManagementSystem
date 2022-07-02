@@ -2,7 +2,10 @@ import sun.security.krb5.internal.crypto.RsaMd5CksumType;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
+import java.util.Vector;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 /*
  * Created by JFormDesigner on Tue Jun 28 10:33:09 CST 2022
  */
@@ -16,12 +19,12 @@ public class OrderManage extends JFrame {
     public OrderManage() {
         initComponents();
     }
-    public OrderManage(String UserNum){
+    public OrderManage(String Number){
         initComponents();
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                OrderwindowClosing(UserNum);
+                OrderwindowClosing(Number);
                 dispose();
             }
         });
@@ -54,7 +57,6 @@ public class OrderManage extends JFrame {
     }
 
     private void OrderwindowClosing(String UserNum) {
-
         new ManagerFrame(UserNum).setVisible(true);
     }
 
@@ -98,6 +100,8 @@ public class OrderManage extends JFrame {
         //======== OrderPanel ========
         OrderPanel.setSize(1200, 590);
 
+
+
         //======== this ========
         setContentPane(OrderPanel);
 //        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -114,8 +118,20 @@ public class OrderManage extends JFrame {
 
         //======== scrollPane ========
         {
+            Connection con = DatabaseConnection.getConnection();
+            ResultSet result = null;
+            Statement stmt = null;
+            String SQL = "select * from order_info";
+            try {
+                stmt = con.createStatement();
+                result = stmt.executeQuery(SQL);
+                Ordertable = new JTable(buildTableModel(result));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             scrollPane.setViewportView(Ordertable);
         }
+
         contentPane.add(scrollPane);
         scrollPane.setBounds(5, 140, 750, 445);
 
@@ -330,6 +346,42 @@ public class OrderManage extends JFrame {
     private JPanel OrderPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
+    public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+
+        Vector columnNames = new Vector();
+
+        int columnCount = metaData.getColumnCount();
+
+        /*for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }*/
+        columnNames.add("订单号");
+        columnNames.add("供应商号");
+        columnNames.add("订货项数");
+        columnNames.add("订货日期");
+        columnNames.add("交货日期");
+        columnNames.add("付款金额");
+        columnNames.add("发货地");
+        columnNames.add("收货地");
+        columnNames.add("顾客号");
+
+        Vector data = new Vector();
+
+        while (rs.next()) {
+            Vector vector = new Vector();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                try{
+                    vector.add(rs.getString(columnIndex).trim());
+                }catch (Exception e){
+                    vector.add(null);
+                }
+            }
+            data.add(vector);
+        }
+        return new DefaultTableModel(data, columnNames);
+    }
     /*public static void main(String[] args) {
         new OrderManage().setVisible(true);
     }*/

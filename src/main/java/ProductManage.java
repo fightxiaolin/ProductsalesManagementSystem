@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
+import java.util.Vector;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 /*
  * Created by JFormDesigner on Mon Jun 27 23:05:44 CST 2022
  */
@@ -29,7 +32,6 @@ public class ProductManage extends JFrame {
         // TODO add your code here
         new ManagerFrame(UserNum).setVisible(true);
         dispose();
-
     }
 
     private void AddMouseClicked(MouseEvent e) {
@@ -110,6 +112,17 @@ public class ProductManage extends JFrame {
 
         //======== scrollPane ========
         {
+            Connection con = DatabaseConnection.getConnection();
+            ResultSet result = null;
+            Statement stmt = null;
+            String SQL = "select * from product_info";
+            try {
+                stmt = con.createStatement();
+                result = stmt.executeQuery(SQL);
+                Producttable = new JTable(buildTableModel(result));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             scrollPane.setViewportView(Producttable);
         }
         contentPane.add(scrollPane);
@@ -323,7 +336,39 @@ public class ProductManage extends JFrame {
     private JPanel ProductPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public static void main(String[] args) {
-        new ProductManage().setVisible(true);
+    public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+
+        Vector columnNames = new Vector();
+
+        int columnCount = metaData.getColumnCount();
+
+        /*for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }*/
+        columnNames.add("产品号");
+        columnNames.add("产品名");
+        columnNames.add("产品描述");
+        columnNames.add("产品重量");
+
+        Vector data = new Vector();
+
+        while (rs.next()) {
+            Vector vector = new Vector();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                try{
+                    vector.add(rs.getString(columnIndex).trim());
+                }catch (Exception e){
+                    vector.add(null);
+                }
+            }
+            data.add(vector);
+        }
+        return new DefaultTableModel(data, columnNames);
     }
+
+    /*public static void main(String[] args) {
+        new ProductManage().setVisible(true);
+    }*/
 }

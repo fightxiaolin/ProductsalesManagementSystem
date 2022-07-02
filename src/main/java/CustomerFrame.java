@@ -35,18 +35,72 @@ public class CustomerFrame extends JFrame implements Res {
         // TODO add your code here
     }
 
-    private void SearchMouseClicked(MouseEvent e) {
+    private void SearchMouseClicked(String Number) {
         // TODO add your code here
+        int selected = comboBox1.getSelectedIndex();
+        String Text = comboBox1.getSelectedItem().toString().trim();
+        String SQL = "select * from order_info where cno='" + Number + "' and ";
+        switch (selected){
+            case 1:
+                SQL += "sno='" + Text + "'";
+                break;
+            case 2:
+                SQL += "gno='" + Text + "'";
+                break;
+            case 3:
+                SQL += "snu='" + Text + "'";
+                break;
+            case 4:
+                SQL += "sdrq='" + Text + "'";
+                break;
+            case 5:
+                SQL += "toprice=" + Text ;
+        }
+
     }
 
     private void ConfirmMouseClicked(String Number) {
         // TODO add your code here
-        ConfirmModify(Number);
+        Container contentPane = getContentPane();
+        contentPane.remove(UserNumText);
+        contentPane.remove(UserNameText);
+        contentPane.remove(AddressText);
+        contentPane.remove(CreditText);
+        contentPane.remove(PhoneNumberText);
+        contentPane.remove(Confirm);
+        contentPane.remove(Cancel);
+        contentPane.add(modify);
+        contentPane.repaint();
+        UserName.setText(UserNameText.getText());
+        PhoneNumber.setText(PhoneNumberText.getText());
+        Address.setText(AddressText.getText());
+
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        String SQL = "update customer_info set cna='" + UserNameText.getText() + "'"
+                + ", cad='" + AddressText.getText() + "'" + ", cte='" + PhoneNumberText.getText() + "'"
+                + "where cno='" + Number + "'";
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+            System.out.println("资料修改成功了！！！");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void CancelMouseClicked(MouseEvent e) {
         // TODO add your code here
-        CancelModify();
+        Container contentPane = getContentPane();
+        contentPane.remove(UserNumText);
+        contentPane.remove(UserNameText);
+        contentPane.remove(AddressText);
+        contentPane.remove(CreditText);
+        contentPane.remove(PhoneNumberText);
+        contentPane.remove(Confirm);
+        contentPane.remove(Cancel);
+        contentPane.add(modify);
+        contentPane.repaint();
     }
 
     private void initComponents(String Number) {
@@ -184,14 +238,6 @@ public class CustomerFrame extends JFrame implements Res {
         modify.setBounds(15, 345, 145, 30);
         modify.setContentAreaFilled(false);
 
-        //---- comboBox1 ----
-        comboBox1.setFont(comboBox1.getFont().deriveFont(comboBox1.getFont().getSize() + 4f));
-        contentPane.add(comboBox1);
-        comboBox1.setBounds(220, 110, 240, comboBox1.getPreferredSize().height);
-        comboBox1.addItem("全部订单");
-        comboBox1.addItem("未完成订单");
-        comboBox1.addItem("已完成订单");
-
 
         //======== scrollPane1 ========
         {
@@ -247,17 +293,25 @@ public class CustomerFrame extends JFrame implements Res {
         Alter.setBounds(570, 20, 135, 35);
         Alter.setContentAreaFilled(false);
 
-        //---- comboBox2 ----
+        //---- comboBox1 ----
         comboBox2.setFont(comboBox2.getFont().deriveFont(comboBox2.getFont().getSize() + 4f));
         contentPane.add(comboBox2);
-        comboBox2.setBounds(220, 75, 130, comboBox2.getPreferredSize().height);
+        comboBox2.setBounds(220, 110, 240, comboBox2.getPreferredSize().height);
+        comboBox2.addItem("全部订单");
+        comboBox2.addItem("未完成订单");
+        comboBox2.addItem("已完成订单");
+
+        //---- comboBox2 ----
+        comboBox1.setFont(comboBox1.getFont().deriveFont(comboBox1.getFont().getSize() + 4f));
+        contentPane.add(comboBox1);
+        comboBox1.setBounds(220, 75, 130, comboBox2.getPreferredSize().height);
         contentPane.add(InputText);
-        comboBox2.setOpaque(false);
-        comboBox2.addItem("订单号");
-        comboBox2.addItem("供应商号");
-        comboBox2.addItem("订货项数");
-        comboBox2.addItem("订货日期");
-        comboBox2.addItem("付款金额");
+        comboBox1.setOpaque(false);
+        comboBox1.addItem("订单号");
+        comboBox1.addItem("供应商号");
+        comboBox1.addItem("订货项数");
+        comboBox1.addItem("订货日期");
+        comboBox1.addItem("付款金额");
 
         //---- InputText ----
         InputText.setBounds(360, 75, 455, comboBox2.getPreferredSize().height);
@@ -269,7 +323,7 @@ public class CustomerFrame extends JFrame implements Res {
         Search.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                SearchMouseClicked(e);
+                SearchMouseClicked(Number);
             }
         });
         contentPane.add(Search);
@@ -383,48 +437,6 @@ public class CustomerFrame extends JFrame implements Res {
         contentPane.add(Cancel);
         Cancel.setBounds(100, 345, 70, 30);
         Cancel.setContentAreaFilled(false);
-    }
-
-    private void ConfirmModify(String Number){
-        Container contentPane = getContentPane();
-        contentPane.remove(UserNumText);
-        contentPane.remove(UserNameText);
-        contentPane.remove(AddressText);
-        contentPane.remove(CreditText);
-        contentPane.remove(PhoneNumberText);
-        contentPane.remove(Confirm);
-        contentPane.remove(Cancel);
-        contentPane.add(modify);
-        contentPane.repaint();
-        UserName.setText(UserNameText.getText());
-        PhoneNumber.setText(PhoneNumberText.getText());
-        Address.setText(AddressText.getText());
-
-        Connection con = DatabaseConnection.getConnection();
-        Statement stmt = null;
-        String SQL = "update customer_info set cna='" + UserNameText.getText() + "'"
-                + ", cad='" + AddressText.getText() + "'" + ", cte='" + PhoneNumberText.getText() + "'"
-                + "where cno='" + Number + "'";
-        try {
-            stmt = con.createStatement();
-            stmt.executeUpdate(SQL);
-            System.out.println("资料修改成功了！！！");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    private void CancelModify(){
-        Container contentPane = getContentPane();
-        contentPane.remove(UserNumText);
-        contentPane.remove(UserNameText);
-        contentPane.remove(AddressText);
-        contentPane.remove(CreditText);
-        contentPane.remove(PhoneNumberText);
-        contentPane.remove(Confirm);
-        contentPane.remove(Cancel);
-        contentPane.add(modify);
-        contentPane.repaint();
     }
 
     public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
