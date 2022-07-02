@@ -26,7 +26,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 5
 				"y": 140
-				"width": 610
+				"width": 750
 				"height": 445
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -35,8 +35,8 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "CheckMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 665
-				"y": 40
+				"x": 840
+				"y": 45
 				"width": 140
 				"height": 45
 			} )
@@ -48,8 +48,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 45
-				"x": 830
-				"y": 40
+				"x": 1005
+				"y": 45
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Withdraw"
@@ -59,16 +59,16 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 45
-				"x": 665
-				"y": 110
+				"x": 840
+				"y": 115
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "选择查询类型："
 				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 665
-				"y": 195
+				"x": 840
+				"y": 200
 				"width": 130
 				"height": 25
 			} )
@@ -77,8 +77,8 @@ new FormModel {
 				"text": "订单号"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 670
-				"y": 240
+				"x": 845
+				"y": 245
 				"width": 140
 				"height": 20
 			} )
@@ -89,8 +89,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 670
-				"y": 270
+				"x": 845
+				"y": 275
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "DeliveryDate"
@@ -99,8 +99,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 670
-				"y": 300
+				"x": 845
+				"y": 305
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "SupplyNum"
@@ -109,8 +109,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 830
-				"y": 240
+				"x": 1005
+				"y": 245
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "OrderDate"
@@ -120,8 +120,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 830
-				"y": 270
+				"x": 1005
+				"y": 275
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "Payment"
@@ -130,14 +130,14 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 830
-				"y": 300
+				"x": 1005
+				"y": 305
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textField1"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 675
-				"y": 340
+				"x": 850
+				"y": 345
 				"width": 175
 				"height": 30
 			} )
@@ -147,8 +147,8 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "ResearchMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 865
-				"y": 340
+				"x": 1040
+				"y": 345
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label3"
@@ -157,8 +157,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 130
 				"height": 25
-				"x": 665
-				"y": 395
+				"x": 840
+				"y": 400
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "RangeOrderDate"
@@ -167,8 +167,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 670
-				"y": 440
+				"x": 845
+				"y": 445
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "RangePayment"
@@ -177,8 +177,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 670
-				"y": 470
+				"x": 845
+				"y": 475
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "RangeDeliveryDate"
@@ -187,8 +187,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 830
-				"y": 440
+				"x": 1005
+				"y": 445
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "Rangecount"
@@ -197,14 +197,14 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 20
-				"x": 830
-				"y": 470
+				"x": 1005
+				"y": 475
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "Rangelower"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 660
-				"y": 515
+				"x": 835
+				"y": 520
 				"width": 105
 				"height": 30
 			} )
@@ -214,8 +214,8 @@ new FormModel {
 				"horizontalAlignment": 0
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 765
-				"y": 520
+				"x": 940
+				"y": 525
 				"width": 30
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
@@ -223,8 +223,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 105
 				"height": 30
-				"x": 795
-				"y": 515
+				"x": 970
+				"y": 520
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "RangeResearch"
@@ -232,8 +232,8 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "RangeResearchMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 910
-				"y": 515
+				"x": 1085
+				"y": 520
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Refresh"
@@ -243,11 +243,11 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 140
 				"height": 45
-				"x": 830
-				"y": 110
+				"x": 1005
+				"y": 115
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 1000, 620 )
+			"size": new java.awt.Dimension( 1200, 620 )
 			"location": new java.awt.Point( 0, 0 )
 		} )
 	}

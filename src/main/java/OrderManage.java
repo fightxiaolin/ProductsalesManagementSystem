@@ -96,7 +96,7 @@ public class OrderManage extends JFrame {
             }
         };
         //======== OrderPanel ========
-        OrderPanel.setSize(1000, 590);
+        OrderPanel.setSize(1200, 590);
 
         //======== this ========
         setContentPane(OrderPanel);
@@ -117,7 +117,7 @@ public class OrderManage extends JFrame {
             scrollPane.setViewportView(Ordertable);
         }
         contentPane.add(scrollPane);
-        scrollPane.setBounds(5, 140, 610, 445);
+        scrollPane.setBounds(5, 140, 750, 445);
 
         //---- Check ----
         Check.setText("\u67e5\u770b\u8ba2\u5355");
@@ -129,7 +129,7 @@ public class OrderManage extends JFrame {
             }
         });
         contentPane.add(Check);
-        Check.setBounds(665, 40, 140, 45);
+        Check.setBounds(840, 45, 140, 45);
 
         //---- Handle ----
         Handle.setText("\u5904\u7406\u8ba2\u5355");
@@ -141,7 +141,7 @@ public class OrderManage extends JFrame {
             }
         });
         contentPane.add(Handle);
-        Handle.setBounds(830, 40, 140, 45);
+        Handle.setBounds(1005, 45, 140, 45);
 
         //---- Withdraw ----
         Withdraw.setText("\u64a4\u56de\u8ba2\u5355");
@@ -153,52 +153,52 @@ public class OrderManage extends JFrame {
             }
         });
         contentPane.add(Withdraw);
-        Withdraw.setBounds(665, 110, 140, 45);
+        Withdraw.setBounds(840, 115, 140, 45);
 
         //---- label2 ----
         label2.setText("\u9009\u62e9\u67e5\u8be2\u7c7b\u578b\uff1a");
         label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 2f));
         contentPane.add(label2);
-        label2.setBounds(665, 195, 130, 25);
+        label2.setBounds(840, 200, 130, 25);
 
         //---- OrderNum ----
         OrderNum.setText("\u8ba2\u5355\u53f7");
         OrderNum.setFont(OrderNum.getFont().deriveFont(OrderNum.getFont().getSize() + 2f));
         contentPane.add(OrderNum);
-        OrderNum.setBounds(670, 240, 140, 20);
+        OrderNum.setBounds(845, 245, 140, 20);
 
         //---- Address ----
         Address.setText("\u6536\u8d27\u5730");
         Address.setFont(Address.getFont().deriveFont(Address.getFont().getSize() + 2f));
         contentPane.add(Address);
-        Address.setBounds(670, 270, 140, 20);
+        Address.setBounds(845, 275, 140, 20);
 
         //---- DeliveryDate ----
         DeliveryDate.setText("\u4ea4\u8d27\u65e5\u671f");
         DeliveryDate.setFont(DeliveryDate.getFont().deriveFont(DeliveryDate.getFont().getSize() + 2f));
         contentPane.add(DeliveryDate);
-        DeliveryDate.setBounds(670, 300, 140, 20);
+        DeliveryDate.setBounds(845, 305, 140, 20);
 
         //---- SupplyNum ----
         SupplyNum.setText("\u4f9b\u5e94\u5546\u53f7");
         SupplyNum.setFont(SupplyNum.getFont().deriveFont(SupplyNum.getFont().getSize() + 2f));
         contentPane.add(SupplyNum);
-        SupplyNum.setBounds(830, 240, 140, 20);
+        SupplyNum.setBounds(1005, 245, 140, 20);
 
         //---- OrderDate ----
         OrderDate.setText("\u8ba2\u8d27\u65e5\u671f");
         OrderDate.setFont(OrderDate.getFont().deriveFont(OrderDate.getFont().getSize() + 2f));
         OrderDate.setActionCommand("\u8ba2\u8d27\u65e5\u671f");
         contentPane.add(OrderDate);
-        OrderDate.setBounds(830, 270, 140, 20);
+        OrderDate.setBounds(1005, 275, 140, 20);
 
         //---- Payment ----
         Payment.setText("\u4ed8\u6b3e\u91d1\u989d");
         Payment.setFont(Payment.getFont().deriveFont(Payment.getFont().getSize() + 2f));
         contentPane.add(Payment);
-        Payment.setBounds(830, 300, 140, 20);
+        Payment.setBounds(1005, 305, 140, 20);
         contentPane.add(textField1);
-        textField1.setBounds(675, 340, 175, 30);
+        textField1.setBounds(850, 345, 175, 30);
 
         //---- Research ----
         Research.setText("\u67e5\u8be2");
@@ -210,48 +210,48 @@ public class OrderManage extends JFrame {
             }
         });
         contentPane.add(Research);
-        Research.setBounds(new Rectangle(new Point(865, 340), Research.getPreferredSize()));
+        Research.setBounds(new Rectangle(new Point(1040, 345), Research.getPreferredSize()));
 
         //---- label3 ----
         label3.setText("\u9009\u62e9\u8303\u56f4\u7c7b\u578b\uff1a");
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 2f));
         contentPane.add(label3);
-        label3.setBounds(665, 395, 130, 25);
+        label3.setBounds(840, 400, 130, 25);
 
         //---- RangeOrderDate ----
         RangeOrderDate.setText("\u8ba2\u8d27\u65e5\u671f");
         RangeOrderDate.setFont(RangeOrderDate.getFont().deriveFont(RangeOrderDate.getFont().getSize() + 2f));
         contentPane.add(RangeOrderDate);
-        RangeOrderDate.setBounds(670, 440, 140, 20);
+        RangeOrderDate.setBounds(845, 445, 140, 20);
 
         //---- RangePayment ----
         RangePayment.setText("\u4ed8\u6b3e\u91d1\u989d");
         RangePayment.setFont(RangePayment.getFont().deriveFont(RangePayment.getFont().getSize() + 2f));
         contentPane.add(RangePayment);
-        RangePayment.setBounds(670, 470, 140, 20);
+        RangePayment.setBounds(845, 475, 140, 20);
 
         //---- RangeDeliveryDate ----
         RangeDeliveryDate.setText("\u4ea4\u8d27\u65e5\u671f");
         RangeDeliveryDate.setFont(RangeDeliveryDate.getFont().deriveFont(RangeDeliveryDate.getFont().getSize() + 2f));
         contentPane.add(RangeDeliveryDate);
-        RangeDeliveryDate.setBounds(830, 440, 140, 20);
+        RangeDeliveryDate.setBounds(1005, 445, 140, 20);
 
         //---- Rangecount ----
         Rangecount.setText("\u8ba2\u8d27\u9879\u6570");
         Rangecount.setFont(Rangecount.getFont().deriveFont(Rangecount.getFont().getSize() + 2f));
         contentPane.add(Rangecount);
-        Rangecount.setBounds(830, 470, 140, 20);
+        Rangecount.setBounds(1005, 475, 140, 20);
         contentPane.add(Rangelower);
-        Rangelower.setBounds(660, 515, 105, 30);
+        Rangelower.setBounds(835, 520, 105, 30);
 
         //---- label4 ----
         label4.setText("~");
         label4.setHorizontalAlignment(SwingConstants.CENTER);
         label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 4f));
         contentPane.add(label4);
-        label4.setBounds(765, 520, 30, label4.getPreferredSize().height);
+        label4.setBounds(940, 525, 30, label4.getPreferredSize().height);
         contentPane.add(Rangeupper);
-        Rangeupper.setBounds(795, 515, 105, 30);
+        Rangeupper.setBounds(970, 520, 105, 30);
 
         //---- RangeResearch ----
         RangeResearch.setText("\u67e5\u8be2");
@@ -263,7 +263,7 @@ public class OrderManage extends JFrame {
             }
         });
         contentPane.add(RangeResearch);
-        RangeResearch.setBounds(new Rectangle(new Point(910, 515), RangeResearch.getPreferredSize()));
+        RangeResearch.setBounds(new Rectangle(new Point(1085, 520), RangeResearch.getPreferredSize()));
 
         //---- Refresh ----
         Refresh.setText("\u5237\u65b0\u8ba2\u5355");
@@ -275,7 +275,7 @@ public class OrderManage extends JFrame {
             }
         });
         contentPane.add(Refresh);
-        Refresh.setBounds(830, 110, 140, 45);
+        Refresh.setBounds(1005, 115, 140, 45);
 
         ButtonGroup ResearchGroup = new ButtonGroup();
         ResearchGroup.add(Address);
@@ -293,22 +293,7 @@ public class OrderManage extends JFrame {
         RangeGroup.add(RangeDeliveryDate);
         RangeOrderDate.setSelected(true);
 
-        setSize(1000, 620);
-        /*{
-            // compute preferred size
-            Dimension preferredSize = new Dimension();
-            for(int i = 0; i < contentPane.getComponentCount(); i++) {
-                Rectangle bounds = contentPane.getComponent(i).getBounds();
-                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-            }
-            Insets insets = contentPane.getInsets();
-            preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
-            contentPane.setMinimumSize(preferredSize);
-            contentPane.setPreferredSize(preferredSize);
-        }
-        pack();*/
+        setSize(1200, 620);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -345,7 +330,7 @@ public class OrderManage extends JFrame {
     private JPanel OrderPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new OrderManage().setVisible(true);
-    }
+    }*/
 }
