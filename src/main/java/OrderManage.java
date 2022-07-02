@@ -95,6 +95,7 @@ public class OrderManage extends JFrame {
              */
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
+                
             }
         };
         //======== OrderPanel ========

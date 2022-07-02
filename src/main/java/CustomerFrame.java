@@ -35,28 +35,60 @@ public class CustomerFrame extends JFrame implements Res {
         // TODO add your code here
     }
 
+    /**
+     * 实现用户根据不同类型的查询功能
+     * @param Number    用户号
+     */
     private void SearchMouseClicked(String Number) {
         // TODO add your code here
         int selected = comboBox1.getSelectedIndex();
-        String Text = comboBox1.getSelectedItem().toString().trim();
+        String Text = InputText.getText();
         String SQL = "select * from order_info where cno='" + Number + "' and ";
         switch (selected){
-            case 1:
+            case 0:
                 SQL += "sno='" + Text + "'";
                 break;
-            case 2:
+            case 1:
                 SQL += "gno='" + Text + "'";
                 break;
-            case 3:
+            case 2:
                 SQL += "snu='" + Text + "'";
                 break;
-            case 4:
+            case 3:
                 SQL += "sdrq='" + Text + "'";
                 break;
-            case 5:
+            case 4:
                 SQL += "toprice=" + Text ;
         }
+//        System.out.println(SQL + "\t" + selected);
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result = null;
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            table1 = new JTable(buildTableModel(result));
+            scrollPane1.setViewportView(table1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
+    private void comboBox2itemChanged(ItemEvent e) {
+        if(e.getStateChange() == ItemEvent.SELECTED){
+            Connection con = DatabaseConnection.getConnection();
+            Statement stmt = null;
+            ResultSet result = null;
+            String SQL = "select * from order_info";
+            try {
+                stmt = con.createStatement();
+                result = stmt.executeQuery(SQL);
+                table1 = new JTable(buildTableModel(result));
+                scrollPane1.setViewportView(table1);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
 
     private void ConfirmMouseClicked(String Number) {
@@ -133,7 +165,7 @@ public class CustomerFrame extends JFrame implements Res {
              */
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(CostomerBackground,0, 0, CostomerBackground.getWidth(), CostomerBackground.getHeight(), null);
+//                g.drawImage(CostomerBackground,0, 0, CostomerBackground.getWidth(), CostomerBackground.getHeight(), null);
             }
         };
 
@@ -300,6 +332,12 @@ public class CustomerFrame extends JFrame implements Res {
         comboBox2.addItem("全部订单");
         comboBox2.addItem("未完成订单");
         comboBox2.addItem("已完成订单");
+        comboBox2.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                comboBox2itemChanged(e);
+            }
+        });
 
         //---- comboBox2 ----
         comboBox1.setFont(comboBox1.getFont().deriveFont(comboBox1.getFont().getSize() + 4f));
@@ -335,6 +373,8 @@ public class CustomerFrame extends JFrame implements Res {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
     private JLabel label1;
@@ -349,7 +389,6 @@ public class CustomerFrame extends JFrame implements Res {
     private JLabel Address;
     private JLabel Credit;
     private JButton modify;
-    private JComboBox comboBox1;
     private JScrollPane scrollPane1;
     private JTable table1;
     private JButton Add;
@@ -357,6 +396,7 @@ public class CustomerFrame extends JFrame implements Res {
     private JButton Alter;
     private JButton Confirm;
     private JButton Cancel;
+    private JComboBox comboBox1;
     private JComboBox comboBox2;
     private JTextField InputText;
     private JButton Search;
@@ -378,14 +418,7 @@ public class CustomerFrame extends JFrame implements Res {
         Confirm = new JButton();
         Cancel = new JButton();
 
-
         Container contentPane = getContentPane();
-        /*//---- UserNum ----
-        UserNumText.setText(UserNum.getText());
-        UserNumText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
-        contentPane.add(UserNumText);
-        UserNumText.setBounds(70, 135, 135, 25);*/
-
         //---- UserName ----
         UserNameText.setText(UserName.getText());
         UserNameText.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
@@ -465,7 +498,12 @@ public class CustomerFrame extends JFrame implements Res {
         while (rs.next()) {
             Vector vector = new Vector();
             for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-                vector.add(rs.getObject(columnIndex));
+                try{
+                    vector.add(rs.getString(columnIndex).trim());
+                }
+                catch (Exception e){
+                    vector.add(null);
+                }
             }
             data.add(vector);
         }

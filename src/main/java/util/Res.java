@@ -7,5 +7,4 @@ public interface Res {
     BufferedImage ManageBackground = Resource.getImage("背景图.png");
     BufferedImage CostomerBackground = Resource.getImage("CostomerBackground.png");
     BufferedImage LoginBackground = Resource.getImage("LoginBackground.png");
-
 }

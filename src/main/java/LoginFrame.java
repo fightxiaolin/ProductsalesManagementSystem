@@ -35,7 +35,7 @@ public class LoginFrame extends JFrame implements Res {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(LoginBackground, 0, 0, LoginBackground.getWidth(), LoginBackground.getHeight(), null);
+//                g.drawImage(LoginBackground, 0, 0, LoginBackground.getWidth(), LoginBackground.getHeight(), null);
             }
         };
         LoginPanel.setLayout(null);

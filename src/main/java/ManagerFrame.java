@@ -77,7 +77,7 @@ public class ManagerFrame extends JFrame implements Res {
              */
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(ManageBackground, 0, 0, ManageBackground.getWidth(), ManageBackground.getHeight(), null);
+//                g.drawImage(ManageBackground, 0, 0, ManageBackground.getWidth(), ManageBackground.getHeight(), null);
             }
         };
 
