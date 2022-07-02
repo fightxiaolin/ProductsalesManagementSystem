@@ -50,10 +50,23 @@ public class ProductManage extends JFrame {
 
     private void AlterMouseClicked(MouseEvent e) {
         // TODO add your code here
+
     }
 
     private void DeleteMouseClicked(MouseEvent e) {
         // TODO add your code here
+        int row = Producttable.getSelectedRow();
+        String pno = Producttable.getValueAt(row, 0).toString().trim();
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        String SQL = "delete from product_info where pno='" + pno + "'";
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        showProductImformation(-1);
     }
 
     private void RefreshMouseClicked(MouseEvent e) {
@@ -70,11 +83,34 @@ public class ProductManage extends JFrame {
 
     private void AddConfirmMouseClicked(MouseEvent e) {
         // TODO add your code here
-
+        int row = Producttable.getRowCount() - 1;
+        String  pno = Producttable.getValueAt(row, 0).toString().trim();
+        String  pna = Producttable.getValueAt(row, 1).toString().trim();
+        String  pdes = Producttable.getValueAt(row, 2).toString().trim();
+        System.out.println(pno + "\t" + pna + "\t" + pdes + "\t" + Producttable.getValueAt(row, 3));
+        Object  pwe = Producttable.getValueAt(row, 3);
+        System.out.println(pwe);
+        String SQL = "insert into product_info values('" + pno + "', '" + pna + "', '"+ pdes + "', " + pwe + ")";
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        showProductImformation(-1);
+        AddConfirm.setVisible(false);
+        AddCancel.setVisible(false);
+        Add.setVisible(true);
     }
 
     private void AddCancelMouseClicked(MouseEvent e) {
         // TODO add your code here
+        showProductImformation(-1);
+        AddConfirm.setVisible(false);
+        AddCancel.setVisible(false);
+        Add.setVisible(true);
     }
 
     private void initComponents() {
