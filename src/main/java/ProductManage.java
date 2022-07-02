@@ -50,7 +50,11 @@ public class ProductManage extends JFrame {
 
     private void AlterMouseClicked(MouseEvent e) {
         // TODO add your code here
-
+        editRow = Producttable.getSelectedRow();
+        showProductImformation(editRow, 0);
+        Alter.setVisible(false);
+        AlterConfirm.setVisible(true);
+        AlterCancel.setVisible(true);
     }
 
     private void DeleteMouseClicked(MouseEvent e) {
@@ -71,6 +75,7 @@ public class ProductManage extends JFrame {
 
     private void RefreshMouseClicked(MouseEvent e) {
         // TODO add your code here
+        showProductImformation(-1);
     }
 
     private void ResearchMouseClicked(MouseEvent e) {
@@ -87,7 +92,6 @@ public class ProductManage extends JFrame {
         String  pno = Producttable.getValueAt(row, 0).toString().trim();
         String  pna = Producttable.getValueAt(row, 1).toString().trim();
         String  pdes = Producttable.getValueAt(row, 2).toString().trim();
-        System.out.println(pno + "\t" + pna + "\t" + pdes + "\t" + Producttable.getValueAt(row, 3));
         Object  pwe = Producttable.getValueAt(row, 3);
         System.out.println(pwe);
         String SQL = "insert into product_info values('" + pno + "', '" + pna + "', '"+ pdes + "', " + pwe + ")";
@@ -111,6 +115,35 @@ public class ProductManage extends JFrame {
         AddConfirm.setVisible(false);
         AddCancel.setVisible(false);
         Add.setVisible(true);
+    }
+
+    private void AlterConfirmMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        String  pno = Producttable.getValueAt(editRow, 0).toString().trim();
+        String  pna = Producttable.getValueAt(editRow, 1).toString().trim();
+        String  pdes = Producttable.getValueAt(editRow, 2).toString().trim();
+        String pwe =  Producttable.getValueAt(editRow, 3).toString().trim();
+        String SQL = "update product_info set pna='" + pna +"', pdes='" + pdes + "', pwe=" + Integer.valueOf(pwe) + " where pno='" + pno + "'";
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        showProductImformation(-1);
+        AlterConfirm.setVisible(false);
+        AlterCancel.setVisible(false);
+        Alter.setVisible(true);
+    }
+
+    private void AlterCancelMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        showProductImformation(-1);
+        Alter.setVisible(true);
+        AlterConfirm.setVisible(false);
+        AlterCancel.setVisible(false);
     }
 
     private void initComponents() {
@@ -143,6 +176,8 @@ public class ProductManage extends JFrame {
         RangeResearch = new JButton();
         AddConfirm = new JButton();
         AddCancel = new JButton();
+        AlterCancel = new JButton();
+        AlterConfirm = new JButton();
         ProductPanel = new JPanel(){
             @Override
             /**
@@ -356,6 +391,31 @@ public class ProductManage extends JFrame {
         AddCancel.setBounds(745, 40, 60, 45);
         AddCancel.setVisible(false);
 
+        //---- AlterCancel ----
+        AlterCancel.setText("\u53d6\u6d88");
+        AlterCancel.setFont(AlterCancel.getFont().deriveFont(AlterCancel.getFont().getSize() + 4f));
+        AlterCancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AlterCancelMouseClicked(e);
+            }
+        });
+        contentPane.add(AlterCancel);
+        AlterCancel.setBounds(910, 40, 60, 45);
+        AlterCancel.setVisible(false);
+
+        //---- AlterConfirm ----
+        AlterConfirm.setText("\u786e\u8ba4");
+        AlterConfirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AlterConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(AlterConfirm);
+        AlterConfirm.setBounds(830, 40, 60, 45);
+        AlterConfirm.setVisible(false);
+
         ButtonGroup ResearchGroup = new ButtonGroup();
         ResearchGroup.add(ProductName);
         ResearchGroup.add(ProductNum);
@@ -407,6 +467,9 @@ public class ProductManage extends JFrame {
     private JPanel ProductPanel;
     private JButton AddConfirm;
     private JButton AddCancel;
+    private JButton AlterCancel;
+    private JButton AlterConfirm;
+    private int editRow;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     /**
@@ -421,6 +484,20 @@ public class ProductManage extends JFrame {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
             Producttable = new JTable(DatabaseConnection.buildProductTableModel(result, editrow));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        scrollPane.setViewportView(Producttable);
+    }
+    private void showProductImformation(int editrow, int editcol){
+        Connection con = DatabaseConnection.getConnection();
+        ResultSet result = null;
+        Statement stmt = null;
+        String SQL = "select * from product_info";
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            Producttable = new JTable(DatabaseConnection.buildProductTableModel(result, editrow, editcol));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -47,6 +47,14 @@ public class ProductManageDesigner extends JFrame {
         // TODO add your code here
     }
 
+    private void AlterCancelMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void AlterConfirmMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -77,6 +85,8 @@ public class ProductManageDesigner extends JFrame {
         RangeResearch = new JButton();
         AddConfirm = new JButton();
         AddCancel = new JButton();
+        AlterCancel = new JButton();
+        AlterConfirm = new JButton();
 
         //======== this ========
         setFont(new Font(Font.DIALOG, Font.PLAIN, 48));
@@ -143,7 +153,7 @@ public class ProductManageDesigner extends JFrame {
             }
         });
         contentPane.add(Refresh);
-        Refresh.setBounds(830, 110, 140, 45);
+        Refresh.setBounds(830, 150, 140, 45);
 
         //---- label2 ----
         label2.setText("\u9009\u62e9\u67e5\u8be2\u7c7b\u578b\uff1a");
@@ -278,6 +288,31 @@ public class ProductManageDesigner extends JFrame {
         contentPane.add(AddCancel);
         AddCancel.setBounds(745, 40, 60, 45);
 
+        //---- AlterCancel ----
+        AlterCancel.setText("\u53d6\u6d88");
+        AlterCancel.setFont(AlterCancel.getFont().deriveFont(AlterCancel.getFont().getSize() + 4f));
+        AlterCancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddCancelMouseClicked(e);
+                AlterCancelMouseClicked(e);
+            }
+        });
+        contentPane.add(AlterCancel);
+        AlterCancel.setBounds(910, 40, 60, 45);
+
+        //---- AlterConfirm ----
+        AlterConfirm.setText("\u786e\u8ba4");
+        AlterConfirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddCancelMouseClicked(e);
+                AlterConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(AlterConfirm);
+        AlterConfirm.setBounds(830, 40, 60, 45);
+
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -326,5 +361,7 @@ public class ProductManageDesigner extends JFrame {
     private JButton RangeResearch;
     private JButton AddConfirm;
     private JButton AddCancel;
+    private JButton AlterCancel;
+    private JButton AlterConfirm;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
