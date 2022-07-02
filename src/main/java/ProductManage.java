@@ -473,7 +473,7 @@ public class ProductManage extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     /**
-     * 显示product_info表中的数据导JTable中
+     * 显示product_info表中的数据导JTable中，其中editrow行可进行编辑
      */
     private void showProductImformation(int editrow){
         Connection con = DatabaseConnection.getConnection();
@@ -489,7 +489,13 @@ public class ProductManage extends JFrame {
         }
         scrollPane.setViewportView(Producttable);
     }
-    private void showProductImformation(int editrow, int editcol){
+
+    /**
+     * 在JTable中显示product_info表中的数据，其中editrow行可进行编辑，uneditcol列不可进行编辑
+     * @param editrow   可进行编辑行
+     * @param uneditcol 不可进行编辑列
+     */
+    private void showProductImformation(int editrow, int uneditcol){
         Connection con = DatabaseConnection.getConnection();
         ResultSet result = null;
         Statement stmt = null;
@@ -497,7 +503,7 @@ public class ProductManage extends JFrame {
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
-            Producttable = new JTable(DatabaseConnection.buildProductTableModel(result, editrow, editcol));
+            Producttable = new JTable(DatabaseConnection.buildProductTableModel(result, editrow, uneditcol));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

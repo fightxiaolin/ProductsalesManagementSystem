@@ -383,7 +383,7 @@ public class OrderManage extends JFrame {
         }
         return new DefaultTableModel(data, columnNames);
     }
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         new OrderManage().setVisible(true);
-    }*/
+    }
 }
