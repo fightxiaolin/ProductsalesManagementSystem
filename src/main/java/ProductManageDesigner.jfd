@@ -244,6 +244,28 @@ new FormModel {
 				"x": 910
 				"y": 515
 			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "AddConfirm"
+				"text": "确认"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AddConfirmMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 665
+				"y": 40
+				"width": 60
+				"height": 45
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "AddCancel"
+				"text": "取消"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AddCancelMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 60
+				"height": 45
+				"x": 745
+				"y": 40
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 1000, 620 )

@@ -1,9 +1,12 @@
+import javafx.beans.binding.ObjectExpression;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /*
  * Created by JFormDesigner on Mon Jun 27 23:05:44 CST 2022
  */
@@ -36,6 +39,13 @@ public class ProductManage extends JFrame {
 
     private void AddMouseClicked(MouseEvent e) {
         // TODO add your code here
+        int rowcount = Producttable.getRowCount();
+        showProductImformation(rowcount);
+        DefaultTableModel model = (DefaultTableModel) Producttable.getModel();
+        model.insertRow(rowcount, new Object[]{null, null, null, null});
+        Add.setVisible(false);
+        AddConfirm.setVisible(true);
+        AddCancel.setVisible(true);
     }
 
     private void AlterMouseClicked(MouseEvent e) {
@@ -55,6 +65,15 @@ public class ProductManage extends JFrame {
     }
 
     private void RangeResearchMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void AddConfirmMouseClicked(MouseEvent e) {
+        // TODO add your code here
+
+    }
+
+    private void AddCancelMouseClicked(MouseEvent e) {
         // TODO add your code here
     }
 
@@ -86,6 +105,8 @@ public class ProductManage extends JFrame {
         label4 = new JLabel();
         Rangeupper = new JTextField();
         RangeResearch = new JButton();
+        AddConfirm = new JButton();
+        AddCancel = new JButton();
         ProductPanel = new JPanel(){
             @Override
             /**
@@ -110,21 +131,8 @@ public class ProductManage extends JFrame {
         contentPane.add(Title);
         Title.setBounds(90, 30, 435, 55);
 
-        //======== scrollPane ========
-        {
-            Connection con = DatabaseConnection.getConnection();
-            ResultSet result = null;
-            Statement stmt = null;
-            String SQL = "select * from product_info";
-            try {
-                stmt = con.createStatement();
-                result = stmt.executeQuery(SQL);
-                Producttable = new JTable(buildTableModel(result));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-            scrollPane.setViewportView(Producttable);
-        }
+        showProductImformation(-1);
+
         contentPane.add(scrollPane);
         scrollPane.setBounds(5, 140, 610, 445);
 
@@ -285,6 +293,33 @@ public class ProductManage extends JFrame {
         contentPane.add(RangeResearch);
         RangeResearch.setBounds(new Rectangle(new Point(910, 515), RangeResearch.getPreferredSize()));
 
+        //---- AddConfirm ----
+        AddConfirm.setText("\u786e\u8ba4");
+        AddConfirm.setFont(AddConfirm.getFont().deriveFont(AddConfirm.getFont().getSize()));
+        AddConfirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(AddConfirm);
+        AddConfirm.setBounds(665, 40, 60, 45);
+
+        AddConfirm.setVisible(false);
+
+        //---- AddCancel ----
+        AddCancel.setText("\u53d6\u6d88");
+        AddCancel.setFont(AddCancel.getFont().deriveFont(AddCancel.getFont().getSize()));
+        AddCancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddCancelMouseClicked(e);
+            }
+        });
+        contentPane.add(AddCancel);
+        AddCancel.setBounds(745, 40, 60, 45);
+        AddCancel.setVisible(false);
+
         ButtonGroup ResearchGroup = new ButtonGroup();
         ResearchGroup.add(ProductName);
         ResearchGroup.add(ProductNum);
@@ -334,38 +369,26 @@ public class ProductManage extends JFrame {
     private JTextField Rangeupper;
     private JButton RangeResearch;
     private JPanel ProductPanel;
+    private JButton AddConfirm;
+    private JButton AddCancel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
-
-        ResultSetMetaData metaData = rs.getMetaData();
-
-        Vector columnNames = new Vector();
-
-        int columnCount = metaData.getColumnCount();
-
-        /*for (int column = 1; column <= columnCount; column++) {
-            columnNames.add(metaData.getColumnName(column));
-        }*/
-        columnNames.add("产品号");
-        columnNames.add("产品名");
-        columnNames.add("产品描述");
-        columnNames.add("产品重量");
-
-        Vector data = new Vector();
-
-        while (rs.next()) {
-            Vector vector = new Vector();
-            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-                try{
-                    vector.add(rs.getString(columnIndex).trim());
-                }catch (Exception e){
-                    vector.add(null);
-                }
-            }
-            data.add(vector);
+    /**
+     * 显示product_info表中的数据导JTable中
+     */
+    private void showProductImformation(int editrow){
+        Connection con = DatabaseConnection.getConnection();
+        ResultSet result = null;
+        Statement stmt = null;
+        String SQL = "select * from product_info";
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            Producttable = new JTable(DatabaseConnection.buildProductTableModel(result, editrow));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return new DefaultTableModel(data, columnNames);
+        scrollPane.setViewportView(Producttable);
     }
 
     /*public static void main(String[] args) {

@@ -39,6 +39,14 @@ public class ProductManageDesigner extends JFrame {
         // TODO add your code here
     }
 
+    private void AddConfirmMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void AddCancelMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -67,6 +75,8 @@ public class ProductManageDesigner extends JFrame {
         label4 = new JLabel();
         Rangeupper = new JTextField();
         RangeResearch = new JButton();
+        AddConfirm = new JButton();
+        AddCancel = new JButton();
 
         //======== this ========
         setFont(new Font(Font.DIALOG, Font.PLAIN, 48));
@@ -244,6 +254,30 @@ public class ProductManageDesigner extends JFrame {
         contentPane.add(RangeResearch);
         RangeResearch.setBounds(new Rectangle(new Point(910, 515), RangeResearch.getPreferredSize()));
 
+        //---- AddConfirm ----
+        AddConfirm.setText("\u786e\u8ba4");
+        AddConfirm.setFont(AddConfirm.getFont().deriveFont(AddConfirm.getFont().getSize() + 4f));
+        AddConfirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(AddConfirm);
+        AddConfirm.setBounds(665, 40, 60, 45);
+
+        //---- AddCancel ----
+        AddCancel.setText("\u53d6\u6d88");
+        AddCancel.setFont(AddCancel.getFont().deriveFont(AddCancel.getFont().getSize() + 4f));
+        AddCancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddCancelMouseClicked(e);
+            }
+        });
+        contentPane.add(AddCancel);
+        AddCancel.setBounds(745, 40, 60, 45);
+
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -290,5 +324,7 @@ public class ProductManageDesigner extends JFrame {
     private JLabel label4;
     private JTextField Rangeupper;
     private JButton RangeResearch;
+    private JButton AddConfirm;
+    private JButton AddCancel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
