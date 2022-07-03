@@ -27,6 +27,7 @@ public class ProductManage extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 ProductwindowClosing(UserNum);
+                dispose();
             }
         });
     }
@@ -393,7 +394,7 @@ public class ProductManage extends JFrame {
 
         //---- AlterCancel ----
         AlterCancel.setText("\u53d6\u6d88");
-        AlterCancel.setFont(AlterCancel.getFont().deriveFont(AlterCancel.getFont().getSize() + 4f));
+        AlterCancel.setFont(AlterCancel.getFont().deriveFont(AlterCancel.getFont().getSize()));
         AlterCancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -473,7 +474,7 @@ public class ProductManage extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     /**
-     * 显示product_info表中的数据导JTable中，其中editrow行可进行编辑
+     * 显示product_info表中的数据导JTable中，其中editrow行可进行编辑，如果参数editrow为-1即不可编辑
      */
     private void showProductImformation(int editrow){
         Connection con = DatabaseConnection.getConnection();

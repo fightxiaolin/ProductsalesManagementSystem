@@ -19,6 +19,7 @@ public class OrderManage extends JFrame {
     public OrderManage() {
         initComponents();
     }
+
     public OrderManage(String Number){
         initComponents();
         addWindowListener(new WindowAdapter() {
@@ -34,6 +35,9 @@ public class OrderManage extends JFrame {
 
     private void CheckMouseClicked(MouseEvent e) {
         // TODO add your code here
+        int selectedRow = Ordertable.getSelectedRow();
+        String Number = Ordertable.getValueAt(selectedRow, 0).toString().trim();
+        new OrderDetailsDialog(this, true, Number).setVisible(true);
     }
 
     private void HandleMouseClicked(MouseEvent e) {
