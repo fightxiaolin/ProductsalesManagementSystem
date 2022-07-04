@@ -50,6 +50,7 @@ public class OrderManage extends JFrame {
 
     private void RefreshMouseClicked(MouseEvent e) {
         // TODO add your code here
+        showOrderTable();
     }
 
     private void ResearchMouseClicked(MouseEvent e) {
@@ -123,18 +124,7 @@ public class OrderManage extends JFrame {
 
         //======== scrollPane ========
         {
-            Connection con = DatabaseConnection.getConnection();
-            ResultSet result = null;
-            Statement stmt = null;
-            String SQL = "select * from order_info";
-            try {
-                stmt = con.createStatement();
-                result = stmt.executeQuery(SQL);
-                Ordertable = new JTable(buildTableModel(result));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-            scrollPane.setViewportView(Ordertable);
+            showOrderTable();
         }
 
         contentPane.add(scrollPane);
@@ -319,39 +309,7 @@ public class OrderManage extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
-    private JLabel label1;
-    private JScrollPane scrollPane;
-    private JTable Ordertable;
-    private JButton Check;
-    private JButton Handle;
-    private JButton Withdraw;
-    private JLabel label2;
-    private JRadioButton OrderNum;
-    private JRadioButton Address;
-    private JRadioButton DeliveryDate;
-    private JRadioButton SupplyNum;
-    private JRadioButton OrderDate;
-    private JRadioButton Payment;
-    private JTextField textField1;
-    private JButton Research;
-    private JLabel label3;
-    private JRadioButton RangeOrderDate;
-    private JRadioButton RangePayment;
-    private JRadioButton RangeDeliveryDate;
-    private JRadioButton Rangecount;
-    private JTextField Rangelower;
-    private JLabel label4;
-    private JTextField Rangeupper;
-    private JButton RangeResearch;
-    private JButton Refresh;
-    private JPanel OrderPanel;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
-
-    public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
+    public static DefaultTableModel buildOrderTableModel(ResultSet rs) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
 
@@ -390,4 +348,52 @@ public class OrderManage extends JFrame {
     public static void main(String[] args) {
         new OrderManage().setVisible(true);
     }
+
+    private void showOrderTable(){
+        Connection con = DatabaseConnection.getConnection();
+        ResultSet result = null;
+        Statement stmt = null;
+        String SQL = "select * from order_info";
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            Ordertable = new JTable(buildOrderTableModel(result));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        scrollPane.setViewportView(Ordertable);
+    }
+
+
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
+    private JLabel label1;
+    private JScrollPane scrollPane;
+    private JTable Ordertable;
+    private JButton Check;
+    private JButton Handle;
+    private JButton Withdraw;
+    private JLabel label2;
+    private JRadioButton OrderNum;
+    private JRadioButton Address;
+    private JRadioButton DeliveryDate;
+    private JRadioButton SupplyNum;
+    private JRadioButton OrderDate;
+    private JRadioButton Payment;
+    private JTextField textField1;
+    private JButton Research;
+    private JLabel label3;
+    private JRadioButton RangeOrderDate;
+    private JRadioButton RangePayment;
+    private JRadioButton RangeDeliveryDate;
+    private JRadioButton Rangecount;
+    private JTextField Rangelower;
+    private JLabel label4;
+    private JTextField Rangeupper;
+    private JButton RangeResearch;
+    private JButton Refresh;
+    private JPanel OrderPanel;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 }

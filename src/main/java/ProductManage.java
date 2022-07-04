@@ -94,8 +94,8 @@ public class ProductManage extends JFrame {
         String  pna = Producttable.getValueAt(row, 1).toString().trim();
         String  pdes = Producttable.getValueAt(row, 2).toString().trim();
         Object  pwe = Producttable.getValueAt(row, 3);
-        System.out.println(pwe);
-        String SQL = "insert into product_info values('" + pno + "', '" + pna + "', '"+ pdes + "', " + pwe + ")";
+        Object number = Producttable.getValueAt(row, 4);
+        String SQL = "insert into product_info values('" + pno + "', '" + pna + "', '"+ pdes + "', " + pwe + ", " + number + ")";
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
         try {
@@ -120,11 +120,17 @@ public class ProductManage extends JFrame {
 
     private void AlterConfirmMouseClicked(MouseEvent e) {
         // TODO add your code here
-        String  pno = Producttable.getValueAt(editRow, 0).toString().trim();
-        String  pna = Producttable.getValueAt(editRow, 1).toString().trim();
-        String  pdes = Producttable.getValueAt(editRow, 2).toString().trim();
-        String pwe =  Producttable.getValueAt(editRow, 3).toString().trim();
-        String SQL = "update product_info set pna='" + pna +"', pdes='" + pdes + "', pwe=" + Integer.valueOf(pwe) + " where pno='" + pno + "'";
+        String pno = Producttable.getValueAt(editRow, 0).toString().trim();
+        String pna = Producttable.getValueAt(editRow, 1).toString().trim();
+        String gno = Producttable.getValueAt(editRow, 2).toString().trim();
+        String gna =  Producttable.getValueAt(editRow, 3).toString().trim();
+        String pwe = Producttable.getValueAt(editRow, 4).toString().trim();
+        String price = Producttable.getValueAt(editRow, 5).toString().trim();
+        String surplus = Producttable.getValueAt(editRow, 6).toString().trim();
+
+        String SQL = "update product_info set pna='" + pna + "', pwe=" + Integer.valueOf(pwe) + " where pno='" + pno + "'\n"
+                + "update g_info set gna='" + gna + "' where gno='" + gno + "'\n"
+                + "update god_info set price=" + Integer.valueOf(price) + ", surplus=" + Integer.valueOf(surplus) + "where pno='" + pno +"' and gno='" + gno + "'";
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
         try {
@@ -425,6 +431,7 @@ public class ProductManage extends JFrame {
         ResearchGroup.add(ProductWeight);
         ResearchGroup.add(SupplyName);
         ProductNum.setSelected(true);
+        ResearchGroup.getSelection();
 
         ButtonGroup RangeGroup = new ButtonGroup();
         RangeGroup.add(RangeAnother);
@@ -480,14 +487,15 @@ public class ProductManage extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         ResultSet result = null;
         Statement stmt = null;
-        String SQL = "select * from product_info";
+        String SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P,g_info G, god_info God where P.pno=God.pno and G.gno=God.gno";
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
-            Producttable = new JTable(DatabaseConnection.buildProductTableModel(result, editrow));
+            Producttable = new JTable(buildProductTableModel(result, editrow));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        Producttable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
         scrollPane.setViewportView(Producttable);
     }
 
@@ -500,18 +508,109 @@ public class ProductManage extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         ResultSet result = null;
         Statement stmt = null;
-        String SQL = "select * from product_info";
+        String SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P,g_info G, god_info God where P.pno=God.pno and G.gno=God.gno";
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
-            Producttable = new JTable(DatabaseConnection.buildProductTableModel(result, editrow, uneditcol));
+            Producttable = new JTable(buildProductTableModel(result, editrow, uneditcol));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        Producttable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
         scrollPane.setViewportView(Producttable);
     }
 
-    /*public static void main(String[] args) {
-        new ProductManage().setVisible(true);
-    }*/
+
+    /**
+     *根据查询结果ResultSet生成一个product_info表的默认Table模型DefaultTableModel，其中仅er行可进行编辑
+     * @param rs    SQL语句查询结果
+     * @param er    可进行编辑行
+     * @return
+     * @throws SQLException
+     */
+    public static DefaultTableModel buildProductTableModel(ResultSet rs, int er) throws SQLException {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+        Vector columnNames = new Vector();
+
+        int columnCount = metaData.getColumnCount();
+        columnNames.add("产品号");
+        columnNames.add("产品名");
+        columnNames.add("供应商号");
+        columnNames.add("供应商名");
+        columnNames.add("产品重量");
+        columnNames.add("单价");
+        columnNames.add("余量");
+
+        Vector data = new Vector();
+
+        while (rs.next()) {
+            Vector vector = new Vector();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                try{
+                    vector.add(rs.getString(columnIndex).trim());
+                }catch (Exception e){
+                    vector.add(null);
+                }
+            }
+            data.add(vector);
+        }
+        return new DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(row == er){
+                    return true;
+                }
+                else
+                    return false;
+            }
+        };
+    }
+
+    /**
+     * 根据查询结果ResultSet生成一个product_info表的默认Table模型DefaultTableModel，其中仅er行可进行编辑，且unec列不可进行编辑
+     * @param rs    SQL语句的查询结果
+     * @param er    可进行编辑行editrow
+     * @param unec  不可进行编辑列uneditcolumn
+     * @return
+     * @throws SQLException
+     */
+    public static DefaultTableModel buildProductTableModel(ResultSet rs, int er, int unec) throws SQLException {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+        Vector columnNames = new Vector();
+
+        int columnCount = metaData.getColumnCount();
+        columnNames.add("产品号");
+        columnNames.add("产品名");
+        columnNames.add("供应商号");
+        columnNames.add("供应商名");
+        columnNames.add("产品重量");
+        columnNames.add("单价");
+        columnNames.add("余量");
+
+        Vector data = new Vector();
+
+        while (rs.next()) {
+            Vector vector = new Vector();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                try{
+                    vector.add(rs.getString(columnIndex).trim());
+                }catch (Exception e){
+                    vector.add(null);
+                }
+            }
+            data.add(vector);
+        }
+        return new DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(row == er && column != unec){
+                    return true;
+                }
+                else
+                    return false;
+            }
+        };
+    }
 }
