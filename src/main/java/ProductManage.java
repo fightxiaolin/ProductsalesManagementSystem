@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.Vector;
 import javax.swing.*;
+import javax.swing.plaf.nimbus.State;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 /*
@@ -43,7 +44,7 @@ public class ProductManage extends JFrame {
         int rowcount = Producttable.getRowCount();
         showProductImformation(rowcount);
         DefaultTableModel model = (DefaultTableModel) Producttable.getModel();
-        model.insertRow(rowcount, new Object[]{null, null, null, null});
+        model.insertRow(rowcount, new Object[]{null, null, null, null, null, null, null});
         Add.setVisible(false);
         AddConfirm.setVisible(true);
         AddCancel.setVisible(true);
@@ -81,6 +82,7 @@ public class ProductManage extends JFrame {
 
     private void ResearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+        ProductNum.isSelected();
     }
 
     private void RangeResearchMouseClicked(MouseEvent e) {
@@ -92,10 +94,15 @@ public class ProductManage extends JFrame {
         int row = Producttable.getRowCount() - 1;
         String  pno = Producttable.getValueAt(row, 0).toString().trim();
         String  pna = Producttable.getValueAt(row, 1).toString().trim();
-        String  pdes = Producttable.getValueAt(row, 2).toString().trim();
-        Object  pwe = Producttable.getValueAt(row, 3);
-        Object number = Producttable.getValueAt(row, 4);
-        String SQL = "insert into product_info values('" + pno + "', '" + pna + "', '"+ pdes + "', " + pwe + ", " + number + ")";
+        String  gno = Producttable.getValueAt(row, 2).toString().trim();
+        String  gna = Producttable.getValueAt(row, 3).toString().trim();
+        String  pwe = Producttable.getValueAt(row, 4).toString().trim();
+        String  price = Producttable.getValueAt(row, 5).toString().trim();
+        String  surplus = Producttable.getValueAt(row, 6).toString().trim();
+        String SQL = "insert into product_info(pno, pna, pwe) values('" + pno + "', '" + pna + "', "+ Integer.valueOf(pwe) + ");\n"
+                + "insert into g_info(gno, gna) values('" + gno + "', '" + gna + "');\n"
+                + "insert into god_info values('" + gno + "', '" + pno + "', " + Integer.valueOf(price) + "," + Integer.valueOf(surplus) + ")";
+
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
         try {
@@ -508,7 +515,8 @@ public class ProductManage extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         ResultSet result = null;
         Statement stmt = null;
-        String SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P,g_info G, god_info God where P.pno=God.pno and G.gno=God.gno";
+        String SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P,g_info G, god_info God " +
+                "where P.pno=God.pno and G.gno=God.gno";
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);

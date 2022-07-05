@@ -153,7 +153,7 @@ public class ProductManageDesigner extends JFrame {
             }
         });
         contentPane.add(Refresh);
-        Refresh.setBounds(830, 150, 140, 45);
+        Refresh.setBounds(830, 110, 140, 45);
 
         //---- label2 ----
         label2.setText("\u9009\u62e9\u67e5\u8be2\u7c7b\u578b\uff1a");

@@ -70,7 +70,7 @@ new FormModel {
 				"width": 140
 				"height": 45
 				"x": 830
-				"y": 150
+				"y": 110
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
