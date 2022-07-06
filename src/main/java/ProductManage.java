@@ -84,11 +84,6 @@ public class ProductManage extends JFrame {
 
     private void ResearchMouseClicked(MouseEvent e) {
         // TODO add your code here
-        ProductNum.isSelected();
-    }
-
-    private void RangeResearchMouseClicked(MouseEvent e) {
-        // TODO add your code here
         String text = textField1.getText();
         String SQL = null;
         Connection con = DatabaseConnection.getConnection();
@@ -97,27 +92,27 @@ public class ProductManage extends JFrame {
         ProductNum.isSelected();
         if( ProductNum.isSelected())
         {
-            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pno='" + text + "'";
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pno='" + text + "'";
         }
         else if(SupplyNum.isSelected())
         {
-            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where G.gno = text";
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and G.gno ='" + text + "'";
         }
         else if(ProductName.isSelected())
         {
-            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where P.pna = text";
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pna ='" + text + "'";
         }
         else if(SupplyName.isSelected())
         {
-            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where G.gna = text";
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and G.gna ='" + text + "'";
         }
         else if(ProductPrice.isSelected())
         {
-            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where P.pwe = text";
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pwe =" + Integer.valueOf(text);
         }
         else if(ProductWeight.isSelected())
         {
-            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where God.surplus = text";
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.surplus =" + Integer.valueOf(text);
         }
         try {
             stmt = con.createStatement();
@@ -130,6 +125,11 @@ public class ProductManage extends JFrame {
         }
         Producttable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
         scrollPane.setViewportView(Producttable);
+    }
+
+    private void RangeResearchMouseClicked(MouseEvent e) {
+        // TODO add your code here
+
     }
 
     private void AddConfirmMouseClicked(MouseEvent e) {

@@ -35,6 +35,7 @@ public class ManagerFrameDesigner extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - unknown
         modify = new JButton();
         label5 = new JLabel();
         Address = new JLabel();
@@ -197,6 +198,7 @@ public class ManagerFrameDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
     private JButton modify;
     private JLabel label5;
     private JLabel Address;
