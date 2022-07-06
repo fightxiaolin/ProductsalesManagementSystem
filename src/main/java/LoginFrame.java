@@ -194,6 +194,7 @@ public class LoginFrame extends JFrame implements Res {
              * 结束当前窗口进程，并开启供应商窗口进程
              */
 
+
         }else{
             /**
              * 显示对话框“输入的账号或者密码错误”

@@ -4,9 +4,6 @@ import javax.swing.*;
 /*
  * Created by JFormDesigner on Mon Jun 27 23:05:44 CST 2022
  */
-
-
-
 /**
  * @author unknown
  */
@@ -33,10 +30,13 @@ public class ProductManageDesigner extends JFrame {
 
     private void ResearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+        //这个是类型查询的监听器触发方法
+
+
     }
 
     private void RangeResearchMouseClicked(MouseEvent e) {
-        // TODO add your code here
+        // TODO add your code here，范围监听器的触发方法
     }
 
     private void AddConfirmMouseClicked(MouseEvent e) {
@@ -55,9 +55,13 @@ public class ProductManageDesigner extends JFrame {
         // TODO add your code here
     }
 
+    private void ProductNumMouseClicked(MouseEvent e) {
+        // TODO add your code here
+
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
         Title = new JLabel();
         scrollPane = new JScrollPane();
         Producttable = new JTable();
@@ -333,7 +337,6 @@ public class ProductManageDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
     private JLabel Title;
     private JScrollPane scrollPane;
     private JTable Producttable;

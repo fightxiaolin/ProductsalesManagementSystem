@@ -1,4 +1,5 @@
 import javafx.beans.binding.ObjectExpression;
+import javafx.scene.control.RadioButton;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -8,25 +9,28 @@ import javax.swing.*;
 import javax.swing.plaf.nimbus.State;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+
 /*
  * Created by JFormDesigner on Mon Jun 27 23:05:44 CST 2022
  */
-
-
-
 /**
  * @author unknown
  */
 public class ProductManage extends JFrame {
     public ProductManage() {
-        initComponents();
+        initComponents();//在界面添加各个组件，并为它们注册监听器
     }
 
-    public ProductManage(String UserNum){
+    public ProductManage(String UserNum)
+    {
         initComponents();
-        addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {//在窗口添加一个Windows事件消息，在关闭窗口的时候可以正常的退出
             @Override
             public void windowClosing(WindowEvent e) {
+
+
+
                 ProductwindowClosing(UserNum);
                 dispose();
             }
@@ -87,6 +91,44 @@ public class ProductManage extends JFrame {
 
     private void RangeResearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+        String text = textField1.getText();
+        String SQL = null;
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result;
+        ProductNum.isSelected();
+        if( ProductNum.isSelected())
+        {
+            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where P.pno = text";
+        }
+        else if(SupplyNum.isSelected())
+        {
+            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where G.gno = text";
+        }
+        else if(ProductName.isSelected())
+        {
+            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where P.pna = text";
+        }
+        else if(SupplyName.isSelected())
+        {
+            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where G.gna = text";
+        }
+        else if(ProductPrice.isSelected())
+        {
+            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where P.pwe = text";
+        }
+        else if(ProductWeight.isSelected())
+        {
+            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where God.surplus = text";
+        }
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
 
     private void AddConfirmMouseClicked(MouseEvent e) {
@@ -211,7 +253,7 @@ public class ProductManage extends JFrame {
 
         //---- Title ----
         Title.setText("\u4ea7\u54c1\u7ba1\u7406\u7cfb\u7edf");
-        Title.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 48));
+        Title.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 30));
         Title.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(Title);
         Title.setBounds(90, 30, 435, 55);
