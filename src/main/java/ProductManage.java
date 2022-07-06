@@ -6,9 +6,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.Vector;
 import javax.swing.*;
-import javax.swing.plaf.nimbus.State;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 
 /*
@@ -99,7 +97,7 @@ public class ProductManage extends JFrame {
         ProductNum.isSelected();
         if( ProductNum.isSelected())
         {
-            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where P.pno = text";
+            SQL = "select P.pno, P.pna, P.gno, G.gno, P.pwe, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pno='" + text + "'";
         }
         else if(SupplyNum.isSelected())
         {
@@ -124,11 +122,14 @@ public class ProductManage extends JFrame {
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
+            Producttable = new JTable(buildProductTableModel(result, -1));
         }
         catch (SQLException throwables)
         {
             throwables.printStackTrace();
         }
+        Producttable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        scrollPane.setViewportView(Producttable);
     }
 
     private void AddConfirmMouseClicked(MouseEvent e) {

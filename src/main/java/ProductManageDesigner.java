@@ -62,6 +62,7 @@ public class ProductManageDesigner extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - unknown
         Title = new JLabel();
         scrollPane = new JScrollPane();
         Producttable = new JTable();
@@ -168,6 +169,12 @@ public class ProductManageDesigner extends JFrame {
         //---- ProductNum ----
         ProductNum.setText("\u4ea7\u54c1\u53f7");
         ProductNum.setFont(ProductNum.getFont().deriveFont(ProductNum.getFont().getSize() + 2f));
+        ProductNum.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ProductNumMouseClicked(e);
+            }
+        });
         contentPane.add(ProductNum);
         ProductNum.setBounds(670, 240, 140, 20);
 
@@ -209,6 +216,9 @@ public class ProductManageDesigner extends JFrame {
         Research.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                ResearchMouseClicked(e);
+                ResearchMouseClicked(e);
+                ResearchMouseClicked(e);
                 ResearchMouseClicked(e);
             }
         });
@@ -337,6 +347,7 @@ public class ProductManageDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
     private JLabel Title;
     private JScrollPane scrollPane;
     private JTable Producttable;
