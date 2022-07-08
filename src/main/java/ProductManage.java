@@ -129,7 +129,38 @@ public class ProductManage extends JFrame {
 
     private void RangeResearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+        String text1 = Rangelower.getText();
+        String text2 = Rangeupper.getText();
+        String SQL = null;
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result;
+        ProductNum.isSelected();
+        if( RangePrice.isSelected())
+        {
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.price>='" + text1 + "'and God.price<='" + text2 + "'";
+        }
+        else if(RangeWeight.isSelected())
+        {
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pwe>='" + text1 + "'and P.pwe<='" + text2 + "'";
+        }
+        else if(RangeSurplus.isSelected())
+        {
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.surplus>='" + text1 + "'and God.surplus<='" + text2 + "'";
+        }
 
+
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            Producttable = new JTable(buildProductTableModel(result, -1));
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        Producttable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        scrollPane.setViewportView(Producttable);
     }
 
     private void AddConfirmMouseClicked(MouseEvent e) {

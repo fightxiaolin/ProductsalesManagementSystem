@@ -33,6 +33,7 @@ public class OrderManageDesigner extends JFrame {
 
     private void ResearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+
     }
 
     private void RangeResearchMouseClicked(MouseEvent e) {
@@ -41,7 +42,6 @@ public class OrderManageDesigner extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
         label1 = new JLabel();
         scrollPane = new JScrollPane();
         Ordertable = new JTable();
@@ -86,7 +86,7 @@ public class OrderManageDesigner extends JFrame {
             scrollPane.setViewportView(Ordertable);
         }
         contentPane.add(scrollPane);
-        scrollPane.setBounds(5, 140, 750, 445);
+        scrollPane.setBounds(10, 140, 750, 445);
 
         //---- Check ----
         Check.setText("\u67e5\u770b\u8ba2\u5355");
@@ -175,6 +175,7 @@ public class OrderManageDesigner extends JFrame {
         Research.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                ResearchMouseClicked(e);
                 ResearchMouseClicked(e);
             }
         });
@@ -266,7 +267,6 @@ public class OrderManageDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
     private JLabel label1;
     private JScrollPane scrollPane;
     private JTable Ordertable;

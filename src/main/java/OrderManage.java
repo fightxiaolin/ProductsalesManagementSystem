@@ -1,8 +1,7 @@
-import sun.security.krb5.internal.crypto.RsaMd5CksumType;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.text.Format;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -55,6 +54,47 @@ public class OrderManage extends JFrame {
 
     private void ResearchMouseClicked(MouseEvent e) {
         // TODO add your code here
+        String text = textField1.getText();
+        String SQL = null;
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result;
+        string str = format.format(text);
+        if( OrderNum.isSelected())
+        {
+            SQL = "select * from Order where sno='" + text + "'";
+        }
+        else if(SupplyNum.isSelected())
+        {
+            SQL = "select * from Order where gno='" + text + "'";
+        }
+        else if(Address.isSelected())
+        {
+            SQL = "select * from Order where scity='" + text + "'";
+        }
+        else if(OrderDate.isSelected())
+        {
+            SQL = "select * from Order where sdrq =" + str;
+        }
+        else if(DeliveryDate.isSelected())
+        {
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pwe =" + Integer.valueOf(text);
+        }
+        else if(Payment.isSelected())
+        {
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.surplus =" + Integer.valueOf(text);
+        }
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            Ordertable = new JTable(buildOrderTableModel(result, -1));
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        Ordertable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        scrollPane.setViewportView(Ordertable);
     }
 
     private void RangeResearchMouseClicked(MouseEvent e) {
@@ -309,7 +349,7 @@ public class OrderManage extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-    public static DefaultTableModel buildOrderTableModel(ResultSet rs) throws SQLException {
+    public static DefaultTableModel buildOrderTableModel(ResultSet rs, int i) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
 
@@ -357,7 +397,7 @@ public class OrderManage extends JFrame {
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
-            Ordertable = new JTable(buildOrderTableModel(result));
+            Ordertable = new JTable(buildOrderTableModel(result, -1));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
