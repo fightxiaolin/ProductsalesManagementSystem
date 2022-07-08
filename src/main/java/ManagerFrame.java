@@ -1,4 +1,5 @@
 import com.sun.org.apache.xpath.internal.operations.Or;
+import util.MyOptionPane;
 import util.Res;
 import java.awt.*;
 import java.awt.event.*;
@@ -51,6 +52,13 @@ public class ManagerFrame extends JFrame implements Res {
         CancelModify();
     }
 
+    private void logoutMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        if(MyOptionPane.showConfirmDialog(this, "提示", "你确认要退出登录？", "确认", "取消")){
+            dispose();
+            new LoginFrame().setVisible(true);
+        }
+    }
 
     private void initComponents(String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -70,6 +78,7 @@ public class ManagerFrame extends JFrame implements Res {
         OrderManage = new JButton();
         CustomerManage = new JButton();
         ProductManage = new JButton();
+        logout = new JButton();
         ManagePanel = new JPanel(){
             @Override
             /**
@@ -220,6 +229,19 @@ public class ManagerFrame extends JFrame implements Res {
         ProductManage.setBounds(470, 190, 240, 45);
         ProductManage.setContentAreaFilled(false);
 
+        //---- logout ----
+        logout.setText("退出登录");
+        logout.setFont(logout.getFont().deriveFont(logout.getFont().getSize() + 4f));
+        logout.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                logoutMouseClicked(e);
+            }
+        });
+        contentPane.add(logout);
+        logout.setBounds(30, 510, 175, 50);
+        logout.setContentAreaFilled(false);
+
         setSize(1000, 620);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -249,6 +271,7 @@ public class ManagerFrame extends JFrame implements Res {
     private JTextField UserNameText;
     private JTextField PhoneNumberText;
     private JTextField AddressText;
+    private JButton logout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void ModifyImformation(String Number){
