@@ -1,8 +1,11 @@
+import util.MyOptionPane;
 import util.Res;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import javax.swing.*;
 /*
@@ -41,11 +44,16 @@ public class LoginFrame extends JFrame implements Res {
         LoginPanel.setLayout(null);
 
         //======== this ========
-        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                thisWindowClosing(e);
+            }
+        });
         setContentPane(LoginPanel);
 //        setResizable(false);
         setTitle("登录");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         LoginPanel.add(Username);
         Username.setBounds(160, 115, 120, 30);
@@ -126,6 +134,12 @@ public class LoginFrame extends JFrame implements Res {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    private void thisWindowClosing(WindowEvent e) {
+        if (MyOptionPane.showConfirmDialog(this, "提示", "你是否要退出？", "是", "否")) {
+            dispose();
+        }
+    }
+
     /**
      * 找回账号按钮监听器触发事件
      * @param e
@@ -155,7 +169,6 @@ public class LoginFrame extends JFrame implements Res {
         ResultSet result = null;
         int sign = 0;
         String password = null;
-
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
@@ -179,6 +192,8 @@ public class LoginFrame extends JFrame implements Res {
             /**
              * 结束当前窗口的进程，并开启管理员窗口进程
              */
+            MyOptionPane.showMessageDialog(this, "登录成功！", "欢迎使用产品管理系统");
+//            JOptionPane.showConfirmDialog(null, "登录成功！", "欢迎使用产品管理系统", JOptionPane.DEFAULT_OPTION);
             dispose();
             new ManagerFrame(UserNum).setVisible(true);
         }
@@ -186,6 +201,7 @@ public class LoginFrame extends JFrame implements Res {
             /**
              * 结束当前窗口进程，并开启顾客窗口进程
              */
+            MyOptionPane.showMessageDialog(this, "登录成功！", "欢迎使用产品管理系统");
             dispose();
             new CustomerFrame(UserNum).setVisible(true);
         }
@@ -193,13 +209,17 @@ public class LoginFrame extends JFrame implements Res {
             /**
              * 结束当前窗口进程，并开启供应商窗口进程
              */
-
+            MyOptionPane.showMessageDialog(this, "登录成功！", "欢迎使用产品管理系统");
+            dispose();
 
         }else{
             /**
              * 显示对话框“输入的账号或者密码错误”
              */
-
+            MyOptionPane.showMessageDialog(this, "输入的用户名或密码错误，请重试！", "登录失败");
+//            JOptionPane.showMessageDialog(null, "输入的用户名或密码错误，请重试！", "ERROR", JOptionPane.WARNING_MESSAGE);
+            Username.setText("");
+            Password.setText("");
         }
     }
 
@@ -208,7 +228,9 @@ public class LoginFrame extends JFrame implements Res {
      * @param e
      */
     private void exitmouseClicked(MouseEvent e) {
-        dispose();
+        if (MyOptionPane.showConfirmDialog(this, "提示", "你是否要退出？", "是", "否")) {
+            dispose();
+        }
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -225,7 +247,5 @@ public class LoginFrame extends JFrame implements Res {
     private JPanel LoginPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public static void main(String[] args) {
-        new LoginFrame().setVisible(true);
-    }
+
 }
