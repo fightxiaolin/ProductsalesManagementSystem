@@ -32,6 +32,10 @@ public class ManagerFrameDesigner extends JFrame {
         // TODO add your code here
     }
 
+    private void logoutMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -52,6 +56,7 @@ public class ManagerFrameDesigner extends JFrame {
         CostomerManage = new JButton();
         ProductManage = new JButton();
         label7 = new JLabel();
+        logout = new JButton();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -178,6 +183,18 @@ public class ManagerFrameDesigner extends JFrame {
         contentPane.add(label7);
         label7.setBounds(new Rectangle(new Point(-60, -30), label7.getPreferredSize()));
 
+        //---- logout ----
+        logout.setText("\u6ce8\u9500\u8d26\u53f7");
+        logout.setFont(logout.getFont().deriveFont(logout.getFont().getSize() + 4f));
+        logout.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                logoutMouseClicked(e);
+            }
+        });
+        contentPane.add(logout);
+        logout.setBounds(30, 510, 175, 50);
+
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -215,5 +232,6 @@ public class ManagerFrameDesigner extends JFrame {
     private JButton CostomerManage;
     private JButton ProductManage;
     private JLabel label7;
+    private JButton logout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
