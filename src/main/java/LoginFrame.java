@@ -8,16 +8,18 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
 import javax.swing.*;
+
 /*
  * Created by JFormDesigner on Mon Jun 27 09:44:52 CST 2022
  */
-
-
-
 /**
  * @author unknown
  */
+
 public class LoginFrame extends JFrame implements Res {
+    public static void main(String[]args){
+    new LoginFrame();
+    }
     public LoginFrame() {
         initComponents();
     }

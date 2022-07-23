@@ -86,7 +86,7 @@ public class OrderManageDesigner extends JFrame {
             scrollPane.setViewportView(Ordertable);
         }
         contentPane.add(scrollPane);
-        scrollPane.setBounds(10, 140, 750, 445);
+        scrollPane.setBounds(10, 105, 800, 480);
 
         //---- Check ----
         Check.setText("\u67e5\u770b\u8ba2\u5355");

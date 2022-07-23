@@ -25,9 +25,9 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 10
-				"y": 140
-				"width": 750
-				"height": 445
+				"y": 105
+				"width": 800
+				"height": 480
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Check"

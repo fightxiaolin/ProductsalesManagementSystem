@@ -59,7 +59,6 @@ public class OrderManage extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
         ResultSet result;
-        string str = format.format(text);
         if( OrderNum.isSelected())
         {
             SQL = "select * from Order where sno='" + text + "'";
@@ -74,7 +73,7 @@ public class OrderManage extends JFrame {
         }
         else if(OrderDate.isSelected())
         {
-            SQL = "select * from Order where sdrq =" + str;
+            SQL = "select * from Order where sdrq =";
         }
         else if(DeliveryDate.isSelected())
         {
@@ -98,7 +97,49 @@ public class OrderManage extends JFrame {
     }
 
     private void RangeResearchMouseClicked(MouseEvent e) {
+
         // TODO add your code here
+        String text = Rangelower.getText();
+        String text1 = Rangeupper.getText();
+        String SQL = null;
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result;
+        if( RangeOrderDate.isSelected())
+        {
+            SQL = "select * from Order where sdrq<='" + text1 + "' and sdrq>='" + text + "'";
+        }
+        else if(SupplyNum.isSelected())
+        {
+            SQL = "select * from Order where gno='" + text + "'";
+        }
+        else if(Address.isSelected())
+        {
+            SQL = "select * from Order where scity='" + text + "'";
+        }
+        else if(OrderDate.isSelected())
+        {
+            SQL = "select * from Order where sdrq =";
+        }
+        else if(DeliveryDate.isSelected())
+        {
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pwe =" + Integer.valueOf(text);
+        }
+        else if(Payment.isSelected())
+        {
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.surplus =" + Integer.valueOf(text);
+        }
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            Ordertable = new JTable(buildOrderTableModel(result, -1));
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        Ordertable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        scrollPane.setViewportView(Ordertable);
     }
 
     private void OrderwindowClosing(String UserNum) {
