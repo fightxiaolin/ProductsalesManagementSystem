@@ -112,7 +112,7 @@ public class ProductManage extends JFrame {
         }
         else if(ProductWeight.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.surplus =" + Integer.valueOf(text);
+            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.price =" + Integer.valueOf(text);
         }
         try {
             stmt = con.createStatement();

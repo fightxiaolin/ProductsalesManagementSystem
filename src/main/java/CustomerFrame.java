@@ -1,3 +1,4 @@
+import util.MyOptionPane;
 import util.Res;
 
 import java.awt.*;
@@ -59,6 +60,7 @@ public class CustomerFrame extends JFrame implements Res {
                 break;
             case 4:
                 SQL += "toprice=" + Text ;
+                break;
         }
 //        System.out.println(SQL + "\t" + selected);
         Connection con = DatabaseConnection.getConnection();
@@ -74,12 +76,14 @@ public class CustomerFrame extends JFrame implements Res {
         }
     }
 
-    private void comboBox2itemChanged(ItemEvent e) {
+    private void comboBox2itemChanged(ItemEvent e, String Number) {
         if(e.getStateChange() == ItemEvent.SELECTED){
+            //e.getItem():获取当前选中的项名称
+            System.out.println(e.getItem());
             Connection con = DatabaseConnection.getConnection();
             Statement stmt = null;
             ResultSet result = null;
-            String SQL = "select * from order_info";
+            String SQL = "select * from order_info where cno='" + Number + "'";
             try {
                 stmt = con.createStatement();
                 result = stmt.executeQuery(SQL);
@@ -135,6 +139,14 @@ public class CustomerFrame extends JFrame implements Res {
         contentPane.repaint();
     }
 
+    private void logoutMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        if(MyOptionPane.showConfirmDialog(this, "提示", "你确认要退出登录？", "确认", "取消")){
+            dispose();
+            new LoginFrame().setVisible(true);
+        }
+    }
+
     private void initComponents(String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -158,6 +170,7 @@ public class CustomerFrame extends JFrame implements Res {
         comboBox2 = new JComboBox();
         InputText = new JTextField();
         Search = new JButton();
+        logout = new JButton();
         CostomerPanel = new JPanel(){
             @Override
             /**
@@ -178,10 +191,10 @@ public class CustomerFrame extends JFrame implements Res {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
             if(result.next()){
-                cno = result.getString("cno");
-                cna = result.getString("cna");
-                cad = result.getString("cad");
-                cte = result.getString("cte");
+                cno = result.getString("cno").trim();
+                cna = result.getString("cna").trim();
+                cad = result.getString("cad").trim();
+                cte = result.getString("cte").trim();
                 cco = result.getString("cco");
             }
         } catch (SQLException throwables) {
@@ -335,7 +348,7 @@ public class CustomerFrame extends JFrame implements Res {
         comboBox2.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                comboBox2itemChanged(e);
+                comboBox2itemChanged(e, Number);
             }
         });
 
@@ -367,6 +380,19 @@ public class CustomerFrame extends JFrame implements Res {
         contentPane.add(Search);
         Search.setBounds(new Rectangle(new Point(845, 75), Search.getPreferredSize()));
         Search.setContentAreaFilled(false);
+
+        //---- logout ----
+        logout.setText("退出登录");
+        logout.setFont(logout.getFont().deriveFont(logout.getFont().getSize() + 4f));
+        logout.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                logoutMouseClicked(e);
+            }
+        });
+        contentPane.add(logout);
+        logout.setBounds(30, 510, 175, 50);
+        logout.setContentAreaFilled(false);
 
         setSize(1000, 620);
         setLocationRelativeTo(null);
@@ -406,6 +432,7 @@ public class CustomerFrame extends JFrame implements Res {
     private JTextField PhoneNumberText;
     private JTextField AddressText;
     private JTextField CreditText;
+    private JButton logout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void ModifyImformation(String Number){

@@ -6,7 +6,7 @@ public class DatabaseConnection {
     static Connection con = null;
     static Statement stmt = null;
 
-    static String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=product;user=sa;password=gxu";
+    static String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=ProductsalesDatabase;user=xiaolin;password=123456";
     public static Connection getConnection(){
         try {
             //建立数据库连接

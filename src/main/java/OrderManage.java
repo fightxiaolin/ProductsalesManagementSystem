@@ -59,7 +59,7 @@ public class OrderManage extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
         ResultSet result;
-        if( OrderNum.isSelected())
+        if(OrderNum.isSelected())
         {
             SQL = "select * from Order where sno='" + text + "'";
         }
