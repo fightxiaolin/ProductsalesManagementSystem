@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -61,27 +62,27 @@ public class OrderManage extends JFrame {
         ResultSet result;
         if(OrderNum.isSelected())
         {
-            SQL = "select * from Order where sno='" + text + "'";
+            SQL = "select * from Order_info where sno='" + text + "'";
         }
         else if(SupplyNum.isSelected())
         {
-            SQL = "select * from Order where gno='" + text + "'";
+            SQL = "select * from Order_info where gno='" + text + "'";
         }
         else if(Address.isSelected())
         {
-            SQL = "select * from Order where scity='" + text + "'";
+            SQL = "select * from Order_info where scity='" + text + "'";
         }
         else if(OrderDate.isSelected())
         {
-            SQL = "select * from Order where sdrq =";
+            SQL = "select * from Order_info where sdrq ='" + text + "'";
         }
         else if(DeliveryDate.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pwe =" + Integer.valueOf(text);
+            SQL = "select * from Order_info where sjrq ='" + text + "'";
         }
         else if(Payment.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.surplus =" + Integer.valueOf(text);
+            SQL = "select * from Order_info where toprice ='" + text + "'";
         }
         try {
             stmt = con.createStatement();
@@ -96,6 +97,11 @@ public class OrderManage extends JFrame {
         scrollPane.setViewportView(Ordertable);
     }
 
+    //将日期型的时间转化成字符串
+    public static void main(String[] argv){
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd")
+    }
     private void RangeResearchMouseClicked(MouseEvent e) {
 
         // TODO add your code here
@@ -107,27 +113,19 @@ public class OrderManage extends JFrame {
         ResultSet result;
         if( RangeOrderDate.isSelected())
         {
-            SQL = "select * from Order where sdrq<='" + text1 + "' and sdrq>='" + text + "'";
+            SQL = "select * from Order_info where sdrq<='" + text1 + "' and sdrq>='" + text + "'";
         }
-        else if(SupplyNum.isSelected())
+        else if(RangeDeliveryDate.isSelected())
         {
-            SQL = "select * from Order where gno='" + text + "'";
+            SQL = "select * from Order_info where sjrq<='" + text1 + "' and sjrq>='" + text + "'";
         }
-        else if(Address.isSelected())
+        else if(RangePayment.isSelected())
         {
-            SQL = "select * from Order where scity='" + text + "'";
+            SQL = "select * from Order_info where toprice<='" + text1 + "' and toprice>='" + text + "'";
         }
-        else if(OrderDate.isSelected())
+        else if(Rangecount.isSelected())
         {
-            SQL = "select * from Order where sdrq =";
-        }
-        else if(DeliveryDate.isSelected())
-        {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pwe =" + Integer.valueOf(text);
-        }
-        else if(Payment.isSelected())
-        {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.surplus =" + Integer.valueOf(text);
+            SQL = "select * from Order_info where snu<='" + text1 + "' and snu>='" + text + "'";
         }
         try {
             stmt = con.createStatement();
@@ -410,6 +408,7 @@ public class OrderManage extends JFrame {
         columnNames.add("发货地");
         columnNames.add("收货地");
         columnNames.add("顾客号");
+        columnNames.add("订单状态");
 
         Vector data = new Vector();
 
