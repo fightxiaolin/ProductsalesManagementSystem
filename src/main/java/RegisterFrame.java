@@ -13,6 +13,13 @@ import javax.swing.*;
 public class RegisterFrame extends JFrame {
     public RegisterFrame() {
         initComponents();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+                new LoginFrame().setVisible(true);
+            }
+        });
     }
 
     private void RegisterMouseClicked(MouseEvent e) {
@@ -125,9 +132,5 @@ public class RegisterFrame extends JFrame {
     private JTextField Address;
     private JButton Register;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
-    public static void main(String[] args) {
-        new RegisterFrame().setVisible(true);
-    }
 }
 

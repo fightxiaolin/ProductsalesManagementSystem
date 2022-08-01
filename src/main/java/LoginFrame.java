@@ -147,7 +147,8 @@ public class LoginFrame extends JFrame implements Res {
      * @param e
      */
     private void retrievemouseClicked(MouseEvent e) {
-
+        dispose();
+        new RetrieveFrame().setVisible(true);
     }
 
     /**
@@ -155,7 +156,8 @@ public class LoginFrame extends JFrame implements Res {
      * @param e
      */
     private void registermouseClicked(MouseEvent e) {
-
+        dispose();
+        new RegisterFrame().setVisible(true);
     }
 
     /**

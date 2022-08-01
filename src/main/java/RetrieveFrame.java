@@ -13,6 +13,13 @@ import javax.swing.*;
 public class RetrieveFrame extends JFrame {
     public RetrieveFrame() {
         initComponents();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+                new LoginFrame().setVisible(true);
+            }
+        });
     }
 
     private void RetrieveMouseClicked(MouseEvent e) {
@@ -80,8 +87,4 @@ public class RetrieveFrame extends JFrame {
     private JLabel label3;
     private JButton Retrieve;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
-    public static void main(String[] args) {
-        new RetrieveFrame().setVisible(true);
-    }
 }

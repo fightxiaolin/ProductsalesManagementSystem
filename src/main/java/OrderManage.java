@@ -98,10 +98,11 @@ public class OrderManage extends JFrame {
     }
 
     //将日期型的时间转化成字符串
-    public static void main(String[] argv){
+    public void DataTransform(String avg){
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd")
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
     }
+
     private void RangeResearchMouseClicked(MouseEvent e) {
 
         // TODO add your code here
@@ -425,6 +426,7 @@ public class OrderManage extends JFrame {
         }
         return new DefaultTableModel(data, columnNames);
     }
+
     public static void main(String[] args) {
         new OrderManage().setVisible(true);
     }
