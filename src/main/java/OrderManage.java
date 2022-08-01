@@ -128,10 +128,11 @@ public class OrderManage extends JFrame {
         {
             SQL = "select * from Order_info where snu<='" + text1 + "' and snu>='" + text + "'";
         }
-        try {
+        try {//看我鼠标位置，这个不要点好的，就让他保持原样就好了
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
             Ordertable = new JTable(buildOrderTableModel(result, -1));
+            //xiansuibiangaiyixia
         }
         catch (SQLException throwables)
         {
