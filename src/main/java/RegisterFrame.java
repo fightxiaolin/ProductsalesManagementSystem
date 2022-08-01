@@ -1,5 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Sun Jul 31 15:58:26 CST 2022
@@ -22,8 +26,54 @@ public class RegisterFrame extends JFrame {
         });
     }
 
+    /**
+     * 处理“立即注册”按钮事件
+     * @param e
+     */
     private void RegisterMouseClicked(MouseEvent e) {
         // TODO add your code here
+        if(UserNum.getText().isEmpty()){
+            //显示错误提示
+        }
+        else if(UserName.getText().isEmpty()){
+
+        }
+        else if(Password.getPassword().toString().isEmpty()){
+
+        }
+        else if(PhoneNumber.getText().isEmpty()){
+
+        }
+        else if(Address.getText().isEmpty()){
+
+        }
+
+        Statement stmt = null;
+        Connection con = DatabaseConnection.getConnection();
+        String SQL = "select * from customer_info where cno='" + UserNum + "'";
+        ResultSet result = null;
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            if(result.next()){
+                //显示错误，该用户号已被占用
+
+            }
+            else{
+                SQL = "insert into customer_info(cno, cna, cad, cte) values('" + UserNum.getText() + "', '" + UserName.getText() + "', '" + Address.getText() + "', '" + PhoneNumber.getText() + "')";
+                stmt.executeUpdate(SQL);
+                SQL = SQL = "insert into regist_info(no, password, sign) values('" + UserNum.getText() + "', '" + Password.getPassword().toString() + "', " + 1 + ")";
+                stmt.executeUpdate(SQL);
+                //显示提示，注册完成，确定之后关闭窗口并回到登录界面
+
+                dispose();
+                new LoginFrame().setVisible(true);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     private void initComponents() {
@@ -36,7 +86,7 @@ public class RegisterFrame extends JFrame {
         UserNum = new JTextField();
         label6 = new JLabel();
         UserName = new JTextField();
-        Password = new JTextField();
+        Password = new JPasswordField();
         PhoneNumber = new JTextField();
         Address = new JTextField();
         Register = new JButton();
@@ -127,7 +177,7 @@ public class RegisterFrame extends JFrame {
     private JTextField UserNum;
     private JLabel label6;
     private JTextField UserName;
-    private JTextField Password;
+    private JPasswordField Password;
     private JTextField PhoneNumber;
     private JTextField Address;
     private JButton Register;

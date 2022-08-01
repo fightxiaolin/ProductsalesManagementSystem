@@ -24,6 +24,16 @@ public class RetrieveFrame extends JFrame {
 
     private void RetrieveMouseClicked(MouseEvent e) {
         // TODO add your code here
+        if(UserNum.getText().isEmpty()){
+            //显示错误提示
+        }
+        else if(PhoneNumber.getText().isEmpty()){
+
+        }
+
+        //显示一个输入弹窗，来实现验证码
+
+
     }
 
     private void initComponents() {

@@ -161,7 +161,7 @@ public class LoginFrame extends JFrame implements Res {
     }
 
     /**
-     * 登录按钮监听器出发事件
+     * 登录按钮监听器触发事件
      * @param e
      */
     private void loginmouseClicked(MouseEvent e) {
