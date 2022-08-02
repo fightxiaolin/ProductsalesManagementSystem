@@ -77,7 +77,7 @@ public class OrderManage extends JFrame {
             SQL = "select * from Order_info where sdrq ='" + text + "'";
         }
         else if(DeliveryDate.isSelected())
-        {
+        {//
             SQL = "select * from Order_info where sjrq ='" + text + "'";
         }
         else if(Payment.isSelected())
