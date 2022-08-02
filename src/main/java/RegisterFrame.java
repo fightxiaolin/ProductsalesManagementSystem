@@ -1,3 +1,5 @@
+import util.MyOptionPane;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
@@ -32,43 +34,53 @@ public class RegisterFrame extends JFrame {
      */
     private void RegisterMouseClicked(MouseEvent e) {
         // TODO add your code here
+        boolean bool = false;
+        String pass = new String(Password.getPassword());
         if(UserNum.getText().isEmpty()){
             //显示错误提示
+            MyOptionPane.showMessageDialog(this, "请输入用户号！", "提示");
+            bool = true;
         }
         else if(UserName.getText().isEmpty()){
-
+            MyOptionPane.showMessageDialog(this, "请输入用户名！", "提示");
+            bool = true;
         }
-        else if(Password.getPassword().toString().isEmpty()){
-
+        else if(pass.isEmpty()){
+            MyOptionPane.showMessageDialog(this, "请输入密码！", "提示");
+            bool = true;
         }
         else if(PhoneNumber.getText().isEmpty()){
-
+            MyOptionPane.showMessageDialog(this, "请输入手机号！", "提示");
+            bool = true;
         }
         else if(Address.getText().isEmpty()){
-
+            MyOptionPane.showMessageDialog(this, "请输入地址！", "提示");
+            bool = true;
         }
 
         Statement stmt = null;
         Connection con = DatabaseConnection.getConnection();
-        String SQL = "select * from customer_info where cno='" + UserNum + "'";
+        String SQL = "select * from customer_info where cno='" + UserNum.getText().trim() + "'";
         ResultSet result = null;
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
-            if(result.next()){
-                //显示错误，该用户号已被占用
+            if(!bool){
+                if(result.next()){
+                    //显示错误，该用户号已被占用
+                    MyOptionPane.showMessageDialog(this, "您注册的用户号已被占用！", "提示");
+                }
+                else{
+                    SQL = "insert into customer_info(cno, cna, cad, cte) values('" + UserNum.getText() + "', '" + UserName.getText() + "', '" + Address.getText() + "', '" + PhoneNumber.getText() + "')";
+                    stmt.executeUpdate(SQL);
+                    SQL = SQL = "insert into regist_info(no, password, sign) values('" + UserNum.getText() + "', '" + pass + "', " + 2 + ")";
+                    stmt.executeUpdate(SQL);
+                    //显示提示，注册完成，确定之后关闭窗口并回到登录界面
+                    MyOptionPane.showMessageDialog(this, "注册成功！", "欢迎使用产品管理系统");
+                    dispose();
+                    new LoginFrame().setVisible(true);
 
-            }
-            else{
-                SQL = "insert into customer_info(cno, cna, cad, cte) values('" + UserNum.getText() + "', '" + UserName.getText() + "', '" + Address.getText() + "', '" + PhoneNumber.getText() + "')";
-                stmt.executeUpdate(SQL);
-                SQL = SQL = "insert into regist_info(no, password, sign) values('" + UserNum.getText() + "', '" + Password.getPassword().toString() + "', " + 1 + ")";
-                stmt.executeUpdate(SQL);
-                //显示提示，注册完成，确定之后关闭窗口并回到登录界面
-
-                dispose();
-                new LoginFrame().setVisible(true);
-
+                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
