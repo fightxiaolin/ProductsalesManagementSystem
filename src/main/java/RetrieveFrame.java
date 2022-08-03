@@ -1,5 +1,11 @@
+import util.MyOptionPane;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Sun Jul 31 19:47:12 CST 2022
@@ -24,16 +30,63 @@ public class RetrieveFrame extends JFrame {
 
     private void RetrieveMouseClicked(MouseEvent e) {
         // TODO add your code here
+        boolean bool = true;
         if(UserNum.getText().isEmpty()){
             //显示错误提示
+            bool = false;
+            MyOptionPane.showMessageDialog(this, "请输入需要找回的用户号！", "提示");
         }
         else if(PhoneNumber.getText().isEmpty()){
-
+            bool = false;
+            MyOptionPane.showMessageDialog(this, "请输入对应的手机号！", "提示");
+        }
+        else{
+            Statement stmt = null;
+            Connection con = DatabaseConnection.getConnection();
+            String SQL = "select cte from customer_info where cno='" + UserNum.getText().trim() + "'";
+            ResultSet result = null;
+            try {
+                stmt = con.createStatement();
+                result = stmt.executeQuery(SQL);
+                if(result.next()){
+                    System.out.println(result.getString("cte").trim());
+                    if(!PhoneNumber.getText().trim().equals(result.getString("cte").trim())){
+                        bool = false;
+                        MyOptionPane.showMessageDialog(this, "输入的用户号或手机号错误！", "提示");
+                    }
+                }
+                else{
+                    bool = false;
+                    MyOptionPane.showMessageDialog(this, "输入的用户号不存在！", "提示");
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
 
         //显示一个输入弹窗，来实现验证码
+        if(bool){
+            String input = MyOptionPane.showInputDialog(this,"","请输入验证码：");
 
-
+            if(input.equals("123456")){
+                String newpass = MyOptionPane.showInputDialog(this, "", "请输入新的登录密码：");
+                Statement stmt = null;
+                Connection con = DatabaseConnection.getConnection();
+                String SQL = "update regist_info set password='" + newpass + "' where no='" + UserNum.getText().trim() + "'";
+                try {
+                    stmt = con.createStatement();
+                    stmt.executeUpdate(SQL);
+                    MyOptionPane.showMessageDialog(this, "密码设置成功！", "提示");
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                dispose();
+                new LoginFrame().setVisible(true);
+            }
+            else{
+                MyOptionPane.showMessageDialog(this, "验证码错误，请输入正确的验证码！", "提示");
+            }
+        }
     }
 
     private void initComponents() {
