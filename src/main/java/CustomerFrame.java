@@ -24,8 +24,10 @@ public class CustomerFrame extends JFrame implements Res {
         ModifyImformation(Number);
     }
 
-    private void AddMouseClicked(MouseEvent e) {
+    private void AddMouseClicked(String Number) {
         // TODO add your code here
+        new AddNewOrderFrame(Number).setVisible(true);
+        dispose();
     }
 
     private void DeleteMouseClicked(MouseEvent e) {
@@ -79,7 +81,7 @@ public class CustomerFrame extends JFrame implements Res {
     private void comboBox2itemChanged(ItemEvent e, String Number) {
         if(e.getStateChange() == ItemEvent.SELECTED){
             //e.getItem():获取当前选中的项名称
-            System.out.println(e.getItem());
+//            System.out.println(e.getItem());
             Connection con = DatabaseConnection.getConnection();
             Statement stmt = null;
             ResultSet result = null;
@@ -305,7 +307,7 @@ public class CustomerFrame extends JFrame implements Res {
         Add.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                AddMouseClicked(e);
+                AddMouseClicked(Number);
             }
         });
         contentPane.add(Add);

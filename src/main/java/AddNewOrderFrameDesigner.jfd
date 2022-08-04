@@ -1,0 +1,87 @@
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"title": "产品订购"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "ProductTablescrollPane"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "ProductTable"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 5
+				"y": 50
+				"width": 450
+				"height": 580
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "OrderTableScrollPane"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "OrderTable"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 545
+				"y": 50
+				"width": 450
+				"height": 580
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "产品"
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 185
+				"y": 0
+				"width": 90
+				"height": 45
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "订单"
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 90
+				"height": 45
+				"x": 725
+				"y": 0
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addNewProduct"
+				"text": "加入订单"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "addNewProductMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 165
+				"y": 655
+				"width": 130
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "submitOrder"
+				"text": "提交订单"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "submitOrderMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 130
+				"height": 30
+				"x": 625
+				"y": 655
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "deleteProduct"
+				"text": "删除"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "deleteProductMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 130
+				"height": 30
+				"x": 790
+				"y": 655
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 1000, 750 )
+		} )
+	}
+}

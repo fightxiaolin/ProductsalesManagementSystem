@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author unknown
  */
 public class ProductManage extends JFrame {
+
     public ProductManage() {
         initComponents();//在界面添加各个组件，并为它们注册监听器
     }
@@ -293,7 +294,7 @@ public class ProductManage extends JFrame {
         showProductImformation(-1);
 
         contentPane.add(scrollPane);
-        scrollPane.setBounds(5, 140, 610, 445);
+        scrollPane.setBounds(5, 110, 620, 475);
 
         //---- Add ----
         Add.setText("\u6dfb\u52a0\u4ea7\u54c1");

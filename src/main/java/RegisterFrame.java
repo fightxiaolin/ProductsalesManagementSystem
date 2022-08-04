@@ -105,6 +105,7 @@ public class RegisterFrame extends JFrame {
 
         //======== this ========
         Container contentPane = getContentPane();
+        setResizable(false);
         setTitle("用户注册");
         contentPane.setLayout(null);
 

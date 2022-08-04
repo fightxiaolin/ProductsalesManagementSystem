@@ -70,15 +70,17 @@ public class RetrieveFrame extends JFrame {
 
             if(input.equals("123456")){
                 String newpass = MyOptionPane.showInputDialog(this, "", "请输入新的登录密码：");
-                Statement stmt = null;
-                Connection con = DatabaseConnection.getConnection();
-                String SQL = "update regist_info set password='" + newpass + "' where no='" + UserNum.getText().trim() + "'";
-                try {
-                    stmt = con.createStatement();
-                    stmt.executeUpdate(SQL);
-                    MyOptionPane.showMessageDialog(this, "密码设置成功！", "提示");
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                if(!newpass.isEmpty()){
+                    Statement stmt = null;
+                    Connection con = DatabaseConnection.getConnection();
+                    String SQL = "update regist_info set password='" + newpass + "' where no='" + UserNum.getText().trim() + "'";
+                    try {
+                        stmt = con.createStatement();
+                        stmt.executeUpdate(SQL);
+                        MyOptionPane.showMessageDialog(this, "密码重置成功！", "提示");
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
                 dispose();
                 new LoginFrame().setVisible(true);
@@ -100,6 +102,7 @@ public class RetrieveFrame extends JFrame {
 
         //======== this ========
         setTitle("找回密码");
+        setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 

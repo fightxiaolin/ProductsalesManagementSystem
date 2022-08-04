@@ -110,7 +110,7 @@ public class ProductManageDesigner extends JFrame {
             scrollPane.setViewportView(Producttable);
         }
         contentPane.add(scrollPane);
-        scrollPane.setBounds(5, 140, 610, 445);
+        scrollPane.setBounds(5, 110, 620, 475);
 
         //---- Add ----
         Add.setText("\u6dfb\u52a0\u4ea7\u54c1");
