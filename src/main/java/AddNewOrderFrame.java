@@ -3,7 +3,9 @@ import util.MyOptionPane;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.util.Vector;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 /*
@@ -42,20 +44,21 @@ public class AddNewOrderFrame extends JFrame {
         }
         String pno = ProductTable.getValueAt(selectRow, 0).toString().trim();
         String pna = ProductTable.getValueAt(selectRow, 1).toString().trim();
-        String gna = ProductTable.getValueAt(selectRow, 2).toString().trim();
-        int price = Integer.parseInt(ProductTable.getValueAt(selectRow, 3).toString().trim());
-        int surplus = Integer.parseInt(ProductTable.getValueAt(selectRow, 4).toString().trim());
+        String gno = ProductTable.getValueAt(selectRow, 2).toString().trim();
+        String gna = ProductTable.getValueAt(selectRow, 3).toString().trim();
+        int price = Integer.parseInt(ProductTable.getValueAt(selectRow, 4).toString().trim());
+        int surplus = Integer.parseInt(ProductTable.getValueAt(selectRow, 5).toString().trim());
         int row = CheckingContain(pno);
         if(quantity != null){
             if(surplus>=Integer.parseInt(quantity)){
                 DefaultTableModel orderTableModel = (DefaultTableModel) OrderTable.getModel();
                 if(row == -1){
-                    orderTableModel.insertRow(OrderTable.getRowCount(), new Object[]{pno, pna, gna, Integer.parseInt(quantity), Integer.parseInt(quantity)*price});
+                    orderTableModel.insertRow(OrderTable.getRowCount(), new Object[]{pno, pna, gno, gna, Integer.parseInt(quantity), Integer.parseInt(quantity)*price});
                 }
                 else{
-                    int total = Integer.parseInt(orderTableModel.getValueAt(row, 3).toString().trim()) + Integer.parseInt(quantity);
-                    orderTableModel.setValueAt(total, row, 3);
-                    orderTableModel.setValueAt(total*price, row, 4);
+                    int total = Integer.parseInt(orderTableModel.getValueAt(row, 4).toString().trim()) + Integer.parseInt(quantity);
+                    orderTableModel.setValueAt(total, row, 4);
+                    orderTableModel.setValueAt(total*price, row, 5);
                 }
             }
             else{
@@ -68,7 +71,52 @@ public class AddNewOrderFrame extends JFrame {
 
     private void submitOrderMouseClicked(MouseEvent e) {
         // TODO add your code here
+        /*surplus = surplus - Integer.parseInt(quantity);
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        String SQL = "update god_info set surplus=" + surplus + "where pno='" + pno + "' and gno='" + gno + "'";
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }*/
+        String orderNum = getOrderNum();
+        String detailedOrderNum = "";
+
     }
+
+    /**
+     * 生成订单号
+     * 该订单号由当前时间（年月日精确到毫秒）和6位随机数组合而成
+     * @return
+     */
+    private String getOrderNum(){
+        SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+        String before =  sdfTime.format(new Date()).replace("[[\\s-:punct:]]", "");
+
+        Random r = new Random();
+        int rand =  r.nextInt(900000)+100000;
+        String after = String.valueOf(rand);
+        return before+after;
+    }
+
+    /**
+     * 生成订单号
+     * 该订单号由当前时间（精确到毫秒）和4位随机数组合而成
+     * @return
+     */
+    private String getDetailedOrderNum(){
+        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss:SS");
+        String before =  sdfTime.format(new Date()).replace("[[\\s-:punct:]]", "");
+
+        Random r = new Random();
+        int rand =  r.nextInt(9000)+1000;
+        String after = String.valueOf(rand);
+        return before+after;
+    }
+
+
 
     private void deleteProductMouseClicked(MouseEvent e) {
         // TODO add your code here
@@ -99,7 +147,7 @@ public class AddNewOrderFrame extends JFrame {
             Connection con = DatabaseConnection.getConnection();
             Statement stmt = null;
             ResultSet result = null;
-            String SQL = "select P.pno, P.pna, G.gna, God.price, God.surplus from g_info G, god_info God, product_info P where P.pno=God.pno and G.gno=God.gno";
+            String SQL = "select P.pno, P.pna, G.gno ,G.gna, God.price, God.surplus from g_info G, god_info God, product_info P where P.pno=God.pno and G.gno=God.gno";
             try {
                 stmt = con.createStatement();
                 result = stmt.executeQuery(SQL);
@@ -206,6 +254,7 @@ public class AddNewOrderFrame extends JFrame {
         }*/
         columnNames.add("产品号");
         columnNames.add("产品名");
+        columnNames.add("供应商号");
         columnNames.add("供应商名");
         columnNames.add("单价");
         columnNames.add("余量");
@@ -243,6 +292,7 @@ public class AddNewOrderFrame extends JFrame {
         }*/
         columnNames.add("产品号");
         columnNames.add("产品名");
+        columnNames.add("供应商名");
         columnNames.add("供应商名");
         columnNames.add("数量");
         columnNames.add("总计");
