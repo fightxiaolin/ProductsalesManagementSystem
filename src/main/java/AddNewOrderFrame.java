@@ -33,10 +33,10 @@ public class AddNewOrderFrame extends JFrame {
     private void addNewProductMouseClicked(MouseEvent e) {
         // TODO add your code here
         int selectRow = ProductTable.getSelectedRow();
-        String number = "";
-        while(number.isEmpty()){
-            number = MyOptionPane.showInputDialog(this, "提示","请输入你要订购的数量：");
-            if(number == null){
+        String quantity = "";
+        while(quantity.isEmpty()){
+            quantity = MyOptionPane.showInputDialog(this, "提示","请输入你要订购的数量：");
+            if(quantity == null){
                 break;
             }
         }
@@ -45,10 +45,18 @@ public class AddNewOrderFrame extends JFrame {
         String gna = ProductTable.getValueAt(selectRow, 2).toString().trim();
         int price = Integer.parseInt(ProductTable.getValueAt(selectRow, 3).toString().trim());
         int surplus = Integer.parseInt(ProductTable.getValueAt(selectRow, 4).toString().trim());
-        if(number != null){
-            if(surplus>=Integer.parseInt(number)){
+        int row = CheckingContain(pno);
+        if(quantity != null){
+            if(surplus>=Integer.parseInt(quantity)){
                 DefaultTableModel orderTableModel = (DefaultTableModel) OrderTable.getModel();
-                orderTableModel.insertRow(OrderTable.getRowCount(), new Object[]{pno, pna, gna, Integer.parseInt(number), Integer.parseInt(number)*price});
+                if(row == -1){
+                    orderTableModel.insertRow(OrderTable.getRowCount(), new Object[]{pno, pna, gna, Integer.parseInt(quantity), Integer.parseInt(quantity)*price});
+                }
+                else{
+                    int total = Integer.parseInt(orderTableModel.getValueAt(row, 3).toString().trim()) + Integer.parseInt(quantity);
+                    orderTableModel.setValueAt(total, row, 3);
+                    orderTableModel.setValueAt(total*price, row, 4);
+                }
             }
             else{
                 MyOptionPane.showMessageDialog(this, "输入数量错误！", "提示");
@@ -64,6 +72,9 @@ public class AddNewOrderFrame extends JFrame {
 
     private void deleteProductMouseClicked(MouseEvent e) {
         // TODO add your code here
+        int selectedrow = OrderTable.getSelectedRow();
+        DefaultTableModel orderTableModel = (DefaultTableModel) OrderTable.getModel();
+        orderTableModel.removeRow(selectedrow);
     }
 
     private void initComponents() {
@@ -244,5 +255,15 @@ public class AddNewOrderFrame extends JFrame {
                 return false;
             }
         };
+    }
+
+    private int CheckingContain(String Number){
+        int max = OrderTable.getRowCount();
+        for(int i=0; i<max; i++){
+            if(Number.equals(OrderTable.getValueAt(i,0).toString().trim())){
+                return i;
+            }
+        }
+        return -1;
     }
 }
