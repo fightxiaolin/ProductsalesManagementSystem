@@ -19,11 +19,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AddNewOrderFrame extends JFrame {
     public AddNewOrderFrame() {
-        initComponents();
+//        initComponents();
     }
 
     public AddNewOrderFrame(String Number) {
-        initComponents();
+        initComponents(Number);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -69,20 +69,40 @@ public class AddNewOrderFrame extends JFrame {
 
     }
 
-    private void submitOrderMouseClicked(MouseEvent e) {
+    private void submitOrderMouseClicked(String Number) {
         // TODO add your code here
-        /*surplus = surplus - Integer.parseInt(quantity);
+        /*
+        }*/
+        SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd");
+        String orderNum = getOrderNum();
+        int tableRow = ProductTable.getRowCount();
+        int totalMoney = 0;
+        for (int i = 0; i < tableRow; i++) {
+            totalMoney += Integer.parseInt(ProductTable.getValueAt(i, 5).toString());
+        }
+        String SQL = "insert into order_info values('" + orderNum + "', '" + "供应商号" + "', '" + tableRow + "', '" + sdfTime.format(new Date())
+                + "', '" + "交货日期" + "','" + totalMoney + "', '" + "发货地" + "', '" + Number + "', '" + "订单状态" + "')";
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
-        String SQL = "update god_info set surplus=" + surplus + "where pno='" + pno + "' and gno='" + gno + "'";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(SQL);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }*/
-        String orderNum = getOrderNum();
+        }
         String detailedOrderNum = "";
+        for (int i = 0; i < tableRow; i++) {
+            detailedOrderNum = getDetailedOrderNum();
+            String pno = ProductTable.getValueAt(i, 0).toString().trim();
+            String ssnu = ProductTable.getValueAt(i, 4).toString().trim();
+            SQL = "insert into order_details values ('" + detailedOrderNum + "', '" + pno + "', '" + ssnu + "', '" + orderNum + "')";
+            try {
+                stmt.executeUpdate(SQL);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+        }
 
     }
 
@@ -102,8 +122,8 @@ public class AddNewOrderFrame extends JFrame {
     }
 
     /**
-     * 生成订单号
-     * 该订单号由当前时间（精确到毫秒）和4位随机数组合而成
+     * 生成详细订单号
+     * 该详细订单号由当前时间（精确到毫秒）和4位随机数组合而成
      * @return
      */
     private String getDetailedOrderNum(){
@@ -125,7 +145,7 @@ public class AddNewOrderFrame extends JFrame {
         orderTableModel.removeRow(selectedrow);
     }
 
-    private void initComponents() {
+    private void initComponents(String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         ProductTablescrollPane = new JScrollPane();
@@ -202,7 +222,7 @@ public class AddNewOrderFrame extends JFrame {
         submitOrder.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                submitOrderMouseClicked(e);
+                submitOrderMouseClicked(Number);
             }
         });
         contentPane.add(submitOrder);

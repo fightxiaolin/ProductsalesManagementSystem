@@ -218,7 +218,7 @@ public class CustomerManage extends JFrame {
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(Customertable);
+            showCustomerinformation(-1);
         }
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 5, 675, 705);
@@ -245,8 +245,6 @@ public class CustomerManage extends JFrame {
         handle.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                handleMouseClicked(e);
-                handleMouseClicked(e);
                 handleMouseClicked(e);
             }
         });
@@ -504,7 +502,7 @@ public class CustomerManage extends JFrame {
         return new DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if (row == er) {
+                if (row == er && column != unec) {
                     return true;
                 } else
                     return false;

@@ -38,8 +38,10 @@ public class ManagerFrame extends JFrame implements Res {
         dispose();
     }
 
-    private void CostomerManageMouseClicked(MouseEvent e) {
+    private void CostomerManageMouseClicked(String Number) {
         // TODO add your code here
+        new CustomerManage(Number).setVisible(true);
+        dispose();
     }
 
     private void ConfirmMouseClicked(String Number) {
@@ -209,7 +211,7 @@ public class ManagerFrame extends JFrame implements Res {
         CustomerManage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                CostomerManageMouseClicked(e);
+                CostomerManageMouseClicked(Number);
             }
         });
         contentPane.add(CustomerManage);
