@@ -51,8 +51,11 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
         int price = Integer.parseInt(ProductTable.getValueAt(selectRow, 4).toString().trim());
         int surplus = Integer.parseInt(ProductTable.getValueAt(selectRow, 5).toString().trim());
         int row = CheckingContain(pno);
+        int boughtcount = 0;
+        if(row != -1)
+            boughtcount = Integer.parseInt(OrderTable.getValueAt(row,4).toString().trim());
         if(quantity != null){
-            if(surplus>=Integer.parseInt(quantity)){
+            if(surplus>=Integer.parseInt(quantity)+boughtcount){
                 DefaultTableModel orderTableModel = (DefaultTableModel) OrderTable.getModel();
                 if(row == -1){
                     orderTableModel.insertRow(OrderTable.getRowCount(), new Object[]{pno, pna, gno, gna, Integer.parseInt(quantity), Integer.parseInt(quantity)*price});
@@ -64,7 +67,7 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
                 }
             }
             else{
-                MyOptionPane.showMessageDialog(this, "输入数量错误！", "提示");
+                MyOptionPane.showMessageDialog(this, "该产品余量不足，请重新填写！", "提示");
             }
         }
 
@@ -98,7 +101,7 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
                     PreparedStatement ps = con.prepareStatement(SQL);
                     ps.setString(1, orderNum);
                     ps.setString(2, gno);
-                    ps.setString(3, Integer.toString(tableRow));
+                    ps.setString(3, "0");
                     ps.setDate(4, new java.sql.Date(new Date().getTime()));
                     ps.setDate(5, new java.sql.Date(new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000L).getTime()));
                     ps.setInt(6, 0);
@@ -117,7 +120,7 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
         String detailedOrderNum = "";
         for (int i = 0; i < tableRow; i++) {
             detailedOrderNum = getDetailedOrderNum();   //订单细则号
-            System.out.println(detailedOrderNum);
+//            System.out.println(detailedOrderNum);
             String pno = OrderTable.getValueAt(i, 0).toString().trim();
             String gno = OrderTable.getValueAt(i, 2).toString().trim();
             String orderNum = map.get(gno);
@@ -129,7 +132,40 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-           updateSurplus(pno, gno, ssnu);
+            updateSurplus(pno, gno, ssnu);
+            updateorder(orderNum, Integer.parseInt(OrderTable.getValueAt(i, 5).toString().trim()));
+        }
+        MyOptionPane.showMessageDialog(this, "总付款金额为：" + totalMoney, "请支付！");
+        dispose();
+        new CustomerFrame(Number).setVisible(true);
+
+
+    }
+
+    private void updateorder(String orderNum, int totalMoney){
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result = null;
+        String SQL = "select * from order_info where sno='" + orderNum + "'";
+        int snu = 0;
+        int toprice = 0;
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            result.next();
+            snu = Integer.parseInt(result.getString("snu").toString().trim());
+            toprice = Integer.parseInt(result.getString("toprice").toString().trim());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        snu++;
+        toprice += totalMoney;
+        SQL = "update order_info set snu='" + Integer.toString(snu) + "', toprice=" + toprice + " where sno ='" + orderNum + "'";
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
