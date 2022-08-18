@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  * @author unknown
  */
-public class AddNewOrderFrame extends JFrame {
+public class AddNewOrderFrame<preparedstatement> extends JFrame {
     public AddNewOrderFrame() {
 //        initComponents();
     }
@@ -74,7 +74,7 @@ public class AddNewOrderFrame extends JFrame {
     private void submitOrderMouseClicked(String Number) {
         // TODO add your code here
         SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd");  //2022 08 18
-        int tableRow = ProductTable.getRowCount();
+        int tableRow = OrderTable.getRowCount();
         int totalMoney = 0;
         //这里有个Hash表，分不同供应商用的，
         HashMap<String, String> map = new HashMap<String, String>();
@@ -83,20 +83,31 @@ public class AddNewOrderFrame extends JFrame {
 
 
         for (int i = 0; i < tableRow; i++) {
-            totalMoney += Integer.parseInt(ProductTable.getValueAt(i, 5).toString().trim());
-            String gno = ProductTable.getValueAt(i, 2).toString().trim();
+            totalMoney += Integer.parseInt(OrderTable.getValueAt(i, 5).toString().trim());
+            String gno = OrderTable.getValueAt(i, 2).toString().trim();
             if(map.get(gno) == null){
                 String orderNum = getOrderNum();
-                System.out.println(orderNum);
                 map.put(gno, orderNum);
                 String SQL = null;
-                SQL = "insert into order_info values('" + orderNum + "', '" + gno + "', '" + tableRow + "', '" + sdfTime.format(new Date())
-                            + "', '" + "交货日期" + "','" + totalMoney + "', '" + "发货地" + "', '" + "收货地" + "', '" + Number + "')";
+                SQL = "insert into order_info values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//                SQL = "insert into order_info values('" + orderNum + "', '" + gno + "', '" + tableRow + "', '" + sdfTime.format(new Date())
+//                            + "', '" + "交货日期" + "','" + totalMoney + "', '" + "发货地" + "', '" + "收货地" + "', '" + Number + "')";
 
                 try {
                     stmt = con.createStatement();
-                    stmt.executeUpdate(SQL);
-                    System.out.println("插入数据： " +  SQL);
+                    PreparedStatement ps = con.prepareStatement(SQL);
+                    ps.setString(1, orderNum);
+                    ps.setString(2, gno);
+                    ps.setString(3, Integer.toString(tableRow));
+                    ps.setDate(4, new java.sql.Date(new Date().getTime()));
+                    ps.setDate(5, new java.sql.Date(new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000L).getTime()));
+                    ps.setInt(6, 0);
+                    ps.setString(7, "发货地");
+                    ps.setString(8, "收货地");
+                    ps.setString(9, Number);
+                    ps.executeUpdate();
+//                    stmt.executeUpdate(SQL);
+//                    System.out.println("插入数据： " +  SQL);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -107,15 +118,14 @@ public class AddNewOrderFrame extends JFrame {
         for (int i = 0; i < tableRow; i++) {
             detailedOrderNum = getDetailedOrderNum();   //订单细则号
             System.out.println(detailedOrderNum);
-            String pno = ProductTable.getValueAt(i, 0).toString().trim();
-            String gno = ProductTable.getValueAt(i, 2).toString().trim();
+            String pno = OrderTable.getValueAt(i, 0).toString().trim();
+            String gno = OrderTable.getValueAt(i, 2).toString().trim();
             String orderNum = map.get(gno);
-            int ssnu = Integer.parseInt(ProductTable.getValueAt(i, 4).toString().trim());
+            int ssnu = Integer.parseInt(OrderTable.getValueAt(i, 4).toString().trim());
             String SQL = "insert into order_details values ('" + detailedOrderNum + "', '" + pno + "', " + ssnu + ", '" + orderNum + "')";
             try {
                 stmt = con.createStatement();
                 stmt.executeUpdate(SQL);
-                System.out.println("插入数据： " +  SQL);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -159,7 +169,6 @@ public class AddNewOrderFrame extends JFrame {
 
         Random r = new Random();
         int rand =  r.nextInt(900)+100;
-        System.out.println(rand);
         String after = Integer.toString(rand);
         return before+after;
     }
@@ -175,7 +184,6 @@ public class AddNewOrderFrame extends JFrame {
 
         Random r = new Random();
         int rand =  r.nextInt(9000)+1000;
-        System.out.println(rand);
         String after = Integer.toString(rand);
         return before+after;
     }
