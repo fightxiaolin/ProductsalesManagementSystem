@@ -1,8 +1,10 @@
 import util.MyOptionPane;
+import util.Res;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
@@ -71,68 +73,110 @@ public class AddNewOrderFrame extends JFrame {
 
     private void submitOrderMouseClicked(String Number) {
         // TODO add your code here
-        /*
-        }*/
-        SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd");
-        String orderNum = getOrderNum();
+        SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd");  //2022 08 18
         int tableRow = ProductTable.getRowCount();
         int totalMoney = 0;
-        for (int i = 0; i < tableRow; i++) {
-            totalMoney += Integer.parseInt(ProductTable.getValueAt(i, 5).toString());
-        }
-        String SQL = "insert into order_info values('" + orderNum + "', '" + "供应商号" + "', '" + tableRow + "', '" + sdfTime.format(new Date())
-                + "', '" + "交货日期" + "','" + totalMoney + "', '" + "发货地" + "', '" + Number + "', '" + "订单状态" + "')";
+        //这里有个Hash表，分不同供应商用的，
+        HashMap<String, String> map = new HashMap<String, String>();
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
+
+
+        for (int i = 0; i < tableRow; i++) {
+            totalMoney += Integer.parseInt(ProductTable.getValueAt(i, 5).toString().trim());
+            String gno = ProductTable.getValueAt(i, 2).toString().trim();
+            if(map.get(gno) == null){
+                String orderNum = getOrderNum();
+                System.out.println(orderNum);
+                map.put(gno, orderNum);
+                String SQL = null;
+                SQL = "insert into order_info values('" + orderNum + "', '" + gno + "', '" + tableRow + "', '" + sdfTime.format(new Date())
+                            + "', '" + "交货日期" + "','" + totalMoney + "', '" + "发货地" + "', '" + "收货地" + "', '" + Number + "')";
+
+                try {
+                    stmt = con.createStatement();
+                    stmt.executeUpdate(SQL);
+                    System.out.println("插入数据： " +  SQL);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+
+        String detailedOrderNum = "";
+        for (int i = 0; i < tableRow; i++) {
+            detailedOrderNum = getDetailedOrderNum();   //订单细则号
+            System.out.println(detailedOrderNum);
+            String pno = ProductTable.getValueAt(i, 0).toString().trim();
+            String gno = ProductTable.getValueAt(i, 2).toString().trim();
+            String orderNum = map.get(gno);
+            int ssnu = Integer.parseInt(ProductTable.getValueAt(i, 4).toString().trim());
+            String SQL = "insert into order_details values ('" + detailedOrderNum + "', '" + pno + "', " + ssnu + ", '" + orderNum + "')";
+            try {
+                stmt = con.createStatement();
+                stmt.executeUpdate(SQL);
+                System.out.println("插入数据： " +  SQL);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+           updateSurplus(pno, gno, ssnu);
+        }
+    }
+
+    /**
+     *
+     */
+    private void updateSurplus(String pno, String gno, int quantity){
+        String SQL = "select * from god_info where gno='" + gno + "' and pno='" + pno + "'";
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result = null;
+        int surplus = 0;
         try {
             stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            result.next();
+            surplus = Integer.parseInt(result.getString("surplus").trim());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        SQL = "update god_info set surplus=" + (surplus - quantity) + " where gno='" + gno + "' and pno='" + pno + "'";
+        try {
             stmt.executeUpdate(SQL);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        String detailedOrderNum = "";
-        for (int i = 0; i < tableRow; i++) {
-            detailedOrderNum = getDetailedOrderNum();
-            String pno = ProductTable.getValueAt(i, 0).toString().trim();
-            String ssnu = ProductTable.getValueAt(i, 4).toString().trim();
-            SQL = "insert into order_details values ('" + detailedOrderNum + "', '" + pno + "', '" + ssnu + "', '" + orderNum + "')";
-            try {
-                stmt.executeUpdate(SQL);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-
-        }
-
     }
 
     /**
      * 生成订单号
-     * 该订单号由当前时间（年月日精确到毫秒）和6位随机数组合而成
+     * 该订单号由当前时间（年月日精确到毫秒（毫秒有三位））和3位随机数组合而成
      * @return
      */
     private String getOrderNum(){
-        SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
-        String before =  sdfTime.format(new Date()).replace("[[\\s-:punct:]]", "");
+        SimpleDateFormat sdfTime = new SimpleDateFormat("yyyyMMddHHmmssSS");
+        String before =  sdfTime.format(new Date());
 
         Random r = new Random();
-        int rand =  r.nextInt(900000)+100000;
-        String after = String.valueOf(rand);
+        int rand =  r.nextInt(900)+100;
+        System.out.println(rand);
+        String after = Integer.toString(rand);
         return before+after;
     }
 
     /**
      * 生成详细订单号
-     * 该详细订单号由当前时间（精确到毫秒）和4位随机数组合而成
+     * 该详细订单号由当前时间（精确到毫秒（毫秒有三位））和4位随机数组合而成
      * @return
      */
     private String getDetailedOrderNum(){
-        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss:SS");
-        String before =  sdfTime.format(new Date()).replace("[[\\s-:punct:]]", "");
+        SimpleDateFormat sdfTime = new SimpleDateFormat("HHmmssSS");
+        String before =  sdfTime.format(new Date());
 
         Random r = new Random();
         int rand =  r.nextInt(9000)+1000;
-        String after = String.valueOf(rand);
+        System.out.println(rand);
+        String after = Integer.toString(rand);
         return before+after;
     }
 
