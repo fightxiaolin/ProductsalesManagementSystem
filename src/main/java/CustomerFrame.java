@@ -30,12 +30,47 @@ public class CustomerFrame extends JFrame implements Res {
         dispose();
     }
 
-    private void DeleteMouseClicked(MouseEvent e) {
+    private void DeleteMouseClicked(String Number) {
         // TODO add your code here
+        int row = table1.getSelectedRow();
+        String sno = table1.getValueAt(row, 0).toString().trim();
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result = null;
+        String SQL = "delete from order_details where sno='" + sno + "'\n"
+                + "delete from order_info where sno='" + sno + "'";
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+            SQL = "select * from order_info where cno='" + Number + "'";
+            result = stmt.executeQuery(SQL);
+            table1 = new JTable(buildTableModel(result, -1, 0));
+            scrollPane1.setViewportView(table1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
-    private void AlterMouseClicked(MouseEvent e) {
+    private void AlterMouseClicked(String Number) {
         // TODO add your code here
+        editRow = table1.getSelectedRow();
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result = null;
+        String SQL = "select * from order_info where cno='" + Number + "'";
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            table1 = new JTable(buildTableModel(result, editRow, 0));
+            table1.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+            scrollPane1.setViewportView(table1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        alterComfirm.setVisible(true);
+        alterConcel.setVisible(true);
+        Alter.setVisible(false);
     }
 
     /**
@@ -71,7 +106,7 @@ public class CustomerFrame extends JFrame implements Res {
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
-            table1 = new JTable(buildTableModel(result));
+            table1 = new JTable(buildTableModel(result, -1, 0));
             scrollPane1.setViewportView(table1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -89,7 +124,7 @@ public class CustomerFrame extends JFrame implements Res {
             try {
                 stmt = con.createStatement();
                 result = stmt.executeQuery(SQL);
-                table1 = new JTable(buildTableModel(result));
+                table1 = new JTable(buildTableModel(result, -1, 0));
                 scrollPane1.setViewportView(table1);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -149,6 +184,58 @@ public class CustomerFrame extends JFrame implements Res {
         }
     }
 
+    private void alterComfirmMouseClicked(String Number){
+        String sno = table1.getValueAt(editRow, 0).toString().trim();
+        String gno = table1.getValueAt(editRow, 1).toString().trim();
+        String snu = table1.getValueAt(editRow, 2).toString().trim();
+        String sdrq =  table1.getValueAt(editRow, 3).toString().trim();
+        String sjrq = table1.getValueAt(editRow, 4).toString().trim();
+        String toprice = table1.getValueAt(editRow, 5).toString().trim();
+        String fcity = table1.getValueAt(editRow, 6).toString().trim();
+        String scity = table1.getValueAt(editRow, 7).toString().trim();
+        String cno = table1.getValueAt(editRow, 8).toString().trim();
+
+        String SQL = "update order_info set gno='" + gno + "', snu='" + snu + "', sdrq='" + sdrq + "', sjrq ='"
+                + sjrq + "', toprice='" + Integer.parseInt(toprice) + "', fcity='" + fcity + "', scity='"
+                + scity + "' where sno='" + sno + "'";
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result = null;
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+            SQL = "select * from order_info where cno='" + Number + "'";
+            result = stmt.executeQuery(SQL);
+            table1 = new JTable(buildTableModel(result, -1, 0));
+            table1.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+            scrollPane1.setViewportView(table1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        alterComfirm.setVisible(false);
+        alterConcel.setVisible(false);
+        Alter.setVisible(true);
+    }
+
+    private void alterConcelMouseClicked(String Number){
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result = null;
+        String SQL = "select * from order_info where cno='" + Number + "'";
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            table1 = new JTable(buildTableModel(result, -1, 0));
+            table1.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+            scrollPane1.setViewportView(table1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        alterComfirm.setVisible(false);
+        alterConcel.setVisible(false);
+        Alter.setVisible(true);
+    }
+
     private void initComponents(String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -173,6 +260,8 @@ public class CustomerFrame extends JFrame implements Res {
         InputText = new JTextField();
         Search = new JButton();
         logout = new JButton();
+        alterComfirm = new JButton();
+        alterConcel = new JButton();
         CostomerPanel = new JPanel(){
             @Override
             /**
@@ -291,7 +380,7 @@ public class CustomerFrame extends JFrame implements Res {
             SQL = "select * from order_info where cno='" + Number + "'";
             try {
                 result = stmt.executeQuery(SQL);
-                table1 = new JTable(buildTableModel(result));
+                table1 = new JTable(buildTableModel(result, -1, 0));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -320,7 +409,7 @@ public class CustomerFrame extends JFrame implements Res {
         Delete.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DeleteMouseClicked(e);
+                DeleteMouseClicked(Number);
             }
         });
         contentPane.add(Delete);
@@ -333,7 +422,7 @@ public class CustomerFrame extends JFrame implements Res {
         Alter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                AlterMouseClicked(e);
+                AlterMouseClicked(Number);
             }
         });
         contentPane.add(Alter);
@@ -396,6 +485,32 @@ public class CustomerFrame extends JFrame implements Res {
         logout.setBounds(30, 510, 175, 50);
         logout.setContentAreaFilled(false);
 
+        //---- alterComfirm ----
+        alterComfirm.setText("\u786e\u8ba4");
+        alterComfirm.setFont(alterComfirm.getFont().deriveFont(alterComfirm.getFont().getSize()));
+        alterComfirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                alterComfirmMouseClicked(Number);
+            }
+        });
+        contentPane.add(alterComfirm);
+        alterComfirm.setVisible(false);
+        alterComfirm.setBounds(570, 20, 65, 35);
+
+        //---- alterConcel ----
+        alterConcel.setText("\u53d6\u6d88");
+        alterConcel.setFont(alterConcel.getFont().deriveFont(alterConcel.getFont().getSize()));
+        alterConcel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                alterConcelMouseClicked(Number);
+            }
+        });
+        contentPane.add(alterConcel);
+        alterConcel.setVisible(false);
+        alterConcel.setBounds(640, 20, 65, 35);
+
         setSize(1000, 620);
         setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -435,6 +550,9 @@ public class CustomerFrame extends JFrame implements Res {
     private JTextField AddressText;
     private JTextField CreditText;
     private JButton logout;
+    private JButton alterComfirm;
+    private JButton alterConcel;
+    private int editRow;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void ModifyImformation(String Number){
@@ -501,7 +619,8 @@ public class CustomerFrame extends JFrame implements Res {
         Cancel.setContentAreaFilled(false);
     }
 
-    public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
+
+    public static DefaultTableModel buildTableModel(ResultSet rs, int er, int unec) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
 
@@ -536,7 +655,16 @@ public class CustomerFrame extends JFrame implements Res {
             }
             data.add(vector);
         }
-        return new DefaultTableModel(data, columnNames);
+        return new DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(row == er && column != unec && column != 8){
+                    return true;
+                }
+                else
+                    return false;
+            }
+        };
     }
 
 }

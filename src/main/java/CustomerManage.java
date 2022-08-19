@@ -189,6 +189,7 @@ public class CustomerManage extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+
         scrollPane1 = new JScrollPane();
         Customertable = new JTable();
         check = new JButton();
@@ -218,7 +219,7 @@ public class CustomerManage extends JFrame {
 
         //======== scrollPane1 ========
         {
-            showCustomerinformation(-1);
+            scrollPane1.setViewportView(Customertable);
         }
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 5, 675, 705);

@@ -36,6 +36,10 @@ public class CustomerFrameDesigner extends JFrame {
         // TODO add your code here
     }
 
+    private void AddConfirmMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -60,6 +64,8 @@ public class CustomerFrameDesigner extends JFrame {
         comboBox2 = new JComboBox();
         InputText = new JTextField();
         Search = new JButton();
+        alterComfirm = new JButton();
+        alterConcel = new JButton();
 
         //======== this ========
         setTitle("\u7528\u6237\u8ba2\u5355\u7ba1\u7406\u7cfb\u7edf");
@@ -208,6 +214,30 @@ public class CustomerFrameDesigner extends JFrame {
         contentPane.add(Search);
         Search.setBounds(new Rectangle(new Point(845, 75), Search.getPreferredSize()));
 
+        //---- alterComfirm ----
+        alterComfirm.setText("\u786e\u8ba4");
+        alterComfirm.setFont(alterComfirm.getFont().deriveFont(alterComfirm.getFont().getSize() + 4f));
+        alterComfirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(alterComfirm);
+        alterComfirm.setBounds(570, 20, 65, 35);
+
+        //---- alterConcel ----
+        alterConcel.setText("\u53d6\u6d88");
+        alterConcel.setFont(alterConcel.getFont().deriveFont(alterConcel.getFont().getSize() + 4f));
+        alterConcel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddConfirmMouseClicked(e);
+            }
+        });
+        contentPane.add(alterConcel);
+        alterConcel.setBounds(640, 20, 65, 35);
+
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -250,5 +280,7 @@ public class CustomerFrameDesigner extends JFrame {
     private JComboBox comboBox2;
     private JTextField InputText;
     private JButton Search;
+    private JButton alterComfirm;
+    private JButton alterConcel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
