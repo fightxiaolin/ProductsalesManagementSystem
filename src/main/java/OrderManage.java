@@ -191,16 +191,17 @@ public class OrderManage extends JFrame {
         //======== this ========
         setContentPane(OrderPanel);
 //        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("\u8ba2\u5355\u7ba1\u7406\u7cfb\u7edf");
         setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
         //---- label1 ----
-        label1.setText("\u8ba2\u5355\u7ba1\u7406\u7cfb\u7edf");
-        label1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 48));
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPane.add(label1);
-        label1.setBounds(70, 35, 435, 55);
+        //label1.setText("\u8ba2\u5355\u7ba1\u7406\u7cfb\u7edf");
+        //label1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 48));
+        //label1.setHorizontalAlignment(SwingConstants.CENTER);
+        //contentPane.add(label1);
+        //label1.setBounds(70, 35, 435, 55);
 
         //======== scrollPane ========
         {
@@ -208,7 +209,7 @@ public class OrderManage extends JFrame {
         }
 
         contentPane.add(scrollPane);
-        scrollPane.setBounds(5, 140, 750, 445);
+        scrollPane.setBounds(0, 5, 825, 565);
 
         //---- Check ----
         Check.setText("\u67e5\u770b\u8ba2\u5355");

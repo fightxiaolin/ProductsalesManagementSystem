@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.11" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.15" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -6,17 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "this"
 			"font": new java.awt.Font( "Dialog", 0, 48 )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "Title"
-				"text": "产品管理系统"
-				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 48 )
-				"horizontalAlignment": 0
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 90
-				"y": 30
-				"width": 435
-				"height": 55
-			} )
+			"title": "产品管理系统"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane"
 				add( new FormComponent( "javax.swing.JTable" ) {
@@ -24,9 +14,9 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 5
-				"y": 110
-				"width": 620
-				"height": 475
+				"y": 0
+				"width": 640
+				"height": 585
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Add"

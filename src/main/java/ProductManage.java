@@ -280,21 +280,21 @@ public class ProductManage extends JFrame {
         //======== this ========
         setContentPane(ProductPanel);
 //        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("\u4ea7\u54c1\u7ba1\u7406\u7cfb\u7edf");
         setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
         //---- Title ----
-        Title.setText("\u4ea7\u54c1\u7ba1\u7406\u7cfb\u7edf");
-        Title.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 30));
-        Title.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPane.add(Title);
-        Title.setBounds(90, 30, 435, 55);
+//        Title.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 30));
+       // Title.setHorizontalAlignment(SwingConstants.CENTER);
+        //contentPane.add(Title);
+        //Title.setBounds(90, 30, 435, 55);
 
         showProductImformation(-1);
 
         contentPane.add(scrollPane);
-        scrollPane.setBounds(5, 110, 620, 475);
+        scrollPane.setBounds(5, 0, 640, 585);
 
         //---- Add ----
         Add.setText("\u6dfb\u52a0\u4ea7\u54c1");

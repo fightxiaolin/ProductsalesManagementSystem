@@ -189,7 +189,6 @@ public class CustomerManage extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-
         scrollPane1 = new JScrollPane();
         Customertable = new JTable();
         check = new JButton();
@@ -219,7 +218,7 @@ public class CustomerManage extends JFrame {
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(Customertable);
+            showCustomerTable();
         }
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 5, 675, 705);
@@ -246,6 +245,8 @@ public class CustomerManage extends JFrame {
         handle.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                handleMouseClicked(e);
+                handleMouseClicked(e);
                 handleMouseClicked(e);
             }
         });
@@ -472,6 +473,21 @@ public class CustomerManage extends JFrame {
                     return false;
             }
         };
+    }
+
+    private void showCustomerTable(){
+        Connection con = DatabaseConnection.getConnection();
+        ResultSet result = null;
+        Statement stmt = null;
+        String SQL = "select * from customer_info";
+        try {
+            stmt = con.createStatement();
+            result = stmt.executeQuery(SQL);
+            Customertable = new JTable(buildCustomerTableModel(result, -1));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        scrollPane1.setViewportView(Customertable);
     }
 
     public static DefaultTableModel buildCustomerTableModel(ResultSet rs, int er,int unec) throws SQLException {

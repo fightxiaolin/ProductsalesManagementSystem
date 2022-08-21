@@ -62,8 +62,6 @@ public class ProductManageDesigner extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
-        Title = new JLabel();
         scrollPane = new JScrollPane();
         Producttable = new JTable();
         Add = new JButton();
@@ -95,22 +93,16 @@ public class ProductManageDesigner extends JFrame {
 
         //======== this ========
         setFont(new Font(Font.DIALOG, Font.PLAIN, 48));
+        setTitle("\u4ea7\u54c1\u7ba1\u7406\u7cfb\u7edf");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
-
-        //---- Title ----
-        Title.setText("\u4ea7\u54c1\u7ba1\u7406\u7cfb\u7edf");
-        Title.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 48));
-        Title.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPane.add(Title);
-        Title.setBounds(90, 30, 435, 55);
 
         //======== scrollPane ========
         {
             scrollPane.setViewportView(Producttable);
         }
         contentPane.add(scrollPane);
-        scrollPane.setBounds(5, 110, 620, 475);
+        scrollPane.setBounds(5, 0, 640, 585);
 
         //---- Add ----
         Add.setText("\u6dfb\u52a0\u4ea7\u54c1");
@@ -347,8 +339,6 @@ public class ProductManageDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
-    private JLabel Title;
     private JScrollPane scrollPane;
     private JTable Producttable;
     private JButton Add;
