@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/mssql-jdbc-7.4.1.jre8.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/mssql-jdbc-7.4.1.jre8-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
