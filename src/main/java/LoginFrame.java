@@ -215,6 +215,7 @@ public class LoginFrame extends JFrame implements Res {
              */
             MyOptionPane.showMessageDialog(this, "登录成功！", "欢迎使用产品管理系统");
             dispose();
+            new G(UserNum).setVisible(true);
 
         }else{
             /**

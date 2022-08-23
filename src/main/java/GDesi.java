@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Sun Aug 21 19:50:46 CST 2022
@@ -14,27 +15,64 @@ public class GDesi extends JFrame {
         initComponents();
     }
 
+    private void addProductMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void alterProductMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void deleteProductMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void researchMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void addConfrimMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void addConcelMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void alterConfrimMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void alterConcelMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - unknown
         label1 = new JLabel();
-        label2 = new JLabel();
+        userNum = new JLabel();
         label3 = new JLabel();
-        label4 = new JLabel();
+        userName = new JLabel();
         label5 = new JLabel();
-        label6 = new JLabel();
+        phoneNumber = new JLabel();
         label7 = new JLabel();
-        label8 = new JLabel();
+        address = new JLabel();
         label9 = new JLabel();
-        label10 = new JLabel();
-        button1 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
-        comboBox1 = new JComboBox();
-        textField1 = new JTextField();
-        button4 = new JButton();
-        comboBox2 = new JComboBox();
-        scrollPane1 = new JScrollPane();
-        table1 = new JTable();
+        credit = new JLabel();
+        addProduct = new JButton();
+        alterProduct = new JButton();
+        deleteProduct = new JButton();
+        typeBox = new JComboBox();
+        radioButton1 = new JRadioButton();
+        researchInput = new JTextField();
+        research = new JButton();
+        productPane = new JScrollPane();
+        productTable = new JTable();
+        addConfrim = new JButton();
+        addConcel = new JButton();
+        alterConfrim = new JButton();
+        alterConcel = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -46,11 +84,11 @@ public class GDesi extends JFrame {
         contentPane.add(label1);
         label1.setBounds(20, 130, 80, 35);
 
-        //---- label2 ----
-        label2.setText("04");
-        label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 2f));
-        contentPane.add(label2);
-        label2.setBounds(95, 130, 80, 35);
+        //---- userNum ----
+        userNum.setText("04");
+        userNum.setFont(userNum.getFont().deriveFont(userNum.getFont().getSize() + 2f));
+        contentPane.add(userNum);
+        userNum.setBounds(95, 130, 80, 35);
 
         //---- label3 ----
         label3.setText("\u4f9b\u5e94\u5546\u540d\uff1a");
@@ -58,11 +96,11 @@ public class GDesi extends JFrame {
         contentPane.add(label3);
         label3.setBounds(20, 185, 75, 25);
 
-        //---- label4 ----
-        label4.setText("\u5218\u51ef");
-        label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 2f));
-        contentPane.add(label4);
-        label4.setBounds(90, 185, 75, 25);
+        //---- userName ----
+        userName.setText("\u5218\u51ef");
+        userName.setFont(userName.getFont().deriveFont(userName.getFont().getSize() + 2f));
+        contentPane.add(userName);
+        userName.setBounds(90, 185, 75, 25);
 
         //---- label5 ----
         label5.setText("\u7535\u8bdd\uff1a");
@@ -70,11 +108,11 @@ public class GDesi extends JFrame {
         contentPane.add(label5);
         label5.setBounds(new Rectangle(new Point(20, 235), label5.getPreferredSize()));
 
-        //---- label6 ----
-        label6.setText("26262626");
-        label6.setFont(label6.getFont().deriveFont(label6.getFont().getSize() + 2f));
-        contentPane.add(label6);
-        label6.setBounds(new Rectangle(new Point(65, 235), label6.getPreferredSize()));
+        //---- phoneNumber ----
+        phoneNumber.setText("26262626");
+        phoneNumber.setFont(phoneNumber.getFont().deriveFont(phoneNumber.getFont().getSize() + 2f));
+        contentPane.add(phoneNumber);
+        phoneNumber.setBounds(new Rectangle(new Point(65, 235), phoneNumber.getPreferredSize()));
 
         //---- label7 ----
         label7.setText("\u5730\u5740\uff1a");
@@ -82,11 +120,11 @@ public class GDesi extends JFrame {
         contentPane.add(label7);
         label7.setBounds(new Rectangle(new Point(20, 280), label7.getPreferredSize()));
 
-        //---- label8 ----
-        label8.setText("\u5357\u5b81");
-        label8.setFont(label8.getFont().deriveFont(label8.getFont().getSize() + 2f));
-        contentPane.add(label8);
-        label8.setBounds(new Rectangle(new Point(65, 280), label8.getPreferredSize()));
+        //---- address ----
+        address.setText("\u5357\u5b81");
+        address.setFont(address.getFont().deriveFont(address.getFont().getSize() + 2f));
+        contentPane.add(address);
+        address.setBounds(new Rectangle(new Point(65, 280), address.getPreferredSize()));
 
         //---- label9 ----
         label9.setText("\u4fe1\u8d37\u60c5\u51b5\uff1a");
@@ -94,48 +132,119 @@ public class GDesi extends JFrame {
         contentPane.add(label9);
         label9.setBounds(new Rectangle(new Point(20, 330), label9.getPreferredSize()));
 
-        //---- label10 ----
-        label10.setText("\u4f18");
-        label10.setFont(label10.getFont().deriveFont(label10.getFont().getSize() + 2f));
-        contentPane.add(label10);
-        label10.setBounds(90, 330, 25, label10.getPreferredSize().height);
+        //---- credit ----
+        credit.setText("\u4f18");
+        credit.setFont(credit.getFont().deriveFont(credit.getFont().getSize() + 2f));
+        contentPane.add(credit);
+        credit.setBounds(90, 330, 25, credit.getPreferredSize().height);
 
-        //---- button1 ----
-        button1.setText("\u6dfb\u52a0\u4ea7\u54c1");
-        button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 3f));
-        contentPane.add(button1);
-        button1.setBounds(255, 30, 105, 35);
+        //---- addProduct ----
+        addProduct.setText("\u6dfb\u52a0\u4ea7\u54c1");
+        addProduct.setFont(addProduct.getFont().deriveFont(addProduct.getFont().getSize() + 3f));
+        addProduct.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                addProductMouseClicked(e);
+            }
+        });
+        contentPane.add(addProduct);
+        addProduct.setBounds(255, 30, 105, 35);
 
-        //---- button2 ----
-        button2.setText("\u4fee\u6539\u4ea7\u54c1");
-        button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 3f));
-        contentPane.add(button2);
-        button2.setBounds(395, 30, 105, 35);
+        //---- alterProduct ----
+        alterProduct.setText("\u4fee\u6539\u4ea7\u54c1");
+        alterProduct.setFont(alterProduct.getFont().deriveFont(alterProduct.getFont().getSize() + 3f));
+        alterProduct.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                alterProductMouseClicked(e);
+            }
+        });
+        contentPane.add(alterProduct);
+        alterProduct.setBounds(395, 30, 105, 35);
 
-        //---- button3 ----
-        button3.setText("\u4e0b\u67b6\u4ea7\u54c1");
-        button3.setFont(button3.getFont().deriveFont(button3.getFont().getSize() + 3f));
-        contentPane.add(button3);
-        button3.setBounds(540, 30, 105, 35);
-        contentPane.add(comboBox1);
-        comboBox1.setBounds(195, 105, 145, 40);
-        contentPane.add(textField1);
-        textField1.setBounds(350, 110, 345, 35);
+        //---- deleteProduct ----
+        deleteProduct.setText("\u4e0b\u67b6\u4ea7\u54c1");
+        deleteProduct.setFont(deleteProduct.getFont().deriveFont(deleteProduct.getFont().getSize() + 3f));
+        deleteProduct.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                deleteProductMouseClicked(e);
+            }
+        });
+        contentPane.add(deleteProduct);
+        deleteProduct.setBounds(540, 30, 105, 35);
+        contentPane.add(typeBox);
+        typeBox.setBounds(195, 105, 145, 40);
 
-        //---- button4 ----
-        button4.setText("\u67e5\u8be2");
-        button4.setFont(button4.getFont().deriveFont(button4.getFont().getSize() + 3f));
-        contentPane.add(button4);
-        button4.setBounds(new Rectangle(new Point(710, 115), button4.getPreferredSize()));
-        contentPane.add(comboBox2);
-        comboBox2.setBounds(195, 150, 180, 40);
+        //---- radioButton1 ----
+        radioButton1.setText("text");
+        contentPane.add(radioButton1);
+        radioButton1.setBounds(new Rectangle(new Point(0, 530), radioButton1.getPreferredSize()));
+        contentPane.add(researchInput);
+        researchInput.setBounds(350, 110, 345, 35);
 
-        //======== scrollPane1 ========
+        //---- research ----
+        research.setText("\u67e5\u8be2");
+        research.setFont(research.getFont().deriveFont(research.getFont().getSize() + 3f));
+        research.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                researchMouseClicked(e);
+            }
+        });
+        contentPane.add(research);
+        research.setBounds(new Rectangle(new Point(710, 115), research.getPreferredSize()));
+
+        //======== productPane ========
         {
-            scrollPane1.setViewportView(table1);
+            productPane.setViewportView(productTable);
         }
-        contentPane.add(scrollPane1);
-        scrollPane1.setBounds(185, 200, 635, 325);
+        contentPane.add(productPane);
+        productPane.setBounds(185, 160, 635, 365);
+
+        //---- addConfrim ----
+        addConfrim.setText("\u786e\u8ba4");
+        addConfrim.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                addConfrimMouseClicked(e);
+            }
+        });
+        contentPane.add(addConfrim);
+        addConfrim.setBounds(250, 30, 55, 35);
+
+        //---- addConcel ----
+        addConcel.setText("\u53d6\u6d88");
+        addConcel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                addConcelMouseClicked(e);
+            }
+        });
+        contentPane.add(addConcel);
+        addConcel.setBounds(310, 30, 55, 35);
+
+        //---- alterConfrim ----
+        alterConfrim.setText("\u786e\u8ba4");
+        alterConfrim.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                alterConfrimMouseClicked(e);
+            }
+        });
+        contentPane.add(alterConfrim);
+        alterConfrim.setBounds(390, 30, 55, 35);
+
+        //---- alterConcel ----
+        alterConcel.setText("\u53d6\u6d88");
+        alterConcel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                alterConcelMouseClicked(e);
+            }
+        });
+        contentPane.add(alterConcel);
+        alterConcel.setBounds(450, 30, 55, 35);
 
         {
             // compute preferred size
@@ -157,24 +266,29 @@ public class GDesi extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
     private JLabel label1;
-    private JLabel label2;
+    private JLabel userNum;
     private JLabel label3;
-    private JLabel label4;
+    private JLabel userName;
     private JLabel label5;
-    private JLabel label6;
+    private JLabel phoneNumber;
     private JLabel label7;
-    private JLabel label8;
+    private JLabel address;
     private JLabel label9;
-    private JLabel label10;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JComboBox comboBox1;
-    private JTextField textField1;
-    private JButton button4;
-    private JComboBox comboBox2;
-    private JScrollPane scrollPane1;
-    private JTable table1;
+    private JLabel credit;
+    private JButton addProduct;
+    private JButton alterProduct;
+    private JButton deleteProduct;
+    private JComboBox typeBox;
+    private JRadioButton radioButton1;
+    private JTextField researchInput;
+    private JButton research;
+    private JScrollPane productPane;
+    private JTable productTable;
+    private JButton addConfrim;
+    private JButton addConcel;
+    private JButton alterConfrim;
+    private JButton alterConcel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

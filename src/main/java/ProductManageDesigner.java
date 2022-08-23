@@ -62,6 +62,7 @@ public class ProductManageDesigner extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - unknown
         scrollPane = new JScrollPane();
         Producttable = new JTable();
         Add = new JButton();
@@ -339,6 +340,7 @@ public class ProductManageDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
     private JScrollPane scrollPane;
     private JTable Producttable;
     private JButton Add;
