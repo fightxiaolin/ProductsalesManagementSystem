@@ -50,18 +50,19 @@ public class ManagerFrameDesigner extends JFrame {
         UserNum = new JLabel();
         label2 = new JLabel();
         label1 = new JLabel();
-        label6 = new JLabel();
         SelectText = new JLabel();
         OrderManage = new JButton();
-        CostomerManage = new JButton();
+        CustomerManage = new JButton();
         ProductManage = new JButton();
         label7 = new JLabel();
         logout = new JButton();
+        label6 = new JLabel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wallhaven-pkdr23_1920x1080.png").getImage());
+        setTitle("\u7ba1\u7406\u5458\u64cd\u4f5c\u5e73\u53f0");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -75,73 +76,66 @@ public class ManagerFrameDesigner extends JFrame {
             }
         });
         contentPane.add(modify);
-        modify.setBounds(20, 335, 145, 30);
+        modify.setBounds(30, 345, 145, 30);
 
         //---- label5 ----
         label5.setText("\u516c\u53f8\uff1a");
-        label5.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        label5.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
         contentPane.add(label5);
         label5.setBounds(20, 300, 55, 25);
 
         //---- Address ----
-        Address.setText("\u505a\u4e0d\u51fa\u6570\u636e\u5e93\u7684\u79d1\u6280\u6709\u9650\u516c\u53f8");
-        Address.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        Address.setText("\u5e7f\u897f\u5927\u5b66");
+        Address.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
         contentPane.add(Address);
         Address.setBounds(75, 300, 175, 25);
 
         //---- PhoneNumber ----
-        PhoneNumber.setText("18988888888");
-        PhoneNumber.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        PhoneNumber.setText("18070786877");
+        PhoneNumber.setFont(new Font("\u6977\u4f53", Font.PLAIN, 16));
         contentPane.add(PhoneNumber);
         PhoneNumber.setBounds(75, 260, 135, 25);
 
         //---- label4 ----
         label4.setText("\u7535\u8bdd\uff1a");
-        label4.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        label4.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
         contentPane.add(label4);
         label4.setBounds(20, 260, 55, 25);
 
         //---- label3 ----
         label3.setText("\u7ba1\u7406\u5458\uff1a");
-        label3.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        label3.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
         contentPane.add(label3);
-        label3.setBounds(20, 220, 55, 25);
+        label3.setBounds(20, 215, 95, 30);
 
         //---- UserName ----
-        UserName.setText("\u6797\u603b");
-        UserName.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        UserName.setText("\u9646\u96c5\u5a1f");
+        UserName.setFont(new Font("\u6977\u4f53", Font.PLAIN, 16));
         contentPane.add(UserName);
-        UserName.setBounds(75, 220, 135, 25);
+        UserName.setBounds(85, 215, 135, 30);
 
         //---- UserNum ----
-        UserNum.setText("666666");
-        UserNum.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        UserNum.setText("01");
+        UserNum.setFont(new Font("\u6977\u4f53", Font.PLAIN, 16));
         contentPane.add(UserNum);
-        UserNum.setBounds(75, 180, 135, 25);
+        UserNum.setBounds(85, 175, 135, 25);
 
         //---- label2 ----
         label2.setText("\u804c\u5de5\u53f7\uff1a");
-        label2.setFont(new Font(Font.DIALOG, Font.PLAIN, 13));
+        label2.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
         contentPane.add(label2);
-        label2.setBounds(20, 180, 55, 25);
+        label2.setBounds(20, 170, 85, 35);
         contentPane.add(label1);
-        label1.setBounds(65, 75, 70, 80);
-
-        //---- label6 ----
-        label6.setText("\u7ba1\u7406\u5458\u64cd\u4f5c\u5e73\u53f0");
-        label6.setHorizontalAlignment(SwingConstants.CENTER);
-        label6.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 48));
-        contentPane.add(label6);
-        label6.setBounds(290, 20, 540, 85);
+        label1.setBounds(50, 75, 70, 80);
 
         //---- SelectText ----
         SelectText.setText("\u8bf7\u9009\u62e9\u60a8\u8981\u8fdb\u884c\u7684\u64cd\u4f5c\uff1a");
-        SelectText.setFont(SelectText.getFont().deriveFont(SelectText.getFont().getSize() + 4f));
+        SelectText.setFont(SelectText.getFont().deriveFont(SelectText.getFont().getSize() + 7f));
         contentPane.add(SelectText);
-        SelectText.setBounds(350, 140, 235, 30);
+        SelectText.setBounds(355, 100, 235, 30);
 
         //---- OrderManage ----
-        OrderManage.setText("\u8ba2\u5355\u7ba1\u7406");
+        OrderManage.setText("\u2461\u8ba2\u5355\u7ba1\u7406");
         OrderManage.setFont(OrderManage.getFont().deriveFont(OrderManage.getFont().getSize() + 4f));
         OrderManage.addMouseListener(new MouseAdapter() {
             @Override
@@ -150,23 +144,24 @@ public class ManagerFrameDesigner extends JFrame {
             }
         });
         contentPane.add(OrderManage);
-        OrderManage.setBounds(470, 270, 240, 45);
+        OrderManage.setBounds(335, 235, 240, 45);
 
-        //---- CostomerManage ----
-        CostomerManage.setText("\u987e\u5ba2\u7ba1\u7406");
-        CostomerManage.setFont(CostomerManage.getFont().deriveFont(CostomerManage.getFont().getSize() + 4f));
-        CostomerManage.addMouseListener(new MouseAdapter() {
+        //---- CustomerManage ----
+        CustomerManage.setText("\u2462\u987e\u5ba2\u7ba1\u7406");
+        CustomerManage.setFont(CustomerManage.getFont().deriveFont(CustomerManage.getFont().getSize() + 4f));
+        CustomerManage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 CostomerManageMouseClicked(e);
             }
         });
-        contentPane.add(CostomerManage);
-        CostomerManage.setBounds(475, 350, 240, 45);
+        contentPane.add(CustomerManage);
+        CustomerManage.setBounds(335, 300, 240, 45);
 
         //---- ProductManage ----
-        ProductManage.setText("\u4ea7\u54c1\u7ba1\u7406");
+        ProductManage.setText("\u2460\u4ea7\u54c1\u7ba1\u7406");
         ProductManage.setFont(ProductManage.getFont().deriveFont(ProductManage.getFont().getSize() + 4f));
+        ProductManage.setBackground(new Color(204, 204, 204));
         ProductManage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -175,7 +170,7 @@ public class ManagerFrameDesigner extends JFrame {
             }
         });
         contentPane.add(ProductManage);
-        ProductManage.setBounds(470, 190, 240, 45);
+        ProductManage.setBounds(335, 165, 240, 45);
 
         //---- label7 ----
         label7.setText("text");
@@ -193,22 +188,16 @@ public class ManagerFrameDesigner extends JFrame {
             }
         });
         contentPane.add(logout);
-        logout.setBounds(30, 510, 175, 50);
+        logout.setBounds(545, 390, 175, 50);
 
-        {
-            // compute preferred size
-            Dimension preferredSize = new Dimension();
-            for(int i = 0; i < contentPane.getComponentCount(); i++) {
-                Rectangle bounds = contentPane.getComponent(i).getBounds();
-                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-            }
-            Insets insets = contentPane.getInsets();
-            preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
-            contentPane.setMinimumSize(preferredSize);
-            contentPane.setPreferredSize(preferredSize);
-        }
+        //---- label6 ----
+        label6.setText("text");
+        label6.setIcon(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\\u5fae\u4fe1\u56fe\u7247_20220831160459.jpg"));
+        label6.setOpaque(true);
+        contentPane.add(label6);
+        label6.setBounds(new Rectangle(new Point(-485, -270), label6.getPreferredSize()));
+
+        contentPane.setPreferredSize(new Dimension(740, 485));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -226,12 +215,12 @@ public class ManagerFrameDesigner extends JFrame {
     private JLabel UserNum;
     private JLabel label2;
     private JLabel label1;
-    private JLabel label6;
     private JLabel SelectText;
     private JButton OrderManage;
-    private JButton CostomerManage;
+    private JButton CustomerManage;
     private JButton ProductManage;
     private JLabel label7;
     private JButton logout;
+    private JLabel label6;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

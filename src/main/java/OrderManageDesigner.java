@@ -42,7 +42,6 @@ public class OrderManageDesigner extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        label1 = new JLabel();
         scrollPane = new JScrollPane();
         Ordertable = new JTable();
         Check = new JButton();
@@ -74,19 +73,12 @@ public class OrderManageDesigner extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-        //---- label1 ----
-        label1.setText("\u8ba2\u5355\u7ba1\u7406\u7cfb\u7edf");
-        label1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 48));
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPane.add(label1);
-        label1.setBounds(70, 35, 435, 55);
-
         //======== scrollPane ========
         {
             scrollPane.setViewportView(Ordertable);
         }
         contentPane.add(scrollPane);
-        scrollPane.setBounds(10, 105, 800, 480);
+        scrollPane.setBounds(0, 0, 830, 570);
 
         //---- Check ----
         Check.setText("\u67e5\u770b\u8ba2\u5355");
@@ -267,7 +259,6 @@ public class OrderManageDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label1;
     private JScrollPane scrollPane;
     private JTable Ordertable;
     private JButton Check;

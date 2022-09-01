@@ -172,7 +172,7 @@ public class G extends JFrame {
         alterCancel.setVisible(false);
     }
 
-    private void initComponents(String Number) {
+    private void initComponents(final String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         label1 = new JLabel();
@@ -453,8 +453,8 @@ public class G extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         ResultSet result = null;
         Statement stmt = null;
-        String SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P,g_info G, god_info God " +
-                "where P.pno=God.pno and G.gno=God.gno and God.gno='" + Number + "'";
+        String SQL = "select * from productmanage " +
+                "where gno='" + Number + "'";
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
@@ -474,7 +474,7 @@ public class G extends JFrame {
      * @return
      * @throws SQLException
      */
-    public static DefaultTableModel buildProductTableModel(ResultSet rs, int er) throws SQLException {
+    public static DefaultTableModel buildProductTableModel(ResultSet rs, final int er) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
         Vector columnNames = new Vector();

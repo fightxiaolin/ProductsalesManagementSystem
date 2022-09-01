@@ -24,7 +24,7 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
 //        initComponents();
     }
 
-    public AddNewOrderFrame(String Number) {
+    public AddNewOrderFrame(final String Number) {
         initComponents(Number);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -135,6 +135,7 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
             updateSurplus(pno, gno, ssnu);
             updateorder(orderNum, Integer.parseInt(OrderTable.getValueAt(i, 5).toString().trim()));
         }
+
         MyOptionPane.showMessageDialog(this, "总付款金额为：" + totalMoney, "请支付！");
         dispose();
         new CustomerFrame(Number).setVisible(true);
@@ -233,7 +234,7 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
         orderTableModel.removeRow(selectedrow);
     }
 
-    private void initComponents(String Number) {
+    private void initComponents(final String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         ProductTablescrollPane = new JScrollPane();

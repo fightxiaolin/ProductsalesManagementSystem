@@ -21,7 +21,7 @@ public class ProductManage extends JFrame {
         initComponents();//在界面添加各个组件，并为它们注册监听器
     }
 
-    public ProductManage(String UserNum)
+    public ProductManage(final String UserNum)
     {
         initComponents();
         addWindowListener(new WindowAdapter() {//在窗口添加一个Windows事件消息，在关闭窗口的时候可以正常的退出
@@ -93,27 +93,27 @@ public class ProductManage extends JFrame {
         ProductNum.isSelected();
         if( ProductNum.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pno='" + text + "'";
+            SQL = "select * from productmanage God where pno='" + text + "'";
         }
         else if(SupplyNum.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and G.gno ='" + text + "'";
+            SQL = "select * from productmanage where gno ='" + text + "'";
         }
         else if(ProductName.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pna ='" + text + "'";
+            SQL = "select * from productmanage where pna like '%" + text + "%'";
         }
         else if(SupplyName.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and G.gna ='" + text + "'";
+            SQL = "select * from productmanage where gna like '%" + text + "%'";
         }
         else if(ProductPrice.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and P.pwe =" + Integer.valueOf(text);
+            SQL = "select * from productmanage where price =" + Integer.valueOf(text);
         }
         else if(ProductWeight.isSelected())
         {
-            SQL = "select P.pno, P.pna, G.gno, G.gna, P.pwe, God.price, God.surplus from product_info P, g_info G, god_info God where P.pno=God.pno and G.gno=God.gno and God.price =" + Integer.valueOf(text);
+            SQL = "select * from productmanage where pwe =" + Integer.valueOf(text);
         }
         try {
             stmt = con.createStatement();
@@ -267,7 +267,9 @@ public class ProductManage extends JFrame {
         AddCancel = new JButton();
         AlterCancel = new JButton();
         AlterConfirm = new JButton();
-        ProductPanel = new JPanel(){
+        label1 = new JLabel();
+        ProductPanel = new JPanel()
+        {
             @Override
             /**
              * 重写该方法以设置背景图片
@@ -276,6 +278,7 @@ public class ProductManage extends JFrame {
                 super.paintComponent(g);
             }
         };
+
 
         //======== this ========
         setContentPane(ProductPanel);
@@ -380,6 +383,8 @@ public class ProductManage extends JFrame {
         contentPane.add(SupplyName);
         SupplyName.setBounds(830, 270, 140, 20);
 
+        //---- label1 ----
+
         //---- ProductWeight ----
         ProductWeight.setText("\u91cd\u91cf");
         ProductWeight.setFont(ProductWeight.getFont().deriveFont(ProductWeight.getFont().getSize() + 2f));
@@ -431,6 +436,8 @@ public class ProductManage extends JFrame {
         RangeAnother.setBounds(830, 470, 140, 20);
         contentPane.add(Rangelower);
         Rangelower.setBounds(660, 515, 105, 30);
+
+
 
         //---- label4 ----
         label4.setText("~");
@@ -560,6 +567,7 @@ public class ProductManage extends JFrame {
     private JButton AlterCancel;
     private JButton AlterConfirm;
     private int editRow;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     /**
@@ -611,7 +619,7 @@ public class ProductManage extends JFrame {
      * @return
      * @throws SQLException
      */
-    public static DefaultTableModel buildProductTableModel(ResultSet rs, int er) throws SQLException {
+    public static DefaultTableModel buildProductTableModel(ResultSet rs, final int er) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
         Vector columnNames = new Vector();
@@ -658,7 +666,7 @@ public class ProductManage extends JFrame {
      * @return
      * @throws SQLException
      */
-    public static DefaultTableModel buildProductTableModel(ResultSet rs, int er, int unec) throws SQLException {
+    public static DefaultTableModel buildProductTableModel(ResultSet rs, final int er, final int unec) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
         Vector columnNames = new Vector();

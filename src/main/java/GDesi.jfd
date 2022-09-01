@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.11" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.15" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -16,7 +16,7 @@ new FormModel {
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "userNum"
+				name: "label2"
 				"text": "04"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -36,7 +36,7 @@ new FormModel {
 				"height": 25
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "userName"
+				name: "label4"
 				"text": "刘凯"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -54,7 +54,7 @@ new FormModel {
 				"y": 235
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "phoneNumber"
+				name: "label6"
 				"text": "26262626"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -70,7 +70,7 @@ new FormModel {
 				"y": 280
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "address"
+				name: "label8"
 				"text": "南宁"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -86,7 +86,7 @@ new FormModel {
 				"y": 330
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "credit"
+				name: "label10"
 				"text": "优"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -95,10 +95,9 @@ new FormModel {
 				"width": 25
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "addProduct"
+				name: "button1"
 				"text": "添加产品"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "addProductMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 255
 				"y": 30
@@ -106,10 +105,9 @@ new FormModel {
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "alterProduct"
+				name: "button2"
 				"text": "修改产品"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "alterProductMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 395
 				"y": 30
@@ -117,10 +115,9 @@ new FormModel {
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "deleteProduct"
+				name: "button3"
 				"text": "下架产品"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "deleteProductMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 540
 				"y": 30
@@ -128,22 +125,15 @@ new FormModel {
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
-				name: "typeBox"
+				name: "comboBox1"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 195
 				"y": 105
 				"width": 145
 				"height": 40
 			} )
-			add( new FormComponent( "javax.swing.JRadioButton" ) {
-				name: "radioButton1"
-				"text": "text"
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 0
-				"y": 530
-			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "researchInput"
+				name: "textField1"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 350
 				"y": 110
@@ -151,67 +141,34 @@ new FormModel {
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "research"
+				name: "button4"
 				"text": "查询"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "researchMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 710
 				"y": 115
 			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox2"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 195
+				"y": 150
+				"width": 180
+				"height": 40
+			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "productPane"
+				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "productTable"
+					name: "table1"
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 185
-				"y": 160
+				"y": 200
 				"width": 635
-				"height": 365
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "addConfrim"
-				"text": "确认"
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "addConfrimMouseClicked", true ) )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 250
-				"y": 30
-				"width": 55
-				"height": 35
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "addConcel"
-				"text": "取消"
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "addConcelMouseClicked", true ) )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 55
-				"height": 35
-				"x": 310
-				"y": 30
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "alterConfrim"
-				"text": "确认"
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "alterConfrimMouseClicked", true ) )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 55
-				"height": 35
-				"x": 390
-				"y": 30
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "alterConcel"
-				"text": "取消"
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "alterConcelMouseClicked", true ) )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 55
-				"height": 35
-				"x": 450
-				"y": 30
+				"height": 325
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 50, 15 )
+			"location": new java.awt.Point( 45, 15 )
 			"size": new java.awt.Dimension( 820, 560 )
 		} )
 	}

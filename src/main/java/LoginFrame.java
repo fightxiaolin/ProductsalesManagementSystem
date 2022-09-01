@@ -35,6 +35,7 @@ public class LoginFrame extends JFrame implements Res {
         exit = new JButton();
         register = new JButton();
         retrieve = new JButton();
+        lable1 = new JLabel();
         Title = new JLabel();
         LoginPanel = new JPanel(){
             @Override
@@ -123,6 +124,20 @@ public class LoginFrame extends JFrame implements Res {
             }
         });
         retrieve.setContentAreaFilled(false);
+
+        //lable1
+        lable1.setText("text");
+        LoginPanel.add(lable1);
+        lable1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                retrievemouseClicked(e);
+            }
+        });
+        lable1.setIcon(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\\u5fae\u4fe1\u56fe\u7247_20220831160459.jpg"));
+        lable1.setOpaque(true);
+        lable1.setBounds(new Rectangle(new Point(-450, 240), lable1.getPreferredSize()));
+
 
         //---- Title ----
         Title.setText("欢迎使用产品销售管理系统");
@@ -250,6 +265,7 @@ public class LoginFrame extends JFrame implements Res {
     private JButton retrieve;
     private JLabel Title;
     private JPanel LoginPanel;
+    private JLabel lable1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 

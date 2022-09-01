@@ -91,10 +91,12 @@ public class ProductManageDesigner extends JFrame {
         AddCancel = new JButton();
         AlterCancel = new JButton();
         AlterConfirm = new JButton();
+        label1 = new JLabel();
 
         //======== this ========
         setFont(new Font(Font.DIALOG, Font.PLAIN, 48));
         setTitle("\u4ea7\u54c1\u7ba1\u7406\u7cfb\u7edf");
+        setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\\u5fae\u4fe1\u56fe\u7247_20220831100129.jpg").getImage());
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -320,6 +322,13 @@ public class ProductManageDesigner extends JFrame {
         contentPane.add(AlterConfirm);
         AlterConfirm.setBounds(830, 40, 60, 45);
 
+        //---- label1 ----
+        label1.setText("text");
+        label1.setIcon(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\\u5fae\u4fe1\u56fe\u7247_20220831100129.jpg"));
+        label1.setOpaque(true);
+        contentPane.add(label1);
+        label1.setBounds(new Rectangle(new Point(-55, 0), label1.getPreferredSize()));
+
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -369,5 +378,6 @@ public class ProductManageDesigner extends JFrame {
     private JButton AddCancel;
     private JButton AlterCancel;
     private JButton AlterConfirm;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

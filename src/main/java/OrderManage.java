@@ -20,7 +20,7 @@ public class OrderManage extends JFrame {
         initComponents();
     }
 
-    public OrderManage(String Number){
+    public OrderManage(final String Number){
         initComponents();
         addWindowListener(new WindowAdapter() {
             @Override

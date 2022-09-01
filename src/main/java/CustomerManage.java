@@ -16,7 +16,7 @@ public class CustomerManage extends JFrame {
     public CustomerManage() {
         initComponents();
     }
-    public CustomerManage(String Number){
+    public CustomerManage(final String Number){
         initComponents();
         addWindowListener(new WindowAdapter() {
             @Override
@@ -152,27 +152,27 @@ public class CustomerManage extends JFrame {
         ResultSet result;
         if( cno.isSelected())
         {
-            SQL = "select C.cno,C.cna,C.cad,C.cte,C.cco,C.cpm from customer_info C where C.cno='" + text + "'";
+            SQL = "select * from customermanage where cno='" + text + "'";
         }
         else if(cna.isSelected())
         {
-            SQL = "select C.cno,C.cna,C.cad,C.cte,C.cco,C.cpm from customer_info C where C.cna='" + text + "'";
+            SQL = "select * from customermanage where cna like '%" + text + "%'";
         }
         else if(cad.isSelected())
         {
-            SQL = "select C.cno,C.cna,C.cad,C.cte,C.cco,C.cpm from customer_info C where C.cad='" + text + "'";
+            SQL = "select * from customermanage where cad like '%" + text + "%'";
         }
         else if(cte.isSelected())
         {
-            SQL = "select C.cno,C.cna,C.cad,C.cte,C.cco,C.cpm from customer_info C where C.cte='" + text + "'";
+            SQL = "select * from customermanage where cte='" + text + "'";
         }
         else if(cco.isSelected())
         {
-            SQL = "select C.cno,C.cna,C.cad,C.cte,C.cco,C.cpm from customer_info C where C.cco='" + text + "'";
+            SQL = "select * from customermanage where cco='" + text + "'";
         }
         else if(cpm.isSelected())
         {
-            SQL = "select C.cno,C.cna,C.cad,C.cte,C.cco,C.cpm from customer_info C where C.cpm =" + Integer.valueOf(text);
+            SQL = "select * from customermanage where cpm =" + Integer.valueOf(text);
         }
         try {
             stmt = con.createStatement();
@@ -189,6 +189,7 @@ public class CustomerManage extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - unknown
         scrollPane1 = new JScrollPane();
         Customertable = new JTable();
         check = new JButton();
@@ -218,7 +219,7 @@ public class CustomerManage extends JFrame {
 
         //======== scrollPane1 ========
         {
-            showCustomerTable();
+            scrollPane1.setViewportView(Customertable);
         }
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 5, 675, 705);
@@ -417,6 +418,7 @@ public class CustomerManage extends JFrame {
 
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
     private JScrollPane scrollPane1;
     private JTable Customertable;
     private JButton check;
@@ -438,7 +440,7 @@ public class CustomerManage extends JFrame {
     private JButton handledelete;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public static DefaultTableModel buildCustomerTableModel(ResultSet rs, int er) throws SQLException {
+    public static DefaultTableModel buildCustomerTableModel(ResultSet rs, final int er) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
         Vector columnNames = new Vector();
@@ -490,7 +492,7 @@ public class CustomerManage extends JFrame {
         scrollPane1.setViewportView(Customertable);
     }
 
-    public static DefaultTableModel buildCustomerTableModel(ResultSet rs, int er,int unec) throws SQLException {
+    public static DefaultTableModel buildCustomerTableModel(ResultSet rs, final int er, final int unec) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
         Vector columnNames = new Vector();
@@ -530,7 +532,7 @@ public class CustomerManage extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         ResultSet result = null;
         Statement stmt = null;
-        String SQL = "select C.cno, C.cna, C.cad, C.cte, C.cco, C.cpm from customer_info C";
+        String SQL = "select * from customermanage";
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
@@ -551,7 +553,7 @@ public class CustomerManage extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         ResultSet result = null;
         Statement stmt = null;
-        String SQL = "select C.cno, C.cna, C.cad, C.cte, C.cco, C.cpm from customer_info C";
+        String SQL = "select * from customermanage";
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);

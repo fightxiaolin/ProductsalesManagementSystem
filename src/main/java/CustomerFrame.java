@@ -236,7 +236,7 @@ public class CustomerFrame extends JFrame implements Res {
         Alter.setVisible(true);
     }
 
-    private void initComponents(String Number) {
+    private void initComponents(final String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         label1 = new JLabel();
@@ -555,7 +555,7 @@ public class CustomerFrame extends JFrame implements Res {
     private int editRow;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    private void ModifyImformation(String Number){
+    private void ModifyImformation(final String Number){
 
         UserNumText = new JTextField();
         UserNameText = new JTextField();
@@ -620,7 +620,7 @@ public class CustomerFrame extends JFrame implements Res {
     }
 
 
-    public static DefaultTableModel buildTableModel(ResultSet rs, int er, int unec) throws SQLException {
+    public static DefaultTableModel buildTableModel(ResultSet rs, final int er, final int unec) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
 

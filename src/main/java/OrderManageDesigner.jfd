@@ -7,27 +7,16 @@ new FormModel {
 			name: "this"
 			"font": new java.awt.Font( "Dialog", 0, 48 )
 			"defaultCloseOperation": 3
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label1"
-				"text": "订单管理系统"
-				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 48 )
-				"horizontalAlignment": 0
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 70
-				"y": 35
-				"width": 435
-				"height": 55
-			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane"
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "Ordertable"
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 10
-				"y": 105
-				"width": 800
-				"height": 480
+				"x": 0
+				"y": 0
+				"width": 830
+				"height": 570
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Check"
