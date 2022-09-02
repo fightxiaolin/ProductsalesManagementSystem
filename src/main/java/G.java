@@ -177,14 +177,11 @@ public class G extends JFrame {
         // Generated using JFormDesigner Evaluation license - unknown
         label1 = new JLabel();
         userNum = new JLabel();
-        label3 = new JLabel();
-        userName = new JLabel();
         label5 = new JLabel();
         phoneNumber = new JLabel();
         label7 = new JLabel();
         address = new JLabel();
         label9 = new JLabel();
-        credit = new JLabel();
         addProduct = new JButton();
         alterProduct = new JButton();
         deleteProduct = new JButton();
@@ -201,16 +198,15 @@ public class G extends JFrame {
         Connection con = DatabaseConnection.getConnection();
         ResultSet result = null;
         Statement stmt= null;
-        String SQL = "select * from customer_info where cno=" + "'" + Number + "'";
-        String cno = null, cna = null, cad = null, cte = null;
+        String SQL = "select * from g_info where gno=" + "'" + Number + "'";
+        String gno = null, gna = null, city = null;
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
             result.next();
-            cno = result.getString("cno").trim();
-            cna = result.getString("cna").trim();
-            cad = result.getString("cad").trim();
-            cte = result.getString("cte").trim();
+            gno = result.getString("gno").trim();
+            gna = result.getString("gna").trim();
+            city = result.getString("city").trim();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -227,64 +223,42 @@ public class G extends JFrame {
         contentPane.setLayout(null);
 
         //---- label1 ----
-        label1.setText("\u4f9b\u5e94\u5546\u53f7\uff1a");
+        label1.setText("供应商号:");
         label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 2f));
         contentPane.add(label1);
-        label1.setBounds(20, 130, 80, 35);
+        label1.setBounds(20, 185, 75, 25);
 
         //---- userNum ----
-        userNum.setText(cno);
+        userNum.setText(gno);
         userNum.setFont(userNum.getFont().deriveFont(userNum.getFont().getSize() + 2f));
         contentPane.add(userNum);
-        userNum.setBounds(95, 130, 80, 35);
+        userNum.setBounds(90, 185, 75, 25);
 
-        //---- label3 ----
-        label3.setText("\u4f9b\u5e94\u5546\u540d\uff1a");
-        label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 2f));
-        contentPane.add(label3);
-        label3.setBounds(20, 185, 75, 25);
-
-        //---- userName ----
-        userName.setText(cna);
-        userName.setFont(userName.getFont().deriveFont(userName.getFont().getSize() + 2f));
-        contentPane.add(userName);
-        userName.setBounds(90, 185, 75, 25);
 
         //---- label5 ----
-        label5.setText("\u7535\u8bdd\uff1a");
+        label5.setText("供应商名:");
         label5.setFont(label5.getFont().deriveFont(label5.getFont().getSize() + 2f));
         contentPane.add(label5);
         label5.setBounds(new Rectangle(new Point(20, 235), label5.getPreferredSize()));
 
-        //---- phoneNumber ----
-        phoneNumber.setText(cte);
+        //---- gna ----
+        phoneNumber.setText(gna);
         phoneNumber.setFont(phoneNumber.getFont().deriveFont(phoneNumber.getFont().getSize() + 2f));
         contentPane.add(phoneNumber);
-        phoneNumber.setBounds(new Rectangle(new Point(65, 235), phoneNumber.getPreferredSize()));
+        phoneNumber.setBounds(new Rectangle(new Point(90, 235), phoneNumber.getPreferredSize()));
 
         //---- label7 ----
-        label7.setText("\u5730\u5740\uff1a");
+        label7.setText("城市:");
         label7.setFont(label7.getFont().deriveFont(label7.getFont().getSize() + 2f));
         contentPane.add(label7);
         label7.setBounds(new Rectangle(new Point(20, 280), label7.getPreferredSize()));
 
-        //---- address ----
-        address.setText(cad);
+        //---- city ----
+        address.setText(city);
         address.setFont(address.getFont().deriveFont(address.getFont().getSize() + 2f));
         contentPane.add(address);
         address.setBounds(new Rectangle(new Point(65, 280), address.getPreferredSize()));
 
-        //---- label9 ----
-        label9.setText("\u4fe1\u8d37\u60c5\u51b5\uff1a");
-        label9.setFont(label9.getFont().deriveFont(label9.getFont().getSize() + 2f));
-        contentPane.add(label9);
-        label9.setBounds(new Rectangle(new Point(20, 330), label9.getPreferredSize()));
-
-        //---- credit ----
-        credit.setText("\u4f18");
-        credit.setFont(credit.getFont().deriveFont(credit.getFont().getSize() + 2f));
-        contentPane.add(credit);
-        credit.setBounds(90, 330, 25, credit.getPreferredSize().height);
 
         //---- addProduct ----
         addProduct.setText("\u6dfb\u52a0\u4ea7\u54c1");
@@ -423,14 +397,11 @@ public class G extends JFrame {
     // Generated using JFormDesigner Evaluation license - unknown
     private JLabel label1;
     private JLabel userNum;
-    private JLabel label3;
-    private JLabel userName;
     private JLabel label5;
     private JLabel phoneNumber;
     private JLabel label7;
     private JLabel address;
     private JLabel label9;
-    private JLabel credit;
     private JButton addProduct;
     private JButton alterProduct;
     private JButton deleteProduct;
