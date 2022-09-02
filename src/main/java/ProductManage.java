@@ -297,7 +297,7 @@ public class ProductManage extends JFrame {
         showProductImformation(-1);
 
         contentPane.add(scrollPane);
-        scrollPane.setBounds(5, 0, 640, 585);
+        scrollPane.setBounds(5, 0, 640, 570);
 
         //---- Add ----
         Add.setText("\u6dfb\u52a0\u4ea7\u54c1");

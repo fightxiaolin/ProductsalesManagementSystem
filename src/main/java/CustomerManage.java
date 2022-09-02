@@ -219,7 +219,7 @@ public class CustomerManage extends JFrame {
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(Customertable);
+            showCustomerinformation(-1);
         }
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 5, 675, 705);
