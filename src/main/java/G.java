@@ -327,7 +327,7 @@ public class G extends JFrame {
         productPane.setBounds(185, 160, 635, 365);
 
         //---- addConfirm ----
-        addConfirm.setText("\u786e\u8ba4");
+        addConfirm.setText("确认");
         addConfirm.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -336,10 +336,10 @@ public class G extends JFrame {
         });
         addConfirm.setVisible(false);
         contentPane.add(addConfirm);
-        addConfirm.setBounds(250, 30, 55, 35);
+        addConfirm.setBounds(240, 30, 65, 35);
 
         //---- addConcel ----
-        addCancel.setText("\u53d6\u6d88");
+        addCancel.setText("取消");
         addCancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -348,10 +348,10 @@ public class G extends JFrame {
         });
         addCancel.setVisible(false);
         contentPane.add(addCancel);
-        addCancel.setBounds(310, 30, 55, 35);
+        addCancel.setBounds(310, 30, 65, 35);
 
         //---- alterConfrim ----
-        alterConfirm.setText("\u786e\u8ba4");
+        alterConfirm.setText("确认");
         alterConfirm.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -360,10 +360,10 @@ public class G extends JFrame {
         });
         alterConfirm.setVisible(false);
         contentPane.add(alterConfirm);
-        alterConfirm.setBounds(390, 30, 55, 35);
+        alterConfirm.setBounds(380, 30, 65, 35);
 
         //---- alterConcel ----
-        alterCancel.setText("\u53d6\u6d88");
+        alterCancel.setText("取消");
         alterCancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -372,7 +372,7 @@ public class G extends JFrame {
         });
         alterCancel.setVisible(false);
         contentPane.add(alterCancel);
-        alterCancel.setBounds(450, 30, 55, 35);
+        alterCancel.setBounds(450, 30, 65, 35);
 
         {
             // compute preferred size
@@ -475,7 +475,7 @@ public class G extends JFrame {
         return new DefaultTableModel(data, columnNames){
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(row==er && column!=0 && column!=1 && column!=2 && column!=3){
+                if(row==er && column!=0 && column!=2){
                     return true;
                 }
                 else

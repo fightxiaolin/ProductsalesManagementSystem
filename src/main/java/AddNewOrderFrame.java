@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.transform.Result;
 /*
  * Created by JFormDesigner on Thu Aug 04 11:46:52 CST 2022
  */
@@ -83,6 +84,7 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
         HashMap<String, String> map = new HashMap<String, String>();
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
+        String getAddr = MyOptionPane.showInputDialog(this,"", "请输入收货地址：");
 
 
         for (int i = 0; i < tableRow; i++) {
@@ -92,10 +94,20 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
                 String orderNum = getOrderNum();
                 map.put(gno, orderNum);
                 String SQL = null;
+                ResultSet result = null;
+                String city = null;
+                SQL = "select * from g_info where gno='" + gno + "'";
+                try {
+                    stmt = con.createStatement();
+                    result = stmt.executeQuery(SQL);
+                    result.next();
+                    city = result.getString("city").trim();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 SQL = "insert into order_info values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 //                SQL = "insert into order_info values('" + orderNum + "', '" + gno + "', '" + tableRow + "', '" + sdfTime.format(new Date())
 //                            + "', '" + "交货日期" + "','" + totalMoney + "', '" + "发货地" + "', '" + "收货地" + "', '" + Number + "')";
-
                 try {
                     stmt = con.createStatement();
                     PreparedStatement ps = con.prepareStatement(SQL);
@@ -105,8 +117,8 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
                     ps.setDate(4, new java.sql.Date(new Date().getTime()));
                     ps.setDate(5, new java.sql.Date(new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000L).getTime()));
                     ps.setInt(6, 0);
-                    ps.setString(7, "发货地");
-                    ps.setString(8, "收货地");
+                    ps.setString(7, city);
+                    ps.setString(8, getAddr);
                     ps.setString(9, Number);
                     ps.executeUpdate();
 //                    stmt.executeUpdate(SQL);
@@ -154,8 +166,8 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
             result.next();
-            snu = Integer.parseInt(result.getString("snu").toString().trim());
-            toprice = Integer.parseInt(result.getString("toprice").toString().trim());
+            snu = Integer.parseInt(result.getString("snu").trim());
+            toprice = Integer.parseInt(result.getString("toprice").trim());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -202,10 +214,10 @@ public class AddNewOrderFrame<preparedstatement> extends JFrame {
      */
     private String getOrderNum(){
         SimpleDateFormat sdfTime = new SimpleDateFormat("yyyyMMddHHmmssSS");
-        String before =  sdfTime.format(new Date());
+        String before = sdfTime.format(new Date());
 
         Random r = new Random();
-        int rand =  r.nextInt(900)+100;
+        int rand = r.nextInt(900) + 100;
         String after = Integer.toString(rand);
         return before+after;
     }

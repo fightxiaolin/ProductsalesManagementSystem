@@ -42,6 +42,7 @@ public class OrderManageDesigner extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - unknown
         scrollPane = new JScrollPane();
         Ordertable = new JTable();
         Check = new JButton();
@@ -259,6 +260,7 @@ public class OrderManageDesigner extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
     private JScrollPane scrollPane;
     private JTable Ordertable;
     private JButton Check;

@@ -171,7 +171,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Alter"
 				"text": "修改订单"
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AlterMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 135
@@ -206,7 +206,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "alterComfirm"
 				"text": "确认"
-				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				"font": &SwingDerivedFont1 new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AddConfirmMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 65
@@ -217,12 +217,24 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "alterConcel"
 				"text": "取消"
-				"font": #SwingDerivedFont0
+				"font": #SwingDerivedFont1
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AddConfirmMouseClicked", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 65
 				"height": 35
 				"x": 640
+				"y": 20
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "Check"
+				"text": "查看订单"
+				"font": #SwingDerivedFont0
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AlterMouseClicked", true ) )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "CheckMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 135
+				"height": 35
+				"x": 735
 				"y": 20
 			} )
 		}, new FormLayoutConstraints( null ) {

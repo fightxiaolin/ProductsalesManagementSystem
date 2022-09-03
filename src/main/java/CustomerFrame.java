@@ -236,6 +236,13 @@ public class CustomerFrame extends JFrame implements Res {
         Alter.setVisible(true);
     }
 
+    private void CheckMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        int selectedRow = table1.getSelectedRow();
+        String Number = table1.getValueAt(selectedRow, 0).toString().trim();
+        new OrderDetailsDialog(this, true, Number).setVisible(true);
+    }
+
     private void initComponents(final String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -262,6 +269,7 @@ public class CustomerFrame extends JFrame implements Res {
         logout = new JButton();
         alterComfirm = new JButton();
         alterConcel = new JButton();
+        Check = new JButton();
         CostomerPanel = new JPanel(){
             @Override
             /**
@@ -429,6 +437,19 @@ public class CustomerFrame extends JFrame implements Res {
         Alter.setBounds(570, 20, 135, 35);
         Alter.setContentAreaFilled(false);
 
+        //---- Check ----
+        Check.setText("\u67e5\u770b\u8ba2\u5355");
+        Check.setFont(Check.getFont().deriveFont(Check.getFont().getSize() + 4f));
+        Check.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                CheckMouseClicked(e);
+            }
+        });
+        contentPane.add(Check);
+        Check.setBounds(735, 20, 135, 35);
+        Check.setContentAreaFilled(false);
+
         //---- comboBox1 ----
         comboBox2.setFont(comboBox2.getFont().deriveFont(comboBox2.getFont().getSize() + 4f));
         contentPane.add(comboBox2);
@@ -552,6 +573,7 @@ public class CustomerFrame extends JFrame implements Res {
     private JButton logout;
     private JButton alterComfirm;
     private JButton alterConcel;
+    private JButton Check;
     private int editRow;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 

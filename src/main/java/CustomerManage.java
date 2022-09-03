@@ -247,8 +247,6 @@ public class CustomerManage extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 handleMouseClicked(e);
-                handleMouseClicked(e);
-                handleMouseClicked(e);
             }
         });
         contentPane.add(handle);
@@ -438,6 +436,7 @@ public class CustomerManage extends JFrame {
     private JButton adddelete;
     private JButton handleconfirm;
     private JButton handledelete;
+    private int editRow;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public static DefaultTableModel buildCustomerTableModel(ResultSet rs, final int er) throws SQLException {
@@ -492,7 +491,7 @@ public class CustomerManage extends JFrame {
         scrollPane1.setViewportView(Customertable);
     }
 
-    public static DefaultTableModel buildCustomerTableModel(ResultSet rs, final int er, final int unec) throws SQLException {
+    private DefaultTableModel buildCustomerTableModel(ResultSet rs, final int er, final int unec) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
         Vector columnNames = new Vector();
@@ -557,17 +556,11 @@ public class CustomerManage extends JFrame {
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(SQL);
-            Customertable = new JTable(buildCustomerTableModel(result, editrow,uneditcol));
+            Customertable = new JTable(buildCustomerTableModel(result, editrow, uneditcol));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         Customertable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
         scrollPane1.setViewportView(Customertable);
     }
-    private int editRow;
 }
-
-
-
-
-

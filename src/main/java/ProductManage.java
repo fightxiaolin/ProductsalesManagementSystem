@@ -66,9 +66,11 @@ public class ProductManage extends JFrame {
         // TODO add your code here
         int row = Producttable.getSelectedRow();
         String pno = Producttable.getValueAt(row, 0).toString().trim();
+        String gno = Producttable.getValueAt(row, 2).toString().trim();
         Connection con = DatabaseConnection.getConnection();
         Statement stmt = null;
-        String SQL = "delete from product_info where pno='" + pno + "'";
+        String SQL = "delete from god_info where pno='" + pno + "' and gno='" + gno + "'\n"
+                +"delete from product_info where pno='" + pno + "'";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(SQL);

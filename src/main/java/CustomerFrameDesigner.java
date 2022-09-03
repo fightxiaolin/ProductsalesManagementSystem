@@ -40,6 +40,10 @@ public class CustomerFrameDesigner extends JFrame {
         // TODO add your code here
     }
 
+    private void CheckMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -66,6 +70,7 @@ public class CustomerFrameDesigner extends JFrame {
         Search = new JButton();
         alterComfirm = new JButton();
         alterConcel = new JButton();
+        Check = new JButton();
 
         //======== this ========
         setTitle("\u7528\u6237\u8ba2\u5355\u7ba1\u7406\u7cfb\u7edf");
@@ -238,6 +243,19 @@ public class CustomerFrameDesigner extends JFrame {
         contentPane.add(alterConcel);
         alterConcel.setBounds(640, 20, 65, 35);
 
+        //---- Check ----
+        Check.setText("\u67e5\u770b\u8ba2\u5355");
+        Check.setFont(Check.getFont().deriveFont(Check.getFont().getSize() + 4f));
+        Check.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AlterMouseClicked(e);
+                CheckMouseClicked(e);
+            }
+        });
+        contentPane.add(Check);
+        Check.setBounds(735, 20, 135, 35);
+
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -282,5 +300,6 @@ public class CustomerFrameDesigner extends JFrame {
     private JButton Search;
     private JButton alterComfirm;
     private JButton alterConcel;
+    private JButton Check;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

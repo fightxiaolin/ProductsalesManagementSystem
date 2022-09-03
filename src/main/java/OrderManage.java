@@ -410,7 +410,7 @@ public class OrderManage extends JFrame {
         columnNames.add("发货地");
         columnNames.add("收货地");
         columnNames.add("顾客号");
-        columnNames.add("订单状态");
+//        columnNames.add("订单状态");
 
         Vector data = new Vector();
 
