@@ -16,22 +16,10 @@ import javax.swing.table.DefaultTableModel;
  * @author unknown
  */
 public class OrderManage extends JFrame {
-    public OrderManage() {
-        initComponents();
+    public OrderManage(String Number){
+        initComponents(Number);
+
     }
-
-    public OrderManage(final String Number){
-        initComponents();
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                OrderwindowClosing(Number);
-                dispose();
-            }
-        });
-    }
-
-
 
     private void CheckMouseClicked(MouseEvent e) {
         // TODO add your code here
@@ -40,12 +28,26 @@ public class OrderManage extends JFrame {
         new OrderDetailsDialog(this, true, Number).setVisible(true);
     }
 
-    private void HandleMouseClicked(MouseEvent e) {
+    private void HandleMouseClicked(String Number) {
         // TODO add your code here
     }
 
-    private void WithdrawMouseClicked(MouseEvent e) {
+    private void WithdrawMouseClicked(String Number) {
         // TODO add your code here
+        int row = Ordertable.getSelectedRow();
+        String sno = Ordertable.getValueAt(row, 0).toString().trim();
+        Connection con = DatabaseConnection.getConnection();
+        Statement stmt = null;
+        ResultSet result = null;
+        String SQL = "delete from order_details where sno='" + sno + "'\n"
+                + "delete from order_info where sno='" + sno + "'";
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(SQL);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        showOrderTable();
     }
 
     private void RefreshMouseClicked(MouseEvent e) {
@@ -145,7 +147,7 @@ public class OrderManage extends JFrame {
         new ManagerFrame(UserNum).setVisible(true);
     }
 
-    private void initComponents() {
+    private void initComponents(final String Number) {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         label1 = new JLabel();
@@ -186,7 +188,13 @@ public class OrderManage extends JFrame {
         //======== OrderPanel ========
         OrderPanel.setSize(1200, 590);
 
-
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                OrderwindowClosing(Number);
+                dispose();
+            }
+        });
 
         //======== this ========
         setContentPane(OrderPanel);
@@ -229,7 +237,7 @@ public class OrderManage extends JFrame {
         Handle.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                HandleMouseClicked(e);
+                HandleMouseClicked(Number);
             }
         });
         contentPane.add(Handle);
@@ -241,7 +249,7 @@ public class OrderManage extends JFrame {
         Withdraw.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                WithdrawMouseClicked(e);
+                WithdrawMouseClicked(Number);
             }
         });
         contentPane.add(Withdraw);
@@ -426,10 +434,6 @@ public class OrderManage extends JFrame {
             data.add(vector);
         }
         return new DefaultTableModel(data, columnNames);
-    }
-
-    public static void main(String[] args) {
-        new OrderManage().setVisible(true);
     }
 
     private void showOrderTable(){
